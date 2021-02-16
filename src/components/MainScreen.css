@@ -1,7 +1,6 @@
 .MainScreen {
-    width: 800px;
-    /* height: 800px; */
-    background-color: black;
+    width: 80%;
+    background-color: #03989E;
     margin: 0 auto;
     font-size: 3rem;
     display: flex;

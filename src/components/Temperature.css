@@ -1,0 +1,12 @@
+.Temperature {
+    width: 200px;
+    height: 200px;
+    border: 0.1em solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'News Cycle', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+}
