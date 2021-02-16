@@ -1,9 +1,10 @@
 import './App.css';
+import MainScreen from './MainScreen';
 
 function App() {
   return (
     <div className="App">
-    <h1>test</h1>
+      <MainScreen />
     </div>
   );
 }

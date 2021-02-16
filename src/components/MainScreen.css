@@ -1,0 +1,11 @@
+.MainScreen {
+    width: 80%;
+    background-color: #03989E;
+    margin: 0 auto;
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
