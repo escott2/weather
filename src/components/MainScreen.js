@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 import "./MainScreen.css";
 import LightMeter from './LightMeter';
 import Sunrise from './Sunrise';
@@ -9,7 +11,7 @@ import Attribution from './Attribution';
 
 function MainScreen() {
 
-    const today = new Date(2021, 11, 16);
+    const today = new Date();
 
     const [temp, setTemp] = useState("");
     const [sunrise, setSunrise] = useState("");
@@ -39,6 +41,7 @@ function MainScreen() {
         seconds: SECONDS_PER_MINUTES - Number(dayLength.substring(6,9)),
     }
 
+    const sunriseTime = `${sunrise.sunriseHour}:${sunrise.sunriseMinute}`;
     const nightMinutes = timeToMinutes(nightLength.hours, nightLength.minutes, nightLength.seconds);
     const nightPercent = nightMinutes / MINUTES_PER_DAY;
     const nightPercentRounded = Math.round(nightPercent * 100) / 100;
@@ -113,10 +116,9 @@ function MainScreen() {
               sunriseMinute = roundMinute(sunriseSecond, sunriseMinute);
 
               return {
-                sunriseHour: sunriseHour,
-                sunriseMinute: sunriseMinute,
-                sunriseSecond: sunriseSecond,
-                sunriseTime: `${sunriseHour}:${sunriseMinute}`
+                sunriseHour: String(sunriseHour).padStart(2, '0'),
+                sunriseMinute: String(sunriseMinute).padStart(2, '0'),
+                sunriseSecond: String(sunriseSecond).padStart(2, '0')
               };
           });
 
@@ -157,18 +159,27 @@ function MainScreen() {
           // handle error
           console.log(error);
         })
-    }, []);
+    }, [date]);
 
 
-
-
+    function handleDayClick(day) {
+      setDate(
+         {
+          month: day.getMonth(),
+          date: day.getDate(),
+          year: day.getFullYear()
+        });
+      };
 
     return (
         <div className="MainScreen">
        
             <p>{months[date.month]} {date.date}, {date.year}</p>
+            <DayPicker onDayClick={handleDayClick} />
             
-            <Sunrise sunrise={sunrise.sunriseTime}/>
+            <Sunrise sunrise={sunriseTime}/>
+
+
 
             <p>{dayHours} hrs</p>
             
