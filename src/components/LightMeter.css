@@ -1,7 +1,13 @@
 .LightMeter {
     width: 600px;
     height: 600px;
-    background-color: black;
+    /* background-color: black; */
+    background-image: conic-gradient(
+        from 270deg,
+        /* #03989E 150deg,   */
+        #81CCCF 150deg,
+        /* lightblue 0 235deg,   */
+        black 0); 
     border-radius: 50%;
     display: flex;
     align-items: center;
