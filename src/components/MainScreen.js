@@ -9,9 +9,9 @@ import Attribution from './Attribution';
 
 function MainScreen() {
 
-    const today = new Date();
+    const today = new Date(2021, 11, 16);
 
-    const [temp, setTemp] = useState("70");
+    const [temp, setTemp] = useState("");
     const [sunrise, setSunrise] = useState("");
     const [sunset, setSunset] = useState("");
     const [dayLength, setDayLength] = useState("");
@@ -37,6 +37,20 @@ function MainScreen() {
         seconds: SECONDS_PER_MINUTES - Number(dayLength.substring(6,9)),
     }
 
+    function roundMinute (second, minute) {
+      if (second > 30) {
+        minute++;
+      }
+      return minute;
+    }
+
+    function toHour_24 (period, hour) {
+        if (period === "PM" && hour !== 12) {
+          hour = hour + 12;
+        } 
+        return hour;
+    }
+
 
     useEffect(() => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${WEATHER_API_KEY}`)
@@ -60,21 +74,29 @@ function MainScreen() {
            setSunrise(() => {
 
               let sunriseTimeUTC = response.data.results.sunrise.padStart(11, '0');
-              let hourUTC = Number(sunriseTimeUTC.slice(0, 2));
-
-                if (sunriseTimeUTC.substring(9) === "PM") {
-                    hourUTC = hourUTC + 12;
-                }
+              const hourUTC_12 = Number(sunriseTimeUTC.slice(0, 2));
+              const period = sunriseTimeUTC.substring(9);
+              const hourUTC_24 = toHour_24(period, hourUTC_12);
 
               const selectedDate = new Date(date.year, date.month, date.date);
               const offset = selectedDate.getTimezoneOffset() / 60; 
-              const hour = String(hourUTC - offset);
-              //Figure out AM/PM
-              let sunriseTime = sunriseTimeUTC.slice(2, 5);
-              sunriseTime = `${hour}${sunriseTime}`;
+    
+              const hour = hourUTC_24 - offset;
+
+              const sunriseHour = hour;
+              let sunriseMinute = Number(sunriseTimeUTC.substring(3,5));
+              const sunriseSecond = Number(sunriseTimeUTC.substring(6,9));
               
-              return sunriseTime;
+              sunriseMinute = roundMinute(sunriseSecond, sunriseMinute);
+
+              return {
+                sunriseHour: sunriseHour,
+                sunriseMinute: sunriseMinute,
+                sunriseSecond: sunriseSecond,
+                sunriseTime: `${sunriseHour}:${sunriseMinute}`
+              };
           });
+
           setSunset(() => {
             let sunsetTimeUTC = response.data.results.sunset.padStart(11, '0');
             let hourUTC = Number(sunsetTimeUTC.slice(0, 2));
@@ -85,8 +107,12 @@ function MainScreen() {
 
             const selectedDate = new Date(date.year, date.month, date.date);
             const offset = selectedDate.getTimezoneOffset() / 60; 
-              
+            
             let hour = hourUTC - offset;
+
+              if ( hour < 0 ) {
+                hour = 24 + hour;
+              }
 
               if (hour > 12) {
                 hour = hour - 12;
@@ -97,11 +123,11 @@ function MainScreen() {
               
             return sunsetTime;
           });
+
           setDayLength(() => {
               const dayLength = response.data.results.day_length;
               return dayLength;
           });
-
 
         })
         .catch(function (error) {
@@ -119,7 +145,7 @@ function MainScreen() {
        
             <p>{months[date.month]} {date.date}, {date.year}</p>
             
-            <Sunrise sunrise={sunrise}/>
+            <Sunrise sunrise={sunrise.sunriseTime}/>
 
             <p>{dayLength} hrs</p>
             
