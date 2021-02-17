@@ -14,6 +14,7 @@ function MainScreen() {
     const [temp, setTemp] = useState("");
     const [sunrise, setSunrise] = useState("");
     const [sunset, setSunset] = useState("");
+    //may not make sense in state.
     const [dayLength, setDayLength] = useState("");
     const [date, setDate] = useState({
         month: today.getMonth(),
@@ -30,6 +31,7 @@ function MainScreen() {
     const HOURS_PER_DAY = 24;
     const MINUTES_PER_HOUR = 60;
     const SECONDS_PER_MINUTES = 60;
+    const MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
 
    const nightLength = {
         hours: HOURS_PER_DAY - Number(dayLength.substring(0,2)),
@@ -37,20 +39,41 @@ function MainScreen() {
         seconds: SECONDS_PER_MINUTES - Number(dayLength.substring(6,9)),
     }
 
-    function roundMinute (second, minute) {
+    const nightMinutes = timeToMinutes(nightLength.hours, nightLength.minutes, nightLength.seconds);
+    const nightPercent = nightMinutes / MINUTES_PER_DAY;
+    const nightPercentRounded = Math.round(nightPercent * 100) / 100;
+    const dayPercentRounded = Math.round(100 - (nightPercentRounded * 100)) / 100;
+    const nightHours = Math.round((nightPercentRounded * HOURS_PER_DAY) * 10) / 10;
+    const dayHours = Math.round((dayPercentRounded * HOURS_PER_DAY) * 10) / 10;
+
+
+
+
+    function roundMinute(second, minute) {
       if (second > 30) {
         minute++;
       }
       return minute;
     }
 
-    function toHour_24 (period, hour) {
+    function toHour_24(period, hour) {
         if (period === "PM" && hour !== 12) {
           hour = hour + 12;
         } 
         return hour;
     }
 
+    function timeToMinutes(hours, minutes, seconds) {
+
+      if (seconds > 30) {
+        minutes++
+      }
+
+      const totalMinutes = (hours * 60) + minutes
+      return totalMinutes;
+    }
+
+ 
 
     useEffect(() => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${WEATHER_API_KEY}`)
@@ -147,11 +170,11 @@ function MainScreen() {
             
             <Sunrise sunrise={sunrise.sunriseTime}/>
 
-            <p>{dayLength} hrs</p>
+            <p>{dayHours} hrs</p>
             
-            <LightMeter temp={temp} />
+            <LightMeter temp={temp} daylength={dayPercentRounded} nightlength={nightPercentRounded}/>
 
-            <p>{nightLength.hours}:{nightLength.minutes}:{String(nightLength.seconds).padStart(2, '0')} hrs</p>
+            <p>{nightHours} hrs</p>
 
 
             <Sunset sunset={sunset}/>
