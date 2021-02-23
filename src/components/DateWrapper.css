@@ -1,0 +1,16 @@
+.DateWrapper {
+    width: 100%;
+    background-color: black;
+    text-align: center;
+
+}
+
+.DateModal {
+    background-color: red;
+    /* width: 100%; */
+}
+
+.DayPicker {
+    background-color: white;
+    color: black
+}
