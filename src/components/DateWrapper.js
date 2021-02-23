@@ -1,44 +1,29 @@
 import React, {useState} from 'react';
 import './DateWrapper.css';
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import DateModal from './DateModal';
+
 
 function DateWrapper({date, changeDate}) {
 
-    const [chosenDate, setChosenDate] = useState("");
-    const [isSelected, setIsSelected] = useState(false);
+    const [isDisplayModal, setIsDisplayModal] = useState(false);
 
     const months = ["January","February","March","April","May","June","July",
     "August","September","October","November","December"];
 
-
-    function handleDayClick(day) {
-        setChosenDate(day);
-        setIsSelected(true);
+    function handleShowModal() {
+        setIsDisplayModal(true);
     }
 
-
+    function handleHideModal() {
+        setIsDisplayModal(false);
+    }
 
     return (
         <div className="DateWrapper">
-            <div className="DateModal">
-                <DayPicker onDayClick={handleDayClick} />
-                {console.log(isSelected)}
-                {isSelected ? 
-                <React.Fragment>
-                    <p>You selected:</p>
-                    <p>{chosenDate.toDateString()}</p>
-                </React.Fragment>
-                :
-                <p>Choose a date</p>
-                 }
-                <button onClick={() => { changeDate(chosenDate)}}>Submit</button>
-            </div>
-
+            {isDisplayModal && <DateModal changeDate={changeDate} hideModal={handleHideModal} />}
             <p>{months[date.month]} {date.date}, {date.year}</p>
-            <button>Change Date</button>
-           
-
+            {console.log(isDisplayModal)}
+            <button onClick={handleShowModal}>Change Date</button>
         </div>
     )
 }
