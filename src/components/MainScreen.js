@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import axios from "axios";
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
-import "./MainScreen.css";
+import axios from 'axios';
+import './MainScreen.css';
+import DateWrapper from './DateWrapper';
 import LightMeter from './LightMeter';
 import Sunrise from './Sunrise';
 import Sunset from './Sunset';
@@ -28,8 +27,8 @@ function MainScreen() {
 
     const WEATHER_API_KEY = "922176d7fe6aa80866789eaaf2e9d26d";
     const cityName = "Minneapolis";
-    const months = ["January","February","March","April","May","June","July",
-    "August","September","October","November","December"];
+    // const months = ["January","February","March","April","May","June","July",
+    // "August","September","October","November","December"];
     const HOURS_PER_DAY = 24;
     const MINUTES_PER_HOUR = 60;
     const SECONDS_PER_MINUTES = 60;
@@ -161,32 +160,28 @@ function MainScreen() {
         })
     }, [date]);
 
-
-    function handleDayClick(day) {
-      setDate(
+    function handleDateChange(day) {
+        setDate(
          {
           month: day.getMonth(),
           date: day.getDate(),
           year: day.getFullYear()
         });
-      };
+    }
 
     return (
         <div className="MainScreen">
        
-            <p>{months[date.month]} {date.date}, {date.year}</p>
-            <DayPicker onDayClick={handleDayClick} />
-            
+
+            <DateWrapper date={date} changeDate={handleDateChange} />
+                        
             <Sunrise sunrise={sunriseTime}/>
-
-
 
             <p>{dayHours} hrs</p>
             
             <LightMeter temp={temp} daylength={dayPercentRounded} nightlength={nightPercentRounded}/>
 
             <p>{nightHours} hrs</p>
-
 
             <Sunset sunset={sunset}/>
 
