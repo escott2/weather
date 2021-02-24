@@ -2,15 +2,40 @@
     width: 100%;
     background-color: black;
     text-align: center;
+    position: relative;
+}
 
+.DateWrapper h1 {
+    font-size: 3rem;
+    margin: 0.75em 0 0.5em; 
+}
+
+.DateWrapper__button {
+    background-color: black;
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    margin-bottom: 0.25em;
 }
 
 .DateModal {
-    background-color: red;
-    /* width: 100%; */
+    background-color: rgb(3,152,158, 0.9);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .DayPicker {
     background-color: white;
-    color: black
+    color: black;
 }

@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import './DateWrapper.css';
+// import {GoCalendar} from 'react-icons/fa';
+import {GoCalendar} from 'react-icons/go';
+
 import DateModal from './DateModal';
 
 
@@ -21,9 +24,10 @@ function DateWrapper({date, changeDate}) {
     return (
         <div className="DateWrapper">
             {isDisplayModal && <DateModal changeDate={changeDate} hideModal={handleHideModal} />}
-            <p>{months[date.month]} {date.date}, {date.year}</p>
+            <h1>{months[date.month]} {date.date}, {date.year}</h1>
             {console.log(isDisplayModal)}
-            <button onClick={handleShowModal}>Change Date</button>
+            {/* Add calendar icon */}
+            <button className="DateWrapper__button" onClick={handleShowModal}><GoCalendar /></button>            
         </div>
     )
 }
