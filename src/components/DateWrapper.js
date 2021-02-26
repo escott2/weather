@@ -25,8 +25,6 @@ function DateWrapper({date, changeDate}) {
         <div className="DateWrapper">
             {isDisplayModal && <DateModal changeDate={changeDate} hideModal={handleHideModal} />}
             <h1>{months[date.month]} {date.date}, {date.year}</h1>
-            {console.log(isDisplayModal)}
-            {/* Add calendar icon */}
             <button className="DateWrapper__button" onClick={handleShowModal}><GoCalendar /></button>            
         </div>
     )

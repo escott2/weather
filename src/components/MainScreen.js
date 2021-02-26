@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './MainScreen.css';
+import LocationWrapper from './LocationWrapper';
 import DateWrapper from './DateWrapper';
 import LightMeter from './LightMeter';
 import Sunrise from './Sunrise';
@@ -12,6 +13,15 @@ function MainScreen() {
 
     const today = new Date();
 
+    const [location, setLocation] = useState(
+      {
+        city: "Minneapolis", 
+        state: "Minnesota", 
+        country: "United States",
+        lat: undefined,
+        long: undefined
+      }
+    );
     const [temp, setTemp] = useState("");
     const [sunrise, setSunrise] = useState("");
     const [sunset, setSunset] = useState("");
@@ -22,11 +32,13 @@ function MainScreen() {
         date: today.getDate(),
         year: today.getFullYear()
     });
+    
 
 
 
     const WEATHER_API_KEY = "922176d7fe6aa80866789eaaf2e9d26d";
-    const cityName = "Minneapolis";
+    const GEOCODE_API_KEY = "BipYncCG753nCC2wdpSNdjzKWErYoH3b"
+    // const cityName = "Minneapolis";
     // const months = ["January","February","March","April","May","June","July",
     // "August","September","October","November","December"];
     const HOURS_PER_DAY = 24;
@@ -75,10 +87,31 @@ function MainScreen() {
       return totalMinutes;
     }
 
- 
+
+
 
     useEffect(() => {
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${WEATHER_API_KEY}`)
+      axios.get(`http://www.mapquestapi.com/geocoding/v1/address?key=${GEOCODE_API_KEY}&city=${location.city}&state=MN&country=United States`)
+      .then(response => {
+        setLocation((prevState) => {
+          return {
+            ...prevState,
+            lat: response.data.results[0].locations[0].latLng.lat,
+            long: response.data.results[0].locations[0].latLng.lng
+          }
+        });
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+    }, [location.city]);
+
+
+
+
+    useEffect(() => {
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location.city}&units=imperial&appid=${WEATHER_API_KEY}`)
         .then(response => {
            setTemp(() => {
               let currentTemp = response.data.main.temp;
@@ -90,7 +123,7 @@ function MainScreen() {
           // handle error
           console.log(error);
         })
-    }, []);
+    }, [location]);
 
     useEffect(() => {
 
@@ -169,11 +202,26 @@ function MainScreen() {
         });
     }
 
+    function handleLocationChange(location) {
+      setLocation((prevState) => {
+        return {
+          ...prevState,
+          city: location
+        }
+      });
+
+    }
+
+
     return (
         <div className="MainScreen">
        
-
+            <LocationWrapper location={location} changeLocation={handleLocationChange}/>
             <DateWrapper date={date} changeDate={handleDateChange} />
+            {console.log(location)}
+            <p>{location.lat}</p>
+            <p>{location.long}</p>
+
                         
             <Sunrise sunrise={sunriseTime}/>
 
