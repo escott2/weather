@@ -1,0 +1,73 @@
+.DateModal {
+    background-color: rgb(3,152,158, 0.9);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.DateModal__wrapper {
+    background-color: white;
+    width: 40%;
+    color: black;
+    padding-bottom: 2em;
+    border: 0.15em solid #03989E;
+    border-radius: 15px;
+
+
+}
+
+.modal-text {
+    font-size: 1.25rem;
+}
+
+.DayPicker {
+    background-color: #81CCCF;
+    color: black;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border: 0.25em solid #03989E;
+    border-radius: 10px;
+}
+
+/* how can I style this library? */
+/* .DayPicker-Day {
+    border-radius: 0px;
+} */
+
+/* .DayPicker-Caption {
+    background-color: #03989E;
+    color: white;
+    padding: 1em;
+} */
+
+
+
+
+.DateModal__submit-btn {
+    font-size: 1.1rem;
+    border: 0.15em solid #03989E;
+    padding: 0.4em 1em;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #03989E;
+    /* background-color: black; */
+    /* color: white; */
+}
+
+.DateModal__exit-btn {
+    display: block;
+    margin-left: auto;
+
+}
+
+.close-icon {
+    color: #81CCCF;
+    /* display: block; */
+    margin-left: auto;
+}
