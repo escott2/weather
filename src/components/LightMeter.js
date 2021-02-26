@@ -1,12 +1,9 @@
 import React from 'react';
 import './LightMeter.css';
-import Temperature from './Temperature.js';
 
+function LightMeter({dayLength}) {
 
-
-function LightMeter({temp, daylength, nightlength}) {
-
-    const dayDegrees = Math.round(daylength * 360);
+    const dayDegrees = Math.round(dayLength * 360);
 
     const percentStyle = {
         backgroundImage:
@@ -14,9 +11,7 @@ function LightMeter({temp, daylength, nightlength}) {
     }
 
     return (
-    <div className="LightMeter" style={percentStyle}>
-        {/* <Temperature temp={temp} /> */}
-    </div>
+    <div className="LightMeter" style={percentStyle}></div>
     )
 }
 

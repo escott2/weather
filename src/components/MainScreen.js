@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './MainScreen.css';
-import LocationWrapper from './LocationWrapper';
-import DateWrapper from './DateWrapper';
-import Temperature from './Temperature';
+import Container from './Container';
+import Location from './Location';
+import Day from './Day';
 import LightMeter from './LightMeter';
 import Sunrise from './Sunrise';
 import Sunset from './Sunset';
@@ -216,23 +216,28 @@ function MainScreen() {
 
     return (
         <div className="MainScreen">
-       
-            <LocationWrapper location={location} changeLocation={handleLocationChange}/>
-            <DateWrapper date={date} changeDate={handleDateChange} />
-            {console.log(location)}
-         
-            <Temperature temp={temp}/>
+
+            {/* Start Header */}
+            <Location location={location} changeLocation={handleLocationChange}/>
+            <Day date={date} changeDate={handleDateChange} />
+            {/* End Header */}
+
+            <Container temp={temp} dayLength={dayPercentRounded}/> 
+
             <Sunrise sunrise={sunriseTime}/>
 
             <p>{dayHours} hrs</p>
             
-            <LightMeter temp={temp} daylength={dayPercentRounded} nightlength={nightPercentRounded}/>
+            {/* <LightMeter temp={temp} daylength={dayPercentRounded} nightlength={nightPercentRounded}/> */}
 
             <p>{nightHours} hrs</p>
 
             <Sunset sunset={sunset}/>
 
+            {/* Start Footer */}
             <Attribution />
+            {/* End Footer */}
+
         </div>
     )
 

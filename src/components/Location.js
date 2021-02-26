@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {GoLocation} from 'react-icons/go';
-import './LocationWrapper.css';
+import './Location.css';
 
 // import PropTypes from 'prop-types';
 
-// LocationWrapper.propTypes = {
+// Location.propTypes = {
     
 // };
 
-function LocationWrapper({location, changeLocation}) {
+function Location({location, changeLocation}) {
 
     const [inputText, setInputText] = useState("");
 
@@ -22,14 +22,14 @@ function LocationWrapper({location, changeLocation}) {
     }
 
     return (
-        <div className="LocationWrapper">
+        <div className="Location">
             <p>Enter a location</p>
             <input type="text" value={inputText} onChange={handleChange}></input>
-            <button className="LocationWrapper__submit-btn" onClick={handleClick}>submit</button>
+            <button className="Location__submit-btn" onClick={handleClick}>submit</button>
             <h2>{location.city}, {location.state}</h2>
             <GoLocation />
         </div>
     );
 }
 
-export default LocationWrapper;
+export default Location;
