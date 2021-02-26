@@ -1,6 +1,5 @@
 .DateWrapper {
     width: 100%;
-    background-color: black;
     text-align: center;
     position: relative;
 }
@@ -21,7 +20,6 @@ button {
 }
 
 .DateWrapper__button {
-    background-color: black;
     margin-bottom: 0.25em;
 }
 

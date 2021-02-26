@@ -3,6 +3,7 @@ import axios from 'axios';
 import './MainScreen.css';
 import LocationWrapper from './LocationWrapper';
 import DateWrapper from './DateWrapper';
+import Temperature from './Temperature';
 import LightMeter from './LightMeter';
 import Sunrise from './Sunrise';
 import Sunset from './Sunset';
@@ -219,10 +220,8 @@ function MainScreen() {
             <LocationWrapper location={location} changeLocation={handleLocationChange}/>
             <DateWrapper date={date} changeDate={handleDateChange} />
             {console.log(location)}
-            <p>{location.lat}</p>
-            <p>{location.long}</p>
-
-                        
+         
+            <Temperature temp={temp}/>
             <Sunrise sunrise={sunriseTime}/>
 
             <p>{dayHours} hrs</p>

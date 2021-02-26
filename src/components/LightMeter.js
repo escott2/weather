@@ -10,12 +10,12 @@ function LightMeter({temp, daylength, nightlength}) {
 
     const percentStyle = {
         backgroundImage:
-            `conic-gradient(from 270deg, #81CCCF ${dayDegrees}deg, black 0)`
+            `conic-gradient(from 270deg, #d9f0fc ${dayDegrees}deg, black 0)`
     }
 
     return (
     <div className="LightMeter" style={percentStyle}>
-        <Temperature temp={temp} />
+        {/* <Temperature temp={temp} /> */}
     </div>
     )
 }
