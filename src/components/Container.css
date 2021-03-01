@@ -1,5 +1,6 @@
 .Container {
-    width: 100%;
+    width: 1000px;
+    height: 600px;
     background-color: #D9F0FC;
     /* background-color: black; */
     display: flex;
@@ -7,4 +8,6 @@
     align-items: center;
     justify-content: center;
     padding: 1em;
+    box-sizing: border-box;
+    position: relative;
 }

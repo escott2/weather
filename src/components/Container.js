@@ -8,11 +8,11 @@ import LightMeter from './LightMeter';
     
 // };
 
-function Container({temp, dayLength}) {
+function Container({temp, dayLength, dayHours, nightHours}) {
     return (
         <div className="Container">
-            <Temperature temp={temp}/>
-            <LightMeter dayLength={dayLength}/>
+            <Temperature temp={temp} dayHours={dayHours} nightHours={nightHours}/>
+            <LightMeter dayLength={dayLength} dayHours={dayHours} nightHours={nightHours}/>
 
 
 

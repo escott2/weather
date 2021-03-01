@@ -1,7 +1,7 @@
 import React from 'react';
 import './LightMeter.css';
 
-function LightMeter({dayLength}) {
+function LightMeter({dayLength, dayHours, nightHours}) {
 
     const dayDegrees = Math.round(dayLength * 360);
 
@@ -11,7 +11,10 @@ function LightMeter({dayLength}) {
     }
 
     return (
-    <div className="LightMeter" style={percentStyle}></div>
+    <div className="LightMeter" style={percentStyle}>
+        <p className="light-stats">{dayHours} hrs</p>
+        <p className="light-stats">{nightHours} hrs</p>
+    </div>
     )
 }
 
