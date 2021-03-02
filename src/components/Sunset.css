@@ -1,6 +1,5 @@
 .Sunset {
-    align-self: flex-start;
-    font-size: 2.5rem;
-    margin-left: 1em;
-    
+    font-size: 2.5rem; 
+    align-self: flex-end;   
+
 }

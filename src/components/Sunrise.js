@@ -4,7 +4,7 @@ import './Sunrise.css';
 function Sunrise({sunrise}) {
     return (
         <div className="Sunrise">
-            <p>Sunrise: {sunrise} AM</p>
+            <p>{`${sunrise.sunriseHour}:${sunrise.sunriseMinute}`} AM</p>
         </div>
     )
 }

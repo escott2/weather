@@ -1,21 +1,19 @@
 import React from 'react';
 import './LightMeter.css';
-import Temperature from './Temperature.js';
 
+function LightMeter({dayLength, dayHours, nightHours}) {
 
-
-function LightMeter({temp, daylength, nightlength}) {
-
-    const dayDegrees = Math.round(daylength * 360);
+    const dayDegrees = Math.round(dayLength * 360);
 
     const percentStyle = {
         backgroundImage:
-            `conic-gradient(from 270deg, #d9f0fc ${dayDegrees}deg, black 0)`
+            `conic-gradient(from 270deg, #E8F6FD ${dayDegrees}deg, #41484C 0)`
     }
 
     return (
     <div className="LightMeter" style={percentStyle}>
-        {/* <Temperature temp={temp} /> */}
+        {/* <p className="light-stats">{dayHours} hrs</p>
+        <p className="light-stats">{nightHours} hrs</p> */}
     </div>
     )
 }

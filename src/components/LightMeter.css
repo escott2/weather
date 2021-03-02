@@ -1,13 +1,18 @@
 .LightMeter {
-    width: 600px;
-    height: 600px;
-    /* background-color: black; */
-    /* background-image: conic-gradient(
-        from 270deg,
-        #81CCCF 150deg,
-        black 0);  */
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    position: absolute;
+    bottom: 90px;
+    left: 450px;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 9px 10px 3px 4px rgba(195, 216, 227, 0.75);
+}
+
+.light-stats {
+    margin-left: 1em;
 }

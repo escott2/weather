@@ -1,5 +1,5 @@
 .MainScreen {
-    width: 80%;
+    width: 100%;
     background-color: white;
     margin: 0 auto;
     font-size: 3rem;
@@ -9,3 +9,10 @@
     justify-content: center;
     color: black;
 }
+
+/* .SunTimes {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */

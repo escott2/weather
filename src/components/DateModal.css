@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .DateModal__wrapper {
@@ -34,20 +35,6 @@
     border: 0.25em solid #03989E;
     border-radius: 10px;
 }
-
-/* how can I style this library? */
-/* .DayPicker-Day {
-    border-radius: 0px;
-} */
-
-/* .DayPicker-Caption {
-    background-color: #03989E;
-    color: white;
-    padding: 1em;
-} */
-
-
-
 
 .DateModal__submit-btn {
     font-size: 1.1rem;

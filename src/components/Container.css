@@ -1,0 +1,43 @@
+.Container {
+    width: 1000px;
+    height: 600px;
+    background-color: #D9F0FC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.SunTimes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: #C3D8E3; */
+    justify-self: end;
+    position: relative;
+}
+
+.SunTimes p {
+    margin: 0.1em;
+    margin-left: 5px;
+    font-size: 1.4rem;
+    
+}
+
+.horizon {
+    height: 10px;
+    width: 100%;
+    background-color: orange;
+    /* align-self: center; */
+}
+
+.sun-img {
+    position: absolute;
+    top: -3px;
+    left: 2px;
+    transform: rotate(180deg);
+    width: 60px;
+}
