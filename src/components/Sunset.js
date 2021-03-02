@@ -4,7 +4,7 @@ import './Sunset.css';
 function Sunset({sunset}) {
     return (
         <div className="Sunset">
-            <p>Sunset: {sunset} PM</p>
+            <p>{sunset} PM</p>
         </div>
     )
 }

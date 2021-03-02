@@ -4,8 +4,8 @@ import './MainScreen.css';
 import Container from './Container';
 import Location from './Location';
 import Day from './Day';
-import Sunrise from './Sunrise';
-import Sunset from './Sunset';
+// import Sunrise from './Sunrise';
+// import Sunset from './Sunset';
 import Attribution from './Attribution';
 
 
@@ -246,12 +246,12 @@ function MainScreen() {
             <Day date={date} changeDate={handleDateChange} />
             {/* End Header */}
             <p>{time}</p>
-            <Container temp={temp} dayHours={dayHours} nightHours={nightHours} dayLength={dayPercentRounded}/> 
+            <Container temp={temp} dayHours={dayHours} nightHours={nightHours} dayLength={dayPercentRounded} sunrise={sunrise} sunset={sunset}/> 
 
-            <div className="SunTimes">
+            {/* <div className="SunTimes">
               <Sunrise sunrise={sunriseTime}/>
               <Sunset sunset={sunset}/>
-            </div>
+            </div> */}
 
             {/* Start Footer */}
             <Attribution />
