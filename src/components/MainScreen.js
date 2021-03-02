@@ -12,6 +12,7 @@ import Attribution from './Attribution';
 function MainScreen() {
 
     const today = new Date();
+    const initialTime = today.toLocaleTimeString("en-US", { hour12: false });
 
     const [location, setLocation] = useState(
       {
@@ -32,6 +33,15 @@ function MainScreen() {
         date: today.getDate(),
         year: today.getFullYear()
     });
+
+    const [time, setTime] = useState(initialTime);
+    function getCurrentTime() {
+      setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    }
+
+    setInterval(getCurrentTime, 1000);
+
+  
     
 
 
@@ -87,6 +97,11 @@ function MainScreen() {
       return totalMinutes;
     }
 
+    function findSunPosition() {
+
+    }
+
+
 
 
 
@@ -132,6 +147,7 @@ function MainScreen() {
            setSunrise(() => {
 
               let sunriseTimeUTC = response.data.results.sunrise.padStart(11, '0');
+
               const hourUTC_12 = Number(sunriseTimeUTC.slice(0, 2));
               const period = sunriseTimeUTC.substring(9);
               const hourUTC_24 = toHour_24(period, hourUTC_12);
@@ -209,8 +225,17 @@ function MainScreen() {
           city: location
         }
       });
-
     }
+
+
+    
+    // const dateOne = new Date(2021, 1, 1, 6, 49);
+    // const dateTwo = new Date(2021, 1, 1, 18, 49);
+    // dateOne.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // dateTwo.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // const difference = dateTwo - dateOne;
+
 
 
     return (
@@ -220,7 +245,7 @@ function MainScreen() {
             <Location location={location} changeLocation={handleLocationChange}/>
             <Day date={date} changeDate={handleDateChange} />
             {/* End Header */}
-
+            <p>{time}</p>
             <Container temp={temp} dayHours={dayHours} nightHours={nightHours} dayLength={dayPercentRounded}/> 
 
             <div className="SunTimes">

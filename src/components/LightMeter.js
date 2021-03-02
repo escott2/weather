@@ -7,13 +7,13 @@ function LightMeter({dayLength, dayHours, nightHours}) {
 
     const percentStyle = {
         backgroundImage:
-            `conic-gradient(from 270deg, #d9f0fc ${dayDegrees}deg, black 0)`
+            `conic-gradient(from 270deg, #E8F6FD ${dayDegrees}deg, #41484C 0)`
     }
 
     return (
     <div className="LightMeter" style={percentStyle}>
-        <p className="light-stats">{dayHours} hrs</p>
-        <p className="light-stats">{nightHours} hrs</p>
+        {/* <p className="light-stats">{dayHours} hrs</p>
+        <p className="light-stats">{nightHours} hrs</p> */}
     </div>
     )
 }

@@ -2,6 +2,11 @@
    text-align: center;
 }
 
+.Location h2 {
+    font-size: 3rem;
+    margin: 0.75em 0 0.5em; 
+}
+
 .Location p {
     font-size: 1.25rem;
     display: inline-block;
