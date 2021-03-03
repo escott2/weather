@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+
+
 
 import PropTypes from 'prop-types';
 
@@ -9,26 +12,57 @@ LocationPicker.propTypes = {
 
 function LocationPicker({changeLocation, hideModal}) {
 
-    const [inputText, setInputText] = useState("");
+    const [inputText, setInputText] = useState({
+        city: "",
+        region: "", 
+        country: ""
+    });
 
-    function handleChange(e) {
-        const newLocation = e.target.value;
-        setInputText(newLocation);
+    function handleCityChange(e) {
+        const newCity = e.target.value;
+        setInputText((prevState) => {
+            return {
+                ...prevState,
+                city: newCity      
+            }
+        });
+    }
+
+    function handleCountryChange(val) {
+        setInputText((prevState) => {
+            return {
+                ...prevState,
+                country: val
+            }
+        });
+    }
+
+    function handleRegionChange(val) {
+        setInputText((prevState) => {
+            return {
+                ...prevState,
+                region: val
+            }
+        });
     }
 
     function handleClick() {
         changeLocation(inputText)
-        setInputText("");
+        setInputText({
+            city: "",
+            region: "", 
+            country: ""
+        });
         hideModal();
     }
 
     return (
         <div>
             <p>Enter a city</p>
-            <input type="text" value={inputText} onChange={handleChange}></input>
-            <button className="Location__submit-btn" onClick={handleClick}>submit</button>
-            {/* <h2>{location.city}, {location.state}</h2> */}
-     
+            <input type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+            <CountryDropdown name="country" value={inputText.country} onChange={handleCountryChange}/>
+            <RegionDropdown name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
+            <button className="Location__submit-btn" onClick={handleClick}>submit</button>     
         </div>
     );
 }

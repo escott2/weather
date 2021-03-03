@@ -34,7 +34,10 @@ function Location({location, changeLocation}) {
             {/* <Modal hideModal={hideModal}>
                 <LocationModal changeLocation={changeLocation} hideModal={hideModal}/>
             </Modal> */}
-            <h2>{location.city}, {location.state}</h2>
+            <h2>{location.city}, {location.region}</h2>
+            <p>{location.lat}</p>
+            <p>{location.long}</p>
+
             <button onClick={handleClick}><GoLocation /></button>
            
 

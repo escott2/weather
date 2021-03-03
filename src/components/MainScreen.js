@@ -8,15 +8,15 @@ import Footer from './Footer';
 function MainScreen() {
 
     const today = new Date();
-    const initialTime = today.toLocaleTimeString("en-US", { hour12: false });
+    // const initialTime = today.toLocaleTimeString("en-US", { hour12: false });
 
     const [location, setLocation] = useState(
       {
         city: "Minneapolis", 
-        state: "Minnesota", 
+        region: "Minnesota", 
         country: "United States",
-        lat: undefined,
-        long: undefined
+        lat: 44.986,
+        long: -93.258
       }
     );
     const [temp, setTemp] = useState(0);
@@ -29,6 +29,7 @@ function MainScreen() {
         date: today.getDate(),
         year: today.getFullYear()
     });
+
 
     // ADDING A CLOCK
     // const [time, setTime] = useState(initialTime);
@@ -96,7 +97,7 @@ function MainScreen() {
 
 
     useEffect(() => {
-      axios.get(`http://www.mapquestapi.com/geocoding/v1/address?key=${GEOCODE_API_KEY}&city=${location.city}&state=MN&country=United States`)
+      axios.get(`http://www.mapquestapi.com/geocoding/v1/address?key=${GEOCODE_API_KEY}&city=${location.city}&state=${location.region}&country=${location.country}`)
       .then(response => {
         setLocation((prevState) => {
           return {
@@ -110,13 +111,13 @@ function MainScreen() {
         // handle error
         console.log(error);
       })
-    }, [location.city]);
+    }, [location.city, location.region, location.country]);
 
 
 
 
     useEffect(() => {
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location.city}&units=imperial&appid=${WEATHER_API_KEY}`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${WEATHER_API_KEY}`)
         .then(response => {
            setTemp(() => {
               let currentTemp = response.data.main.temp;
@@ -128,7 +129,7 @@ function MainScreen() {
           // handle error
           console.log(error);
         })
-    }, [location]);
+    }, [location.lat, location.long]);
 
     useEffect(() => {
 
@@ -208,11 +209,13 @@ function MainScreen() {
         });
     }
 
-    function handleLocationChange(location) {
+    function handleLocationChange(newLocation) {
       setLocation((prevState) => {
         return {
           ...prevState,
-          city: location
+          city: newLocation.city,
+          region: newLocation.region,
+          country: newLocation.country
         }
       });
     }
