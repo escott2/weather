@@ -2,6 +2,7 @@
     width: 1000px;
     height: 600px;
     background-color: #D9F0FC;
+    /* background-color: #6d787e; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,9 +16,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* background-color: #C3D8E3; */
     justify-self: end;
     position: relative;
+    margin-bottom: 0.5em;
+
 }
 
 .SunTimes p {
@@ -36,8 +38,17 @@
 
 .sun-img {
     position: absolute;
+    width: 60px;
+}
+
+.sunrise-img {
     top: -3px;
     left: 2px;
     transform: rotate(180deg);
-    width: 60px;
+}
+
+.sunset-img {
+    left: 920px;
+    top: 47px;
+
 }

@@ -1,4 +1,4 @@
-.DateModal {
+.Modal {
     background-color: rgba(2, 73, 89, 0.9);
     position: fixed;
     top: 0;
@@ -12,7 +12,7 @@
     z-index: 10;
 }
 
-.DateModal__wrapper {
+.Modal__wrapper {
     background-color: white;
     width: 40%;
     color: black;
@@ -27,27 +27,7 @@
     font-size: 1.25rem;
 }
 
-.DayPicker {
-    background-color: rgba(2, 73, 89, 0.4);
-    color: black;
-    margin-top: 2em;
-    margin-bottom: 1em;
-    border: 0.25em solid  rgb(2, 73, 89);
-    border-radius: 10px;
-}
-
-.DateModal__submit-btn {
-    font-size: 1.1rem;
-    border: 0.15em solid rgb(2, 73, 89);
-    padding: 0.4em 1em;
-    border-radius: 10px;
-    font-weight: 600;
-    color: rgb(2, 73, 89);
-    /* background-color: black; */
-    /* color: white; */
-}
-
-.DateModal__exit-btn {
+.Modal__exit-btn {
     display: block;
     margin-left: auto;
 
@@ -55,6 +35,5 @@
 
 .close-icon {
     color: rgba(2, 73, 89, 0.4);
-    /* display: block; */
     margin-left: auto;
 }

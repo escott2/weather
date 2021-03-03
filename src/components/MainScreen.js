@@ -1,13 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './MainScreen.css';
+import Header from './Header';
 import Container from './Container';
-import Location from './Location';
-import Day from './Day';
-// import Sunrise from './Sunrise';
-// import Sunset from './Sunset';
-import Attribution from './Attribution';
-
+import Footer from './Footer';
 
 function MainScreen() {
 
@@ -23,8 +19,8 @@ function MainScreen() {
         long: undefined
       }
     );
-    const [temp, setTemp] = useState("");
-    const [sunrise, setSunrise] = useState("");
+    const [temp, setTemp] = useState(0);
+    const [sunrise, setSunrise] = useState({});
     const [sunset, setSunset] = useState("");
     //may not make sense in state.
     const [dayLength, setDayLength] = useState("");
@@ -34,23 +30,20 @@ function MainScreen() {
         year: today.getFullYear()
     });
 
-    const [time, setTime] = useState(initialTime);
-    function getCurrentTime() {
-      setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    }
+    // ADDING A CLOCK
+    // const [time, setTime] = useState(initialTime);
 
-    setInterval(getCurrentTime, 1000);
+    // function getCurrentTime() {
+    //   setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    // }
+
+    // setInterval(getCurrentTime, 1000);
 
   
-    
-
-
-
     const WEATHER_API_KEY = "922176d7fe6aa80866789eaaf2e9d26d";
     const GEOCODE_API_KEY = "BipYncCG753nCC2wdpSNdjzKWErYoH3b"
-    // const cityName = "Minneapolis";
-    // const months = ["January","February","March","April","May","June","July",
-    // "August","September","October","November","December"];
+
+
     const HOURS_PER_DAY = 24;
     const MINUTES_PER_HOUR = 60;
     const SECONDS_PER_MINUTES = 60;
@@ -62,7 +55,6 @@ function MainScreen() {
         seconds: SECONDS_PER_MINUTES - Number(dayLength.substring(6,9)),
     }
 
-    const sunriseTime = `${sunrise.sunriseHour}:${sunrise.sunriseMinute}`;
     const nightMinutes = timeToMinutes(nightLength.hours, nightLength.minutes, nightLength.seconds);
     const nightPercent = nightMinutes / MINUTES_PER_DAY;
     const nightPercentRounded = Math.round(nightPercent * 100) / 100;
@@ -71,7 +63,7 @@ function MainScreen() {
     const dayHours = Math.round((dayPercentRounded * HOURS_PER_DAY) * 10) / 10;
 
 
-
+    // Refactor using Date() formatting
 
     function roundMinute(second, minute) {
       if (second > 30) {
@@ -97,9 +89,7 @@ function MainScreen() {
       return totalMinutes;
     }
 
-    function findSunPosition() {
 
-    }
 
 
 
@@ -227,35 +217,13 @@ function MainScreen() {
       });
     }
 
-
-    
-    // const dateOne = new Date(2021, 1, 1, 6, 49);
-    // const dateTwo = new Date(2021, 1, 1, 18, 49);
-    // dateOne.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    // dateTwo.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    // const difference = dateTwo - dateOne;
-
-
-
     return (
         <div className="MainScreen">
 
-            {/* Start Header */}
-            <Location location={location} changeLocation={handleLocationChange}/>
-            <Day date={date} changeDate={handleDateChange} />
-            {/* End Header */}
-            <p>{time}</p>
+            <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
+            {/* <p>{time}</p> */}
             <Container temp={temp} dayHours={dayHours} nightHours={nightHours} dayLength={dayPercentRounded} sunrise={sunrise} sunset={sunset}/> 
-
-            {/* <div className="SunTimes">
-              <Sunrise sunrise={sunriseTime}/>
-              <Sunset sunset={sunset}/>
-            </div> */}
-
-            {/* Start Footer */}
-            <Attribution />
-            {/* End Footer */}
+            <Footer />
 
         </div>
     )
