@@ -1,5 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Sunrise.css';
+
+Sunrise.propTypes = {
+    sunrise: PropTypes.object
+}
 
 function Sunrise({sunrise}) {
     return (

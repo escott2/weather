@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {GoLocation} from 'react-icons/go';
 import './Location.css';
-import LocationModal from './LocationModal';
+import Modal from './Modal';
+import LocationPicker from './LocationPicker';
 
-// import PropTypes from 'prop-types';
 
-// Location.propTypes = {
-    
-// };
+Location.propTypes = {
+    location: PropTypes.object,
+    changeLocation: PropTypes.func
+};
 
 function Location({location, changeLocation}) {
 
@@ -24,9 +26,14 @@ function Location({location, changeLocation}) {
     return (
         <div className="Location">
             {isDisplayModal && 
-                <LocationModal changeLocation={changeLocation} hideModal={hideModal}/>
+                <Modal hideModal={hideModal}>
+                    <LocationPicker changeLocation={changeLocation} hideModal={hideModal}/>
+                </Modal>
             }
-            
+
+            {/* <Modal hideModal={hideModal}>
+                <LocationModal changeLocation={changeLocation} hideModal={hideModal}/>
+            </Modal> */}
             <h2>{location.city}, {location.state}</h2>
             <button onClick={handleClick}><GoLocation /></button>
            

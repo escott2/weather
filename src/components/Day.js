@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
+import Proptypes from 'prop-types';
 import './Day.css';
 import {GoCalendar} from 'react-icons/go';
-
 import DateModal from './DateModal';
 
+Day.propTypes = {
+    date: Proptypes.object,
+    changeDate: Proptypes.func
+}
 
 function Day({date, changeDate}) {
 

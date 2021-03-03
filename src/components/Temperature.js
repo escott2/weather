@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Temperature.css'
 
-function Temperature({temp, dayHours, nightHours}) {
+Temperature.propTypes = {
+    temp: PropTypes.number
+}
 
-    // const midDay = dayHours / 2;
-    // console.log(midDay);
-
+function Temperature({temp}) {
     return <div className="Temperature">
         <p>{temp}°F</p>
     </div>

@@ -5,14 +5,28 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: absolute;
-    bottom: 90px;
-    left: 450px;
-    font-size: 1.5rem;
-    color: white;
+    bottom: 100px;
+    left: 500px;
+    font-size: 1.25rem;
     box-shadow: 9px 10px 3px 4px rgba(195, 216, 227, 0.75);
 }
 
 .light-stats {
-    margin-left: 1em;
+    width: 200px;
+    height: 200px;
+    background-color:rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* background-image: conic-gradient(from 270deg, #D9F0FC 180deg, #024250 0); */
+}
+
+.light-stats p {
+    color: black;
+    text-align: center;
+    
 }

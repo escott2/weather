@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './DateModal.css';
 import {IoIosCloseCircle} from 'react-icons/io'
 import DayPicker from 'react-day-picker';
 import './custom-day-picker.css';
-// import 'react-day-picker/lib/style.css';
 
-// DateModal.propTypes = {
-    
-// };
+DateModal.propTypes = {
+    changeDate: PropTypes.func,
+    hideModal: PropTypes.func
+};
 
     function DateModal({changeDate, hideModal}) {
 

@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-// LocationModal.propTypes = {
-    
-// };
+LocationPicker.propTypes = {
+    changeLocation: PropTypes.func, 
+    hideModal: PropTypes.func
+};
 
-function LocationModal({changeLocation, hideModal}) {
+function LocationPicker({changeLocation, hideModal}) {
 
     const [inputText, setInputText] = useState("");
 
@@ -23,7 +24,7 @@ function LocationModal({changeLocation, hideModal}) {
 
     return (
         <div>
-            <p>Enter a location</p>
+            <p>Enter a city</p>
             <input type="text" value={inputText} onChange={handleChange}></input>
             <button className="Location__submit-btn" onClick={handleClick}>submit</button>
             {/* <h2>{location.city}, {location.state}</h2> */}
@@ -32,4 +33,4 @@ function LocationModal({changeLocation, hideModal}) {
     );
 }
 
-export default LocationModal;
+export default LocationPicker;
