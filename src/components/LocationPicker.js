@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
-import './LocationPicker.css';
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
-
-
-
 import PropTypes from 'prop-types';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import './LocationPicker.css';
 
 LocationPicker.propTypes = {
     changeLocation: PropTypes.func, 
@@ -82,11 +79,27 @@ function LocationPicker({changeLocation, hideModal, location}) {
                 </React.Fragment>
             }
             
-            <h3>Choose a state:</h3>
-            <RegionDropdown classes="LocationPicker__input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
-            <h3>Enter a city</h3>
-            <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
-            <button className="Location__submit-btn" onClick={handleClick}>submit</button>     
+            { inputText.country === "United States" ?
+                <React.Fragment>
+                    <h3>Choose a state:</h3>
+                    <RegionDropdown classes="LocationPicker__input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
+                {/* </React.Fragment> */}
+
+                {inputText.region !== "" &&
+                    <React.Fragment>
+                        <h3>Enter a city</h3>
+                        <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+                        <button className="Location__submit-btn" onClick={handleClick}>submit</button>
+                    </React.Fragment>
+                }
+                </React.Fragment>
+                :
+                <React.Fragment>
+                    <h3>Enter a city</h3>
+                    <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+                    <button className="Location__submit-btn" onClick={handleClick}>submit</button>     
+                </React.Fragment>
+            }
         </div>
     );
 }

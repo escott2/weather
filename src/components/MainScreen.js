@@ -8,7 +8,6 @@ import Footer from './Footer';
 function MainScreen() {
 
     const today = new Date();
-    // const initialTime = today.toLocaleTimeString("en-US", { hour12: false });
 
     const [location, setLocation] = useState(
       {
@@ -30,19 +29,15 @@ function MainScreen() {
         year: today.getFullYear()
     });
 
+    const geoCodeAPI = {
+      key: "cADuj9DK0OJq9A1eVBEeXI5566aRCAzG",
+      base: "http://www.mapquestapi.com/geocoding/v1/",
+    }
 
-    // ADDING A CLOCK
-    // const [time, setTime] = useState(initialTime);
-
-    // function getCurrentTime() {
-    //   setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    // }
-
-    // setInterval(getCurrentTime, 1000);
-
-  
-    const WEATHER_API_KEY = "922176d7fe6aa80866789eaaf2e9d26d";
-    const GEOCODE_API_KEY = "cADuj9DK0OJq9A1eVBEeXI5566aRCAzG"
+    const weatherAPI = {
+      key: "922176d7fe6aa80866789eaaf2e9d26d",
+      base: "https://api.openweathermap.org/data/2.5/"
+    }
 
 
     const HOURS_PER_DAY = 24;
@@ -91,7 +86,13 @@ function MainScreen() {
     }
 
     useEffect(() => {
-      axios.get(`http://www.mapquestapi.com/geocoding/v1/address?key=${GEOCODE_API_KEY}&city=${location.city}&state=${location.region}&country=${location.country}`)
+      let geoCodeURL = '';
+      if (location.country === "United States") {
+        geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&state=${location.region}&country=${location.country.replace(/\s/g, '+')}`;
+      } else {
+        geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&country=${location.country.replace(/\s/g, '+')}`;
+      }
+      axios.get(geoCodeURL)
       .then(response => {
         setLocation((prevState) => {
           return {
@@ -108,7 +109,8 @@ function MainScreen() {
     }, [location.city, location.region, location.country]);
 
     useEffect(() => {
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${WEATHER_API_KEY}`)
+        const weatherURL = `${weatherAPI.base}weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${weatherAPI.key}`
+        axios.get(weatherURL)
         .then(response => {
            setTemp(() => {
               let currentTemp = response.data.main.temp;
@@ -123,8 +125,8 @@ function MainScreen() {
     }, [location.lat, location.long]);
 
     useEffect(() => {
-
-        axios.get(`https://api.sunrise-sunset.org/json?lat=44.9778&lng=-93.2650&date=${date.year}-${date.month + 1}-${date.date}`)
+        const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${date.year}-${date.month + 1}-${date.date}`;
+        axios.get(sunURL)
         .then(response => {
            setSunrise(() => {
 
@@ -189,7 +191,7 @@ function MainScreen() {
           // handle error
           console.log(error);
         })
-    }, [date]);
+    }, [date, location.lat, location.long]);
 
     function handleDateChange(day) {
         setDate(
@@ -213,16 +215,11 @@ function MainScreen() {
 
     return (
         <div className="MainScreen">
-
             <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
-            {/* <p>{time}</p> */}
             <Container temp={temp} dayHours={dayHours} nightHours={nightHours} dayLength={dayPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
-            {console.log("test")}
-
         </div>
     )
-
 }
 
 export default MainScreen;

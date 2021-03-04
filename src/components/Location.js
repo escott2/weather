@@ -34,7 +34,11 @@ function Location({location, changeLocation}) {
             {/* <Modal hideModal={hideModal}>
                 <LocationModal changeLocation={changeLocation} hideModal={hideModal}/>
             </Modal> */}
-            <h2>{location.city}, {location.region}, {location.country}</h2>
+            { location.country === "United States" ?
+                <h2>{location.city}, {location.region}, {location.country}</h2>
+            :
+                <h2>{location.city}, {location.country}</h2>
+            }
 
             <button onClick={handleClick}><GoLocation /></button>
            
