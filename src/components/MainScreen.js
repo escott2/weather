@@ -42,7 +42,7 @@ function MainScreen() {
 
   
     const WEATHER_API_KEY = "922176d7fe6aa80866789eaaf2e9d26d";
-    const GEOCODE_API_KEY = "BipYncCG753nCC2wdpSNdjzKWErYoH3b"
+    const GEOCODE_API_KEY = "cADuj9DK0OJq9A1eVBEeXI5566aRCAzG"
 
 
     const HOURS_PER_DAY = 24;
@@ -90,12 +90,6 @@ function MainScreen() {
       return totalMinutes;
     }
 
-
-
-
-
-
-
     useEffect(() => {
       axios.get(`http://www.mapquestapi.com/geocoding/v1/address?key=${GEOCODE_API_KEY}&city=${location.city}&state=${location.region}&country=${location.country}`)
       .then(response => {
@@ -112,9 +106,6 @@ function MainScreen() {
         console.log(error);
       })
     }, [location.city, location.region, location.country]);
-
-
-
 
     useEffect(() => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${WEATHER_API_KEY}`)
@@ -227,6 +218,7 @@ function MainScreen() {
             {/* <p>{time}</p> */}
             <Container temp={temp} dayHours={dayHours} nightHours={nightHours} dayLength={dayPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
+            {console.log("test")}
 
         </div>
     )

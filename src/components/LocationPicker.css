@@ -1,0 +1,18 @@
+
+.LocationPicker__input {
+    padding: 0.5em;
+    display: block;
+    margin: 0.53em auto;
+}
+
+.LocationPicker p {
+    margin: 0;
+}
+
+
+.LocationPicker h3 {
+    margin: 1em;
+    padding: 0.5em;
+    font-size: 1.25rem;
+    background-color: rgba(2, 73, 89, 0.4);
+}

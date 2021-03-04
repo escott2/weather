@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './LocationPicker.css';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 
@@ -10,12 +11,12 @@ LocationPicker.propTypes = {
     hideModal: PropTypes.func
 };
 
-function LocationPicker({changeLocation, hideModal}) {
+function LocationPicker({changeLocation, hideModal, location}) {
 
     const [inputText, setInputText] = useState({
         city: "",
         region: "", 
-        country: ""
+        country: location.country
     });
 
     function handleCityChange(e) {
@@ -48,20 +49,43 @@ function LocationPicker({changeLocation, hideModal}) {
 
     function handleClick() {
         changeLocation(inputText)
-        setInputText({
-            city: "",
-            region: "", 
-            country: ""
+        setInputText((prevState) => {
+            return {
+                ...prevState,
+                city: "",
+                region: ""
+            }
         });
         hideModal();
     }
 
+    function handleEditCountry() {
+        setInputText({ 
+            city: "",
+            region: "", 
+            country: ""
+        })
+    }
+
     return (
-        <div>
-            <p>Enter a city</p>
-            <input type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
-            <CountryDropdown name="country" value={inputText.country} onChange={handleCountryChange}/>
-            <RegionDropdown name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
+        <div className="LocationPicker">
+            { inputText.country === "" ?
+                <React.Fragment>
+                    <h3>Choose a country:</h3>
+                    <CountryDropdown classes="LocationPicker__input" name="country" value={inputText.country} onChange={handleCountryChange}/>
+                </React.Fragment>
+            :
+                <React.Fragment>
+                    <h3>Country:</h3>
+                    <p>{inputText.country}</p>
+                    <button className="Location__submit-btn" onClick={handleEditCountry}>edit</button>
+                </React.Fragment>
+            }
+            
+            <h3>Choose a state:</h3>
+            <RegionDropdown classes="LocationPicker__input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
+            <h3>Enter a city</h3>
+            <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
             <button className="Location__submit-btn" onClick={handleClick}>submit</button>     
         </div>
     );

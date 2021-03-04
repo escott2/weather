@@ -27,16 +27,14 @@ function Location({location, changeLocation}) {
         <div className="Location">
             {isDisplayModal && 
                 <Modal hideModal={hideModal}>
-                    <LocationPicker changeLocation={changeLocation} hideModal={hideModal}/>
+                    <LocationPicker changeLocation={changeLocation} hideModal={hideModal} location={location}/>
                 </Modal>
             }
 
             {/* <Modal hideModal={hideModal}>
                 <LocationModal changeLocation={changeLocation} hideModal={hideModal}/>
             </Modal> */}
-            <h2>{location.city}, {location.region}</h2>
-            <p>{location.lat}</p>
-            <p>{location.long}</p>
+            <h2>{location.city}, {location.region}, {location.country}</h2>
 
             <button onClick={handleClick}><GoLocation /></button>
            
