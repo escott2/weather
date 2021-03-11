@@ -9,25 +9,23 @@ function MainScreen() {
 
     const today = new Date();
 
-    const [location, setLocation] = useState(
-      {
+    const [date, setDate] = useState({
+      month: today.getMonth(),
+      date: today.getDate(),
+      year: today.getFullYear()
+    });
+    const [location, setLocation] = useState({
         city: "Minneapolis", 
         region: "Minnesota", 
         country: "United States",
         lat: 44.986,
         long: -93.258
-      }
-    );
+    });
     const [temp, setTemp] = useState(0);
     const [sunrise, setSunrise] = useState({});
     const [sunset, setSunset] = useState("");
-    //may not make sense in state.
-    const [dayLength, setDayLength] = useState("");
-    const [date, setDate] = useState({
-        month: today.getMonth(),
-        date: today.getDate(),
-        year: today.getFullYear()
-    });
+    const [dayLengthInMinutes, setDayLengthInMinutes] = useState("");
+
 
     const geoCodeAPI = {
       key: "cADuj9DK0OJq9A1eVBEeXI5566aRCAzG",
@@ -39,24 +37,17 @@ function MainScreen() {
       base: "https://api.openweathermap.org/data/2.5/"
     }
 
-
+    //Time Constants
     const HOURS_PER_DAY = 24;
     const MINUTES_PER_HOUR = 60;
-    const SECONDS_PER_MINUTES = 60;
     const MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
 
-   const nightLength = {
-        hours: HOURS_PER_DAY - Number(dayLength.substring(0,2)),
-        minutes: MINUTES_PER_HOUR - Number(dayLength.substring(3,5)),
-        seconds: SECONDS_PER_MINUTES - Number(dayLength.substring(6,9)),
-    }
-
-    const nightMinutes = timeToMinutes(nightLength.hours, nightLength.minutes, nightLength.seconds);
-    const nightPercent = nightMinutes / MINUTES_PER_DAY;
-    const nightPercentRounded = Math.round(nightPercent * 100) / 100;
-    const dayPercentRounded = Math.round(100 - (nightPercentRounded * 100)) / 100;
-    const nightHours = Math.round((nightPercentRounded * HOURS_PER_DAY) * 10) / 10;
-    const dayHours = Math.round((dayPercentRounded * HOURS_PER_DAY) * 10) / 10;
+    const nightLengthInMinutes = MINUTES_PER_DAY - dayLengthInMinutes;
+    const nightLengthPercent = nightLengthInMinutes / MINUTES_PER_DAY;
+    const nightLengthPercentRounded = Math.round(nightLengthPercent * 100) / 100;
+    const dayLengthPercentRounded = Math.round(100 - (nightLengthPercentRounded * 100)) / 100;
+    const nightLengthInHours = Math.round((nightLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
+    const dayLengthInHours = Math.round((dayLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
 
 
     // Refactor using Date() formatting
@@ -69,18 +60,16 @@ function MainScreen() {
     }
 
     function toHour_24(period, hour) {
-        if (period === "PM" && hour !== 12) {
-          hour = hour + 12;
-        } 
-        return hour;
+      if (period === "PM" && hour !== 12) {
+        hour = hour + 12;
+      } 
+      return hour;
     }
 
     function timeToMinutes(hours, minutes, seconds) {
-
       if (seconds > 30) {
         minutes++
       }
-
       const totalMinutes = (hours * 60) + minutes
       return totalMinutes;
     }
@@ -125,6 +114,8 @@ function MainScreen() {
     }, [location.lat, location.long]);
 
     useEffect(() => {
+        const fullDate = `${date.year}-${date.month + 1}-${date.date}`;
+        console.log(fullDate);
         const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${date.year}-${date.month + 1}-${date.date}`;
         axios.get(sunURL)
         .then(response => {
@@ -181,9 +172,13 @@ function MainScreen() {
             return sunsetTime;
           });
 
-          setDayLength(() => {
+          setDayLengthInMinutes(() => {
               const dayLength = response.data.results.day_length;
-              return dayLength;
+              const dayLengthHour = Number(dayLength.substring(0, 2));
+              const dayLengthMinutes = Number(dayLength.substring(3, 5));
+              const dayLengthSeconds = Number(dayLength.substring(6, 9));
+              const dayLengthInMinutes = timeToMinutes(dayLengthHour, dayLengthMinutes, dayLengthSeconds);
+              return dayLengthInMinutes;
           });
 
         })
@@ -216,8 +211,9 @@ function MainScreen() {
     return (
         <div className="MainScreen">
             <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
-            <Container temp={temp} dayHours={dayHours} nightHours={nightHours} dayLength={dayPercentRounded} sunrise={sunrise} sunset={sunset}/> 
+            <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
+            {console.log(dayLengthInMinutes)}
         </div>
     )
 }
