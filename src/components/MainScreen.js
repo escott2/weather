@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import geoTz from 'geo-tz';
+import spacetime from 'spacetime';
 import './MainScreen.css';
 import Header from './Header';
 import Container from './Container';
@@ -51,8 +52,16 @@ function MainScreen() {
     const nightLengthInHours = Math.round((nightLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
     const dayLengthInHours = Math.round((dayLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
     //Get timezone with lat and long, using geo-tz library
+    //--- returns an array object. Timezone located at index 0.
     const timezone = geoTz(location.lat, location.long);
 
+    // const spaceTime = spacetime(`${date.month + 1} ${date.day} ${date.year}`, 'UTC');
+    // spaceTime.time(`${sunrise.hour}:${sunrise.minute}${sunrise.period}`);
+    let spaceTime = spacetime("March 15 2021", "UTC");
+    spaceTime = spaceTime.time('12:23pm');
+    spaceTime = spaceTime.goto(timezone[0]);
+    const convertedTime = spaceTime.time();
+    console.log(convertedTime);
 
     //Geolocation API Call
     useEffect(() => {
@@ -104,7 +113,6 @@ function MainScreen() {
     //Sunrise and Sunset API Call
     useEffect(() => {
         const fullDate = `${date.year}-${date.month + 1}-${date.date}`;
-        console.log(fullDate);
         const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${date.year}-${date.month + 1}-${date.date}`;
         axios.get(sunURL)
         .then(response => {
@@ -130,7 +138,8 @@ function MainScreen() {
               return {
                 sunriseHour: String(sunriseHour).padStart(2, '0'),
                 sunriseMinute: String(sunriseMinute).padStart(2, '0'),
-                sunriseSecond: String(sunriseSecond).padStart(2, '0')
+                sunriseSecond: String(sunriseSecond).padStart(2, '0'),
+                sunrisePeriod: period
               };
           });
 
@@ -224,8 +233,8 @@ function MainScreen() {
     return (
         <div className="MainScreen">
             <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
-            {timezoneOffset}
-            {timezone}
+ 
+             {console.log(spaceTime)}
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
         </div>
