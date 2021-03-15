@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import geoTz from 'geo-tz';
 import './MainScreen.css';
 import Header from './Header';
 import Container from './Container';
@@ -25,6 +26,7 @@ function MainScreen() {
     const [sunrise, setSunrise] = useState({});
     const [sunset, setSunset] = useState("");
     const [dayLengthInMinutes, setDayLengthInMinutes] = useState("");
+    const [timezoneOffset, setTimezoneOffset] = useState("");
 
 
     const geoCodeAPI = {
@@ -48,32 +50,11 @@ function MainScreen() {
     const dayLengthPercentRounded = Math.round(100 - (nightLengthPercentRounded * 100)) / 100;
     const nightLengthInHours = Math.round((nightLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
     const dayLengthInHours = Math.round((dayLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
+    //Get timezone with lat and long, using geo-tz library
+    const timezone = geoTz(location.lat, location.long);
 
 
-    // Refactor using Date() formatting
-
-    function roundMinute(second, minute) {
-      if (second > 30) {
-        minute++;
-      }
-      return minute;
-    }
-
-    function toHour_24(period, hour) {
-      if (period === "PM" && hour !== 12) {
-        hour = hour + 12;
-      } 
-      return hour;
-    }
-
-    function timeToMinutes(hours, minutes, seconds) {
-      if (seconds > 30) {
-        minutes++
-      }
-      const totalMinutes = (hours * 60) + minutes
-      return totalMinutes;
-    }
-
+    //Geolocation API Call
     useEffect(() => {
       let geoCodeURL = '';
       if (location.country === "United States") {
@@ -97,15 +78,22 @@ function MainScreen() {
       })
     }, [location.city, location.region, location.country]);
 
+
+    //Weather API Call
     useEffect(() => {
         const weatherURL = `${weatherAPI.base}weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${weatherAPI.key}`
+        console.log(weatherURL);
         axios.get(weatherURL)
         .then(response => {
-           setTemp(() => {
-              let currentTemp = response.data.main.temp;
-              currentTemp = Math.round(Number(currentTemp));
-              return currentTemp;
+          setTemp(() => {
+            let currentTemp = response.data.main.temp;
+            currentTemp = Math.round(Number(currentTemp));
+            return currentTemp;
           });
+          setTimezoneOffset(() => {
+            const timezoneOffsetInSeconds = response.data.timezone;
+            return timezoneOffsetInSeconds;
+          })
         })
         .catch(function (error) {
           // handle error
@@ -113,6 +101,7 @@ function MainScreen() {
         })
     }, [location.lat, location.long]);
 
+    //Sunrise and Sunset API Call
     useEffect(() => {
         const fullDate = `${date.year}-${date.month + 1}-${date.date}`;
         console.log(fullDate);
@@ -188,6 +177,30 @@ function MainScreen() {
         })
     }, [date, location.lat, location.long]);
 
+
+    // Refactor using Date() formatting
+    function roundMinute(second, minute) {
+      if (second > 30) {
+        minute++;
+      }
+      return minute;
+    }
+
+    function toHour_24(period, hour) {
+      if (period === "PM" && hour !== 12) {
+        hour = hour + 12;
+      } 
+      return hour;
+    }
+
+    function timeToMinutes(hours, minutes, seconds) {
+      if (seconds > 30) {
+        minutes++
+      }
+      const totalMinutes = (hours * 60) + minutes
+      return totalMinutes;
+    }
+
     function handleDateChange(day) {
         setDate(
          {
@@ -211,9 +224,10 @@ function MainScreen() {
     return (
         <div className="MainScreen">
             <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
+            {timezoneOffset}
+            {timezone}
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
-            {console.log(dayLengthInMinutes)}
         </div>
     )
 }
