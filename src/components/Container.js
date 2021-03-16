@@ -12,7 +12,7 @@ Container.propTypes = {
     dayLength: PropTypes.number,
     dayHours: PropTypes.number,
     nightHours: PropTypes.number,
-    sunrise: PropTypes.object,
+    sunrise: PropTypes.string,
     sunset: PropTypes.string
 };
 
