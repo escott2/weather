@@ -1,5 +1,7 @@
+@import '../styles/main.scss';
+
 .Modal {
-    background-color: rgba(2, 73, 89, 0.9);
+    background-color: rgba($color-primary, 0.9);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -17,8 +19,9 @@
     width: 40%;
     color: black;
     padding-bottom: 2em;
-    border: 0.15em solid rgb(2, 73, 89);
+    border: 0.15em solid $color-primary;
     border-radius: 15px;
+    opacity: 1;
 
 
 }

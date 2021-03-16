@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import './Modal.css';
+import './Modal.scss';
 import {IoIosCloseCircle} from 'react-icons/io'
 
 // Modal.propTypes = {
