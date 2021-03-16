@@ -9,7 +9,7 @@ Sunset.propTypes = {
 function Sunset({sunset}) {
     return (
         <div className="Sunset">
-            <p>{sunset} PM</p>
+            <p>{sunset}</p>
         </div>
     )
 }

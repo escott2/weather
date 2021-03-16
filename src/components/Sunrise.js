@@ -9,7 +9,9 @@ Sunrise.propTypes = {
 function Sunrise({sunrise}) {
     return (
         <div className="Sunrise">
-            <p>{`${sunrise.sunriseHour}:${sunrise.sunriseMinute}`} AM</p>
+            {/* <p>{`${sunrise.sunriseHour}:${sunrise.sunriseMinute}`} AM</p> */}
+            <p>{sunrise.sunriseTime}</p>
+
         </div>
     )
 }

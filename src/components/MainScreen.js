@@ -27,7 +27,8 @@ function MainScreen() {
     const [sunrise, setSunrise] = useState({});
     const [sunset, setSunset] = useState("");
     const [dayLengthInMinutes, setDayLengthInMinutes] = useState("");
-    const [timezoneOffset, setTimezoneOffset] = useState("");
+    const [timezone, setTimezone] = useState("");
+    // const [timezoneOffset, setTimezoneOffset] = useState("");
 
 
     const geoCodeAPI = {
@@ -45,6 +46,9 @@ function MainScreen() {
     const MINUTES_PER_HOUR = 60;
     const MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
 
+    const fullDate = `${date.year}-${date.month + 1}-${date.date}`;
+
+
     const nightLengthInMinutes = MINUTES_PER_DAY - dayLengthInMinutes;
     const nightLengthPercent = nightLengthInMinutes / MINUTES_PER_DAY;
     const nightLengthPercentRounded = Math.round(nightLengthPercent * 100) / 100;
@@ -53,15 +57,31 @@ function MainScreen() {
     const dayLengthInHours = Math.round((dayLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
     //Get timezone with lat and long, using geo-tz library
     //--- returns an array object. Timezone located at index 0.
-    const timezone = geoTz(location.lat, location.long);
+    // const timezone = geoTz(location.lat, location.long);
 
-    // const spaceTime = spacetime(`${date.month + 1} ${date.day} ${date.year}`, 'UTC');
-    // spaceTime.time(`${sunrise.hour}:${sunrise.minute}${sunrise.period}`);
-    let spaceTime = spacetime("March 15 2021", "UTC");
-    spaceTime = spaceTime.time('12:23pm');
-    spaceTime = spaceTime.goto(timezone[0]);
+ 
+    let spaceTime = spacetime("2021-03-16", "UTC");
+    spaceTime = spaceTime.time('07:55pm');
+    spaceTime = spaceTime.goto("Australia/Sydney");
     const convertedTime = spaceTime.time();
     console.log(convertedTime);
+    /**
+     * Returns local time
+     * @param {string} date 
+     * @param {string} timeInUTC - time in UTC
+     * @param {string} timezone
+     * @returns {string} - time converted from UTC to local timezone
+     */
+    function toLocalTime(date, timeInUTC, timezone) {
+      let universalTime = spacetime(date, "UTC");
+      universalTime = universalTime.time(timeInUTC);
+      universalTime = universalTime.goto(timezone);
+      const localTime = universalTime.time();
+      return localTime;
+    }
+
+
+ 
 
     //Geolocation API Call
     useEffect(() => {
@@ -90,84 +110,98 @@ function MainScreen() {
 
     //Weather API Call
     useEffect(() => {
-        const weatherURL = `${weatherAPI.base}weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${weatherAPI.key}`
+        // const weatherURL = `${weatherAPI.base}weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${weatherAPI.key}`
+        const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,daily,minutely&units=imperial&appid=${weatherAPI.key}`
         console.log(weatherURL);
         axios.get(weatherURL)
         .then(response => {
           setTemp(() => {
-            let currentTemp = response.data.main.temp;
+            let currentTemp = response.data.current.temp;
             currentTemp = Math.round(Number(currentTemp));
             return currentTemp;
           });
-          setTimezoneOffset(() => {
-            const timezoneOffsetInSeconds = response.data.timezone;
-            return timezoneOffsetInSeconds;
-          })
+          setTimezone(() => {
+            const newTimezone = response.data.timezone;
+            return newTimezone;
+          });
         })
         .catch(function (error) {
           // handle error
           console.log(error);
-        })
+        });
     }, [location.lat, location.long]);
 
     //Sunrise and Sunset API Call
     useEffect(() => {
-        const fullDate = `${date.year}-${date.month + 1}-${date.date}`;
-        const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${date.year}-${date.month + 1}-${date.date}`;
+        // const fullDate = `${date.year}-${date.month + 1}-${date.date}`;
+        const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${fullDate}`;
         axios.get(sunURL)
         .then(response => {
            setSunrise(() => {
 
-              let sunriseTimeUTC = response.data.results.sunrise.padStart(11, '0');
+              let sunriseTimeInUTC = response.data.results.sunrise.padStart(11, '0');
+              // console.log(sunriseTimeUTC);
+              // const hourUTC_12 = Number(sunriseTimeUTC.slice(0, 2));
+              // const period = sunriseTimeUTC.substring(9);
+              // const hourUTC_24 = toHour_24(period, hourUTC_12);
 
-              const hourUTC_12 = Number(sunriseTimeUTC.slice(0, 2));
-              const period = sunriseTimeUTC.substring(9);
-              const hourUTC_24 = toHour_24(period, hourUTC_12);
-
-              const selectedDate = new Date(date.year, date.month, date.date);
-              const offset = selectedDate.getTimezoneOffset() / 60; 
+              // const selectedDate = new Date(date.year, date.month, date.date);
+              // const offset = selectedDate.getTimezoneOffset() / 60; 
     
-              const hour = hourUTC_24 - offset;
+              // const hour = hourUTC_24 - offset;
 
-              const sunriseHour = hour;
-              let sunriseMinute = Number(sunriseTimeUTC.substring(3,5));
-              const sunriseSecond = Number(sunriseTimeUTC.substring(6,9));
+              // const sunriseHour = hour;
+              // let sunriseMinute = Number(sunriseTimeUTC.substring(3,5));
+              // const sunriseSecond = Number(sunriseTimeUTC.substring(6,9));
               
-              sunriseMinute = roundMinute(sunriseSecond, sunriseMinute);
+              // sunriseMinute = roundMinute(sunriseSecond, sunriseMinute);
+
+              //NEW
+              console.log(`UTC sunrise: ${sunriseTimeInUTC}`);
+              const sunriseTimeInLocal = toLocalTime(fullDate, sunriseTimeInUTC, timezone)
+
+
+
+
 
               return {
-                sunriseHour: String(sunriseHour).padStart(2, '0'),
-                sunriseMinute: String(sunriseMinute).padStart(2, '0'),
-                sunriseSecond: String(sunriseSecond).padStart(2, '0'),
-                sunrisePeriod: period
+                // sunriseHour: String(sunriseHour).padStart(2, '0'),
+                // sunriseMinute: String(sunriseMinute).padStart(2, '0'),
+                // sunriseSecond: String(sunriseSecond).padStart(2, '0'),
+                // sunrisePeriod: period
+                sunriseTime: sunriseTimeInLocal
               };
           });
 
           setSunset(() => {
-            let sunsetTimeUTC = response.data.results.sunset.padStart(11, '0');
-            let hourUTC = Number(sunsetTimeUTC.slice(0, 2));
+            let sunsetTimeInUTC = response.data.results.sunset.padStart(11, '0');
 
-                if (sunsetTimeUTC.substring(9) === "PM") {
-                    hourUTC = hourUTC + 12;
-                }
+            const sunsetTimeInLocal = toLocalTime(fullDate, sunsetTimeInUTC, timezone)
 
-            const selectedDate = new Date(date.year, date.month, date.date);
-            const offset = selectedDate.getTimezoneOffset() / 60; 
+
+            // let hourUTC = Number(sunsetTimeUTC.slice(0, 2));
+
+            //     if (sunsetTimeUTC.substring(9) === "PM") {
+            //         hourUTC = hourUTC + 12;
+            //     }
+
+            // const selectedDate = new Date(date.year, date.month, date.date);
+            // const offset = selectedDate.getTimezoneOffset() / 60; 
             
-            let hour = hourUTC - offset;
+            // let hour = hourUTC - offset;
 
-              if ( hour < 0 ) {
-                hour = 24 + hour;
-              }
+            //   if ( hour < 0 ) {
+            //     hour = 24 + hour;
+            //   }
 
-              if (hour > 12) {
-                hour = hour - 12;
-              }
+            //   if (hour > 12) {
+            //     hour = hour - 12;
+            //   }
 
-            let sunsetTime = sunsetTimeUTC.slice(2, 5);
-            sunsetTime = `${String(hour)}${sunsetTime}`;
+            // let sunsetTime = sunsetTimeUTC.slice(2, 5);
+            // sunsetTime = `${String(hour)}${sunsetTime}`;
               
-            return sunsetTime;
+            return sunsetTimeInLocal;
           });
 
           setDayLengthInMinutes(() => {
@@ -184,7 +218,7 @@ function MainScreen() {
           // handle error
           console.log(error);
         })
-    }, [date, location.lat, location.long]);
+    }, [date, location.lat, location.long, timezone]);
 
 
     // Refactor using Date() formatting
@@ -210,6 +244,9 @@ function MainScreen() {
       return totalMinutes;
     }
 
+
+
+
     function handleDateChange(day) {
         setDate(
          {
@@ -233,8 +270,8 @@ function MainScreen() {
     return (
         <div className="MainScreen">
             <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
- 
-             {console.log(spaceTime)}
+            {sunrise.sunriseTime}
+            {timezone}
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
         </div>
