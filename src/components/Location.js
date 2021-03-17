@@ -40,7 +40,7 @@ function Location({location, changeLocation}) {
                 <h2>{location.city}, {location.country}</h2>
             }
 
-            <button onClick={handleClick}><GoLocation /></button>
+            <button className="icon" onClick={handleClick}><GoLocation /></button>
            
 
         </div>

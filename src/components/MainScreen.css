@@ -1,6 +1,7 @@
 .MainScreen {
     width: 100%;
-    background-color: white;
+    /* background-color:#f0f9fe; */
+    background-color: #ecf8fe;
     margin: 0 auto;
     font-size: 3rem;
     display: flex;
@@ -8,4 +9,8 @@
     align-items: center;
     justify-content: center;
     color: black;
+}
+
+h2 {
+    font-size: 2rem;
 }
