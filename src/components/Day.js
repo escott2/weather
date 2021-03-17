@@ -27,8 +27,8 @@ function Day({date, changeDate}) {
     return (
         <div className="Day">
             {isDisplayModal && <DateModal changeDate={changeDate} hideModal={handleHideModal} />}
-            <h1>{months[date.month]} {date.date}, {date.year}</h1>
-            <button className="Day__button" onClick={handleShowModal}><GoCalendar /></button>            
+            <h2>{months[date.month]} {date.date}, {date.year}</h2>
+            <button className="Day__button icon" onClick={handleShowModal}><GoCalendar /></button>            
         </div>
     )
 }

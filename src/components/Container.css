@@ -1,5 +1,6 @@
 .Container {
-    width: 1000px;
+    /* width: 80%; */
+    min-width: 1000px;
     height: 600px;
     background-color: #D9F0FC;
     /* background-color: #6d787e; */
@@ -32,7 +33,7 @@
 .horizon {
     height: 10px;
     width: 100%;
-    background-color: orange;
+    background-color: #FFA500;
     /* align-self: center; */
 }
 

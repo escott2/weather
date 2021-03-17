@@ -1,0 +1,11 @@
+@import '../styles/main.scss';
+
+header {
+    margin-top: 1em;
+    width: 80%;
+    // background-color: $white;
+    .icon {
+        color: $orange;
+    }
+}
+

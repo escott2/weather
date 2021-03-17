@@ -1,3 +1,5 @@
+@import '../styles/main.scss';
+
 .Temperature {
     width: 200px;
     height: 200px;
@@ -9,7 +11,7 @@
     font-family: 'News Cycle', sans-serif;
     font-size: 4rem;
     letter-spacing: 2px;
-    background-color: rgba(249,219,130, 0.9);
+    background-color: $yellow;
     position: absolute;
     top: 40px;
     left: 200px;

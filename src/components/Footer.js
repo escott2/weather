@@ -1,4 +1,5 @@
 import React from 'react';
+import './Footer.scss'
 import Attribution from './Attribution';
 // import PropTypes from 'prop-types';
 
