@@ -23,6 +23,7 @@ function MainScreen() {
         lat: 44.986,
         long: -93.258
     });
+    const [cityResults, setCityResults] = useState("");
     const [temp, setTemp] = useState(0);
     const [sunrise, setSunrise] = useState("");
     const [sunset, setSunset] = useState("");
@@ -71,15 +72,30 @@ function MainScreen() {
         geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&country=${location.country.replace(/\s/g, '+')}`;
       }
       axios.get(geoCodeURL)
-      .then(response => {
-        setLocation((prevState) => {
-          return {
-            ...prevState,
-            lat: response.data.results[0].locations[0].latLng.lat,
-            long: response.data.results[0].locations[0].latLng.lng
-          }
-        });
-      })
+        .then(response => {
+          setLocation((prevState) => {
+            return {
+              ...prevState,
+              lat: response.data.results[0].locations[0].latLng.lat,
+              long: response.data.results[0].locations[0].latLng.lng
+            }
+          });
+          setCityResults((prevState) => {
+            let city = response.data.results[0].locations[0].adminArea5;
+            let isValidCity = true;
+
+            if (!city) {
+              city = "City not found";
+              isValidCity = false;
+            }
+            
+            return {
+              ...prevState,
+              city: city,
+              isValidCity: isValidCity
+            };
+          });
+        })
       .catch(function (error) {
         console.log(error);
       })
@@ -96,24 +112,31 @@ function MainScreen() {
       location.lat, location.long
     */
     useEffect(() => {
-        // const weatherURL = `${weatherAPI.base}weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${weatherAPI.key}`
+      if (cityResults.isValidCity === true) {
+        console.log(`this should not be false ${cityResults.isValidCity}`);
+        console.log(cityResults);
         const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,daily,minutely&units=imperial&appid=${weatherAPI.key}`
         axios.get(weatherURL)
-        .then(response => {
+          .then(response => {
           setTemp(() => {
-            let currentTemp = response.data.current.temp;
-            currentTemp = Math.round(Number(currentTemp));
-            return currentTemp;
+              console.log(`what does isValid look like here?: ${cityResults.isValidCity} city: ${cityResults.city}`);
+              let currentTemp = response.data.current.temp;
+              currentTemp = Math.round(Number(currentTemp));
+              return currentTemp;
           });
           setTimezone(() => {
-            const newTimezone = response.data.timezone;
-            return newTimezone;
+              const newTimezone = response.data.timezone;
+              return newTimezone;
           });
-        })
-        .catch(function (error) {
+          })
+          .catch(function (error) {
           console.log(error);
-        });
-    }, [location.lat, location.long]);
+          });
+      } else {
+        console.log("false")
+      }
+    }, [cityResults.city]);
+    // }, [location.lat, location.long, cityResults.city]);
 
 
     /*
@@ -217,6 +240,9 @@ function MainScreen() {
     return (
         <div className="MainScreen">
             <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
+            {String(cityResults.isValidCity)}
+            {cityResults.city}
+            {location.lat}
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
         </div>
