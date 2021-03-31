@@ -8,10 +8,11 @@ import LocationPicker from './LocationPicker';
 
 Location.propTypes = {
     location: PropTypes.object,
-    changeLocation: PropTypes.func
+    changeLocation: PropTypes.func, 
+    locationData: PropTypes.object
 };
 
-function Location({location, changeLocation}) {
+function Location({location, changeLocation, locationData, validateLocation}) {
 
     const [isDisplayModal, setIsDisplayModal] = useState(false);
 
@@ -27,7 +28,7 @@ function Location({location, changeLocation}) {
         <div className="Location">
             {isDisplayModal && 
                 <Modal hideModal={hideModal}>
-                    <LocationPicker changeLocation={changeLocation} hideModal={hideModal} location={location}/>
+                    <LocationPicker changeLocation={changeLocation} hideModal={hideModal} location={location} locationData={locationData} validateLocation={validateLocation}/>
                 </Modal>
             }
 
