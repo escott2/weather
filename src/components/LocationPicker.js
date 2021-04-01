@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import useDidMountEffect from '../hooks/useDidMountEffect'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import './LocationPicker.css';
 
@@ -23,7 +24,7 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
     const [displaySubmit, setDisplaySubmit] = useState(false);
     const [userResponse, setUserResponse] = useState("");
 
-    useEffect(() => {
+    useDidMountEffect(() => {
         setDisplayMessage(true);
         if (!locationData.isCityFound) {
             setInputText((prevState) => {
@@ -63,7 +64,7 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                     region: ""
                 }
             });
-        setMessage("Location not found. Please try again.");
+        setMessage("Location not found. Please search again.");
         setDisplayChoice(false);
         }
 
@@ -177,7 +178,6 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                 </React.Fragment>
             }
             
-            {console.log(`Display submit: ${displaySubmit}, user response: ${userResponse}`)}
             {displaySubmit &&
             <button className="Location__submit-btn" onClick={handleSubmit}>submit</button>     
             }

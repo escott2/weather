@@ -14,7 +14,7 @@ Location.propTypes = {
 
 function Location({location, changeLocation, locationData, validateLocation}) {
 
-    const [isDisplayModal, setIsDisplayModal] = useState(false);
+    const [isDisplayModal, setIsDisplayModal] = useState(true);
 
     function handleClick() {
         setIsDisplayModal(true);
