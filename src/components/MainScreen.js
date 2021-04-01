@@ -23,6 +23,11 @@ function MainScreen() {
         lat: 44.986,
         long: -93.258
     });
+    const [locationData, setLocationData] = useState({
+      enteredCity: "Minneapolis", 
+      enteredRegion: "Minnesota", 
+      enteredCountry: "United States",
+    });
     const [temp, setTemp] = useState(0);
     const [sunrise, setSunrise] = useState("");
     const [sunset, setSunset] = useState("");
@@ -54,6 +59,55 @@ function MainScreen() {
     const dayLengthInHours = Math.round((dayLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
     //END VARIABLE DECLARATION
 
+     /*
+      Mapquest Geolocation API Data
+
+      --- SETS STATE ---
+      locationData
+
+      --- DEPENDENCIES ---
+      performLocationValidation
+    */
+      useEffect(() => {
+        let geoCodeURL = '';
+        if (locationData.enteredCountry === "United States") {
+          geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${locationData.enteredCity.replace(/\s/g, '+')}&state=${locationData.enteredRegion}&country=${locationData.enteredCountry.replace(/\s/g, '+')}`;
+        } else {
+          geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${locationData.enteredCity.replace(/\s/g, '+')}&country=${locationData.enteredCountry.replace(/\s/g, '+')}`;
+        }
+        axios.get(geoCodeURL)
+          .then(response => {
+            setLocationData((prevState) => {
+              let city = response.data.results[0].locations[0].adminArea5;
+              console.log(city);
+              let isCityMatch = false;
+              let isCityFound = true;
+  
+              if (!city) {
+                city = "City not found";
+                isCityMatch = false;
+                isCityFound = false;
+              }
+  
+              if (city.toUpperCase() === prevState.enteredCity.toUpperCase()) {
+                isCityMatch = true;
+              }
+              
+              return {
+                ...prevState,
+                city: city,
+                isCityMatch: isCityMatch,
+                isCityFound: isCityFound
+              };
+            });
+          })
+        .catch(function (error) {
+          console.log(error);
+        })
+      }, [locationData.enteredCity]);
+  
+
+
     /*
       Mapquest Geolocation API Data
 
@@ -71,15 +125,15 @@ function MainScreen() {
         geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&country=${location.country.replace(/\s/g, '+')}`;
       }
       axios.get(geoCodeURL)
-      .then(response => {
-        setLocation((prevState) => {
-          return {
-            ...prevState,
-            lat: response.data.results[0].locations[0].latLng.lat,
-            long: response.data.results[0].locations[0].latLng.lng
-          }
-        });
-      })
+        .then(response => {
+          setLocation((prevState) => {
+            return {
+              ...prevState,
+              lat: response.data.results[0].locations[0].latLng.lat,
+              long: response.data.results[0].locations[0].latLng.lng
+            }
+          });
+        })
       .catch(function (error) {
         console.log(error);
       })
@@ -96,24 +150,28 @@ function MainScreen() {
       location.lat, location.long
     */
     useEffect(() => {
-        // const weatherURL = `${weatherAPI.base}weather?lat=${location.lat}&lon=${location.long}&units=imperial&appid=${weatherAPI.key}`
+      if (locationData.isCityMatch === true) {
         const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,daily,minutely&units=imperial&appid=${weatherAPI.key}`
         axios.get(weatherURL)
-        .then(response => {
+          .then(response => {
           setTemp(() => {
-            let currentTemp = response.data.current.temp;
-            currentTemp = Math.round(Number(currentTemp));
-            return currentTemp;
+              console.log(`what does isValid look like here?: ${locationData.isCityMatch} city: ${locationData.city}`);
+              let currentTemp = response.data.current.temp;
+              currentTemp = Math.round(Number(currentTemp));
+              return currentTemp;
           });
           setTimezone(() => {
-            const newTimezone = response.data.timezone;
-            return newTimezone;
+              const newTimezone = response.data.timezone;
+              return newTimezone;
           });
-        })
-        .catch(function (error) {
+          })
+          .catch(function (error) {
           console.log(error);
-        });
-    }, [location.lat, location.long]);
+          });
+      } else {
+        console.log("false")
+      }
+    }, [locationData.city]);
 
 
     /*
@@ -202,6 +260,17 @@ function MainScreen() {
         });
     }
 
+    function handleLocationValidation(enteredLocation) {
+      setLocationData((prevState) => {
+        return {
+          ...prevState,
+          enteredCity: enteredLocation.city, 
+          enteredRegion: enteredLocation.region,
+          enteredCountry: enteredLocation.country,
+        }
+      })
+    }
+
     function handleLocationChange(newLocation) {
       setLocation((prevState) => {
         return {
@@ -212,11 +281,13 @@ function MainScreen() {
         }
       });
     }
+
     //END FUNCTIONS
 
     return (
         <div className="MainScreen">
-            <Header location={location} changeLocation={handleLocationChange} date={date} changeDate={handleDateChange}/>
+            <Header location={location} locationData={locationData} changeLocation={handleLocationChange} validateLocation={handleLocationValidation} date={date} changeDate={handleDateChange}/>
+            {locationData.city}
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
         </div>

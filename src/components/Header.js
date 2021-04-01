@@ -8,14 +8,15 @@ Header.propTypes = {
     location: PropTypes.object,
     changeLocation: PropTypes.func,
     date: PropTypes.object,
-    changeDate: PropTypes.func
+    changeDate: PropTypes.func, 
+    locationData: PropTypes.object
     
 };
 
-function Header({location, changeLocation, date, changeDate}) {
+function Header({location, changeLocation, date, changeDate, locationData, validateLocation}) {
     return (
         <header>
-            <Location location={location} changeLocation={changeLocation}/>
+            <Location location={location} changeLocation={changeLocation} validateLocation={validateLocation} locationData={locationData}/>
             <Day date={date} changeDate={changeDate} />
         </header>
     );
