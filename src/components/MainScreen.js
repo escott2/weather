@@ -89,9 +89,9 @@ function MainScreen() {
                 isCityFound = false;
               }
   
-              // if (city.toUpperCase() === prevState.enteredCity.toUpperCase()) {
-              //   isCityMatch = true;
-              // }
+              if (city.toUpperCase() === prevState.enteredCity.toUpperCase()) {
+                isCityMatch = true;
+              }
               
               return {
                 ...prevState,
@@ -133,28 +133,6 @@ function MainScreen() {
               long: response.data.results[0].locations[0].latLng.lng
             }
           });
-          // setCityResults((prevState) => {
-          //   let city = response.data.results[0].locations[0].adminArea5;
-          //   let isCityMatch = false;
-          //   let isCityFound = true;
-
-          //   if (!city) {
-          //     city = "City not found";
-          //     isCityMatch = false;
-          //     isCityFound = false;
-          //   }
-
-          //   if (city.toUpperCase() === location.city.toUpperCase()) {
-          //     isCityMatch = true;
-          //   }
-            
-          //   return {
-          //     ...prevState,
-          //     city: city,
-          //     isCityMatch: isCityMatch,
-          //     isCityFound: isCityFound
-          //   };
-          // });
         })
       .catch(function (error) {
         console.log(error);

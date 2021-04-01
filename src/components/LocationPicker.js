@@ -17,33 +17,14 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
         region: "", 
         country: location.country
     });
+    const [displayMessage, setDisplayMessage] = useState(false);
     const [message, setMessage] = useState("");
     const [displayChoice, setDisplayChoice] = useState(false);
+    const [displaySubmit, setDisplaySubmit] = useState(false);
     const [userResponse, setUserResponse] = useState("");
 
-                // if (userResponse === "yes") {
-                //     setInputText((prevState) => {
-                //         return {
-                //             ...prevState,
-                //             city: "",
-                //             region: ""
-                //         }
-                //     });
-                //     hideModal();
-                // } else if (userResponse === "no") {
-                //     setInputText((prevState) => {
-                //         return {
-                //             ...prevState,
-                //             city: "",
-                //             region: ""
-                //         }
-                //     });
-                //     setMessage("Location not found. Please try again.");
-                // }
-  
-
-
     useEffect(() => {
+        setDisplayMessage(true);
         if (!locationData.isCityFound) {
             setInputText((prevState) => {
                 return {
@@ -52,21 +33,13 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                     region: ""
                 }
             });
-            setMessage("Location not found. Please try again.");
+            setMessage("Location not found. Please search again.");
         } else if (locationData.isCityFound && !locationData.isCityMatch) {
             setMessage(`Location not found. Did you mean to search for ${locationData.city}?`);
             setDisplayChoice(true);
-        } else {
-            setInputText((prevState) => {
-                return {
-                    ...prevState,
-                    city: "",
-                    region: ""
-                }
-            });
-            // hideModal();
-            setMessage("");
-            setDisplayChoice(false);
+        } else if (locationData.isCityMatch) {
+            setMessage("Location found!");
+            setDisplaySubmit(true);
         }
     }, [locationData.isCityFound, locationData.city, locationData.isCityMatch]);
 
@@ -77,10 +50,12 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
             setInputText((prevState) => {
                 return {
                     ...prevState,
-                    city: locationData.city
+                    city: locationData.city,
+                    enteredRegion: locationData.region
                 }
             });
-        } else {
+            setDisplaySubmit(true);
+        } else if (userResponse === "no") {
             setInputText((prevState) => {
                 return {
                     ...prevState,
@@ -89,6 +64,7 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                 }
             });
         setMessage("Location not found. Please try again.");
+        setDisplayChoice(false);
         }
 
     }, [userResponse]);
@@ -129,6 +105,11 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
     
     function handleSubmit() {
         changeLocation(inputText);
+        hideModal();
+        setDisplayMessage(false);
+        setMessage("");
+        setDisplayChoice(false);
+        setDisplaySubmit(false);
     }
 
     function handleEditCountry() {
@@ -147,6 +128,7 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
 
     return (
         <div className="LocationPicker">
+
             { inputText.country === "" ?
                 <React.Fragment>
                     <h3>Choose a country:</h3>
@@ -174,22 +156,31 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                     </React.Fragment>
                 }
                 </React.Fragment>
-                :
+            :
                 <React.Fragment>
                     <h3>Enter a city</h3>
                     <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
                     <button className="Location__submit-btn" onClick={handleLocate}>Locate</button>     
                 </React.Fragment>
             }
-            <p>{message}</p>
-            { displayChoice &&
-                <select value={userResponse} onChange={handleSelectChange}>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
+
+            {displayMessage &&
+                <React.Fragment>
+                <p className="LocationPicker__message">{message}</p>
+                { displayChoice &&
+                    <select value={userResponse} onChange={handleSelectChange}>
+                        <option value="">-</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                }
+                </React.Fragment>
             }
             
+            {console.log(`Display submit: ${displaySubmit}, user response: ${userResponse}`)}
+            {displaySubmit &&
             <button className="Location__submit-btn" onClick={handleSubmit}>submit</button>     
+            }
 
         </div>
     );

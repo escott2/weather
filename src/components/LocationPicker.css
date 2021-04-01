@@ -5,6 +5,10 @@
     margin: 0.53em auto;
 }
 
+.LocationPicker__message {
+    color: red;
+}
+
 .LocationPicker p {
     margin: 0;
 }
