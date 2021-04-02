@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import useDidMountEffect from '../hooks/useDidMountEffect'
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import spacetime from 'spacetime';
 import './MainScreen.css';
@@ -69,7 +68,8 @@ function MainScreen() {
       --- DEPENDENCIES ---
       performLocationValidation
     */
-      useDidMountEffect(() => {
+      useEffect(() => {
+        if (locationData.enteredCity) {
         let geoCodeURL = '';
         if (locationData.enteredCountry === "United States") {
           geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${locationData.enteredCity.replace(/\s/g, '+')}&state=${locationData.enteredRegion}&country=${locationData.enteredCountry.replace(/\s/g, '+')}`;
@@ -104,7 +104,8 @@ function MainScreen() {
         .catch(function (error) {
           console.log(error);
         })
-      }, [locationData.enteredCity, locationData.enteredRegion, locationData.enteredCountry]);
+      }
+      }, [locationData.enteredCity, locationData.enteredRegion, locationData.enteredCountry, geoCodeAPI.base, geoCodeAPI.key]);
   
 
 
@@ -117,27 +118,29 @@ function MainScreen() {
       --- DEPENDENCIES ---
       location.city, location.region, location.country
     */
-    useDidMountEffect(() => {
-      let geoCodeURL = '';
-      if (location.country === "United States") {
-        geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&state=${location.region}&country=${location.country.replace(/\s/g, '+')}`;
-      } else {
-        geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&country=${location.country.replace(/\s/g, '+')}`;
-      }
-      axios.get(geoCodeURL)
-        .then(response => {
-          setLocation((prevState) => {
-            return {
-              ...prevState,
-              lat: response.data.results[0].locations[0].latLng.lat,
-              long: response.data.results[0].locations[0].latLng.lng
-            }
-          });
+    useEffect(() => {
+      if (location.city) {
+        let geoCodeURL = '';
+        if (location.country === "United States") {
+          geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&state=${location.region}&country=${location.country.replace(/\s/g, '+')}`;
+        } else {
+          geoCodeURL = `${geoCodeAPI.base}address?key=${geoCodeAPI.key}&city=${location.city.replace(/\s/g, '+')}&country=${location.country.replace(/\s/g, '+')}`;
+        }
+        axios.get(geoCodeURL)
+          .then(response => {
+            setLocation((prevState) => {
+              return {
+                ...prevState,
+                lat: response.data.results[0].locations[0].latLng.lat,
+                long: response.data.results[0].locations[0].latLng.lng
+              }
+            });
+          })
+        .catch(function (error) {
+          console.log(error);
         })
-      .catch(function (error) {
-        console.log(error);
-      })
-    }, [location.city, location.region, location.country]);
+      }
+    }, [location.city, location.region, location.country, geoCodeAPI.base, geoCodeAPI.key]);
 
 
     /*
@@ -149,24 +152,26 @@ function MainScreen() {
       --- DEPENDENCIES ---
       location.lat, location.long
     */
-    useDidMountEffect(() => {
-      const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,daily,minutely&units=imperial&appid=${weatherAPI.key}`
-      axios.get(weatherURL)
-        .then(response => {
-        setTemp(() => {
-            let currentTemp = response.data.current.temp;
-            currentTemp = Math.round(Number(currentTemp));
-            return currentTemp;
-        });
-        setTimezone(() => {
-            const newTimezone = response.data.timezone;
-            return newTimezone;
-        });
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-    }, [location.lat, location.long]);
+    useEffect(() => {
+      if (location.lat) {
+        const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,daily,minutely&units=imperial&appid=${weatherAPI.key}`
+        axios.get(weatherURL)
+          .then(response => {
+          setTemp(() => {
+              let currentTemp = response.data.current.temp;
+              currentTemp = Math.round(Number(currentTemp));
+              return currentTemp;
+          });
+          setTimezone(() => {
+              const newTimezone = response.data.timezone;
+              return newTimezone;
+          });
+          })
+          .catch(function (error) {
+          console.log(error);
+          });
+      }
+    }, [location.lat, location.long, weatherAPI.base, weatherAPI.key]);
 
 
     /*
@@ -178,7 +183,8 @@ function MainScreen() {
       --- DEPENDENCIES ---
       location.lat, location.long, timezone
     */
-    useDidMountEffect(() => {
+    useEffect(() => {
+      if (location.lat) {
         const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${fullDate}`;
         axios.get(sunURL)
         .then(response => {
@@ -209,7 +215,8 @@ function MainScreen() {
         .catch(function (error) {
           console.log(error);
         })
-    }, [date, location.lat, location.long, timezone]);
+      }
+    }, [date, location.lat, location.long, timezone, fullDate]);
 
 
     //START FUNCTIONS

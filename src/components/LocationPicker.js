@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import useDidMountEffect from '../hooks/useDidMountEffect'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import './LocationPicker.css';
 
@@ -28,57 +27,29 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
 
 
     //If user searches for a city, clicks locate, and exits with the x, this will not rerender if they search for the same location again. Fix.
-    useDidMountEffect(() => {
-        setDisplayMessage(true);
-        console.log("ran");
-        if (!locationData.isCityFound) {
-            setInputText((prevState) => {
-                return {
-                    ...prevState,
-                    city: "",
-                    region: ""
-                }
-            });
-            setMessage("Location not found. Please search again.");
-        } else if (locationData.isCityFound && !locationData.isCityMatch) {
-            setMessage(`Location not found. Did you mean to search for ${locationData.city}?`);
-            setDisplayChoice(true);
-        } else if (locationData.isCityMatch) {
-            setMessage("Location found!");
-            // setDisplayLocateBtn(false);
-            setDisplayLocateBtn(false);
-            setDisplaySubmit(true);
+    useEffect(() => {
+        if (locationData.city) {
+            setDisplayMessage(true);
+            console.log("ran");
+            if (!locationData.isCityFound) {
+                setInputText((prevState) => {
+                    return {
+                        ...prevState,
+                        city: "",
+                        region: ""
+                    }
+                });
+                setMessage("Location not found. Please search again.");
+            } else if (locationData.isCityFound && !locationData.isCityMatch) {
+                setMessage(`Location not found. Did you mean to search for ${locationData.city}?`);
+                setDisplayChoice(true);
+            } else if (locationData.isCityMatch) {
+                setMessage("Location found!");
+                setDisplayLocateBtn(false);
+                setDisplaySubmit(true);
+            }
         }
     }, [locationData.isCityFound, locationData.city, locationData.isCityMatch]);
-
-
-    //
-    // useEffect(() => {
-    //     if (userResponse === "yes") {
-    //         setInputText((prevState) => {
-    //             return {
-    //                 ...prevState,
-    //                 city: locationData.city,
-    //                 enteredRegion: locationData.region
-    //             }
-    //         });
-    //         setDisplayLocateBtn(false);
-    //         setDisplaySubmit(true);
-    //     } else if (userResponse === "no") {
-    //         setInputText((prevState) => {
-    //             return {
-    //                 ...prevState,
-    //                 city: "",
-    //                 region: ""
-    //             }
-    //         });
-    //     setMessage("Location not found. Please search again.");
-    //     setDisplayChoice(false);
-    //     }
-
-    // }, [userResponse]);
-
-
 
     function handleCityChange(e) {
         const newCity = e.target.value;
