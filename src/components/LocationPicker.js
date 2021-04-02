@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import useDidMountEffect from '../hooks/useDidMountEffect'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import './LocationPicker.css';
 
 LocationPicker.propTypes = {
+    validateLocation: PropTypes.func,
     changeLocation: PropTypes.func, 
-    hideModal: PropTypes.func,
     locationData: PropTypes.object,
+    hideModal: PropTypes.func,
     location: PropTypes.object
 };
 
@@ -21,11 +22,15 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
     const [displayMessage, setDisplayMessage] = useState(false);
     const [message, setMessage] = useState("");
     const [displayChoice, setDisplayChoice] = useState(false);
+    const [displayLocateBtn, setDisplayLocateBtn] = useState(true);
     const [displaySubmit, setDisplaySubmit] = useState(false);
     const [userResponse, setUserResponse] = useState("");
 
+
+    //If user searches for a city, clicks locate, and exits with the x, this will not rerender if they search for the same location again. Fix.
     useDidMountEffect(() => {
         setDisplayMessage(true);
+        console.log("ran");
         if (!locationData.isCityFound) {
             setInputText((prevState) => {
                 return {
@@ -40,35 +45,38 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
             setDisplayChoice(true);
         } else if (locationData.isCityMatch) {
             setMessage("Location found!");
+            // setDisplayLocateBtn(false);
+            setDisplayLocateBtn(false);
             setDisplaySubmit(true);
         }
     }, [locationData.isCityFound, locationData.city, locationData.isCityMatch]);
 
 
     //
-    useEffect(() => {
-        if (userResponse === "yes") {
-            setInputText((prevState) => {
-                return {
-                    ...prevState,
-                    city: locationData.city,
-                    enteredRegion: locationData.region
-                }
-            });
-            setDisplaySubmit(true);
-        } else if (userResponse === "no") {
-            setInputText((prevState) => {
-                return {
-                    ...prevState,
-                    city: "",
-                    region: ""
-                }
-            });
-        setMessage("Location not found. Please search again.");
-        setDisplayChoice(false);
-        }
+    // useEffect(() => {
+    //     if (userResponse === "yes") {
+    //         setInputText((prevState) => {
+    //             return {
+    //                 ...prevState,
+    //                 city: locationData.city,
+    //                 enteredRegion: locationData.region
+    //             }
+    //         });
+    //         setDisplayLocateBtn(false);
+    //         setDisplaySubmit(true);
+    //     } else if (userResponse === "no") {
+    //         setInputText((prevState) => {
+    //             return {
+    //                 ...prevState,
+    //                 city: "",
+    //                 region: ""
+    //             }
+    //         });
+    //     setMessage("Location not found. Please search again.");
+    //     setDisplayChoice(false);
+    //     }
 
-    }, [userResponse]);
+    // }, [userResponse]);
 
 
 
@@ -100,19 +108,6 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
         });
     }
 
-    function handleLocate() {
-        validateLocation(inputText);
-    }
-    
-    function handleSubmit() {
-        changeLocation(inputText);
-        hideModal();
-        setDisplayMessage(false);
-        setMessage("");
-        setDisplayChoice(false);
-        setDisplaySubmit(false);
-    }
-
     function handleEditCountry() {
         setInputText({ 
             city: "",
@@ -124,15 +119,57 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
     function handleSelectChange(e) {
         const selectedResponse = e.target.value;
         setUserResponse(selectedResponse);
-        console.log(selectedResponse);
+        e.preventDefault();
+    }
+
+    function handleLocateClick() {
+        validateLocation(inputText);
+    }
+
+    function handleChoiceClick() {
+        if (userResponse === "yes") {
+            setInputText((prevState) => {
+                return {
+                    ...prevState,
+                    city: locationData.city,
+                    enteredRegion: locationData.region
+                }
+            });
+            setDisplayLocateBtn(false);
+            setDisplaySubmit(true);
+            setMessage("Location found!");
+        } else if (userResponse === "no") {
+            setInputText((prevState) => {
+                return {
+                    ...prevState,
+                    city: "",
+                    region: ""
+                }
+            });
+            setMessage("Location not found. Please search again.");
+        }
+        setDisplayChoice(false);
+
+    }
+    
+    function handleSubmitClick() {
+        changeLocation(inputText);
+        hideModal();
+        setDisplayMessage(false);
+        setMessage("");
+        setDisplayChoice(false);
+        setUserResponse("");
+        setDisplaySubmit(false);
+        setDisplayLocateBtn(true);
     }
 
     return (
         <div className="LocationPicker">
 
             { inputText.country === "" ?
+            
                 <React.Fragment>
-                    <h3>Choose a country:</h3>
+                    <h3>Country</h3>
                     <CountryDropdown classes="LocationPicker__input" name="country" value={inputText.country} onChange={handleCountryChange}/>
                 </React.Fragment>
             :
@@ -145,41 +182,47 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
             
             { inputText.country === "United States" ?
                 <React.Fragment>
-                    <h3>Choose a state:</h3>
+                    <h3>State:</h3>
                     <RegionDropdown classes="LocationPicker__input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
-                {/* </React.Fragment> */}
 
-                {inputText.region !== "" &&
-                    <React.Fragment>
-                        <h3>Enter a city</h3>
-                        <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
-                        <button className="Location__submit-btn" onClick={handleLocate}>Locate</button>
-                    </React.Fragment>
-                }
+                    {inputText.region !== "" &&
+                        <React.Fragment>
+                            <h3>City</h3>
+                            <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+                            {displayLocateBtn &&
+                                <button className="Location__submit-btn" onClick={handleLocateClick}>Locate</button>
+                            }
+                        </React.Fragment>
+                    }
                 </React.Fragment>
             :
                 <React.Fragment>
-                    <h3>Enter a city</h3>
+                    <h3>City</h3>
                     <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
-                    <button className="Location__submit-btn" onClick={handleLocate}>Locate</button>     
+                    {displayLocateBtn &&
+                                <button className="Location__submit-btn" onClick={handleLocateClick}>Locate</button>
+                    }
                 </React.Fragment>
             }
 
             {displayMessage &&
                 <React.Fragment>
-                <p className="LocationPicker__message">{message}</p>
-                { displayChoice &&
-                    <select value={userResponse} onChange={handleSelectChange}>
-                        <option value="">-</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                }
+                    <p className="LocationPicker__message">{message}</p>
+                    { displayChoice &&
+                        <form>
+                            <select value={userResponse} onChange={handleSelectChange}>
+                                <option value="">-</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                            <button type="button" onClick={handleChoiceClick}>Choose</button>
+                        </form>
+                    }
                 </React.Fragment>
             }
             
             {displaySubmit &&
-            <button className="Location__submit-btn" onClick={handleSubmit}>submit</button>     
+                <button className="Location__submit-btn" onClick={handleSubmitClick}>submit</button>     
             }
 
         </div>

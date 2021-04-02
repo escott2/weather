@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import useDidMountEffect from '../hooks/useDidMountEffect'
 import axios from 'axios';
 import spacetime from 'spacetime';
@@ -29,7 +29,7 @@ function MainScreen() {
       enteredRegion: "", 
       enteredCountry: "",
     });
-    const [temp, setTemp] = useState(0);
+    const [temp, setTemp] = useState(-500);
     const [sunrise, setSunrise] = useState("");
     const [sunset, setSunset] = useState("");
     const [dayLengthInMinutes, setDayLengthInMinutes] = useState("");
@@ -80,7 +80,6 @@ function MainScreen() {
           .then(response => {
             setLocationData((prevState) => {
               let city = response.data.results[0].locations[0].adminArea5;
-              console.log(city);
               let isCityMatch = false;
               let isCityFound = true;
   
@@ -105,7 +104,7 @@ function MainScreen() {
         .catch(function (error) {
           console.log(error);
         })
-      }, [locationData.enteredCity]);
+      }, [locationData.enteredCity, locationData.enteredRegion, locationData.enteredCountry]);
   
 
 
@@ -283,7 +282,6 @@ function MainScreen() {
     return (
         <div className="MainScreen">
             <Header location={location} locationData={locationData} changeLocation={handleLocationChange} validateLocation={handleLocationValidation} date={date} changeDate={handleDateChange}/>
-            {locationData.city}
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
         </div>

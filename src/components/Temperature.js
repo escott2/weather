@@ -7,9 +7,15 @@ Temperature.propTypes = {
 }
 
 function Temperature({temp}) {
-    return <div className="Temperature">
-        <p>{temp}°F</p>
-    </div>
+    const isTemperature = (temp !== -500);
+
+    return (
+        <div className="Temperature">
+            { isTemperature && 
+                <p>{temp}°F</p>
+            }
+        </div>
+    )
 }
 
 export default Temperature;
