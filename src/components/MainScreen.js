@@ -39,7 +39,7 @@ function MainScreen() {
     // --- APIs
     const geoCodeAPI = {
       key: "cADuj9DK0OJq9A1eVBEeXI5566aRCAzG",
-      base: "http://www.mapquestapi.com/geocoding/v1/",
+      base: "https://www.mapquestapi.com/geocoding/v1/",
     }
     const weatherAPI = {
       key: "922176d7fe6aa80866789eaaf2e9d26d",
