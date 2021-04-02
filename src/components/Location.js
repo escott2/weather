@@ -14,7 +14,7 @@ Location.propTypes = {
 
 function Location({location, changeLocation, locationData, validateLocation}) {
 
-    const [isDisplayModal, setIsDisplayModal] = useState(false);
+    const [isDisplayModal, setIsDisplayModal] = useState(true);
 
     function handleClick() {
         setIsDisplayModal(true);
@@ -32,13 +32,18 @@ function Location({location, changeLocation, locationData, validateLocation}) {
                 </Modal>
             }
 
-            {/* <Modal hideModal={hideModal}>
-                <LocationModal changeLocation={changeLocation} hideModal={hideModal}/>
-            </Modal> */}
-            { location.country === "United States" ?
-                <h2>{location.city}, {location.region}, {location.country}</h2>
+            {location.city ? 
+                <React.Fragment>
+                { location.country === "United States" ?
+                    <h2>{location.city}, {location.region}, {location.country}</h2>
+                :
+                    <h2>{location.city}, {location.country}</h2>
+                }
+                </React.Fragment>
             :
-                <h2>{location.city}, {location.country}</h2>
+                
+                <h2>Choose a location to get started!</h2> 
+
             }
 
             <button className="icon" onClick={handleClick}><GoLocation /></button>
