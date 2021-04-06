@@ -262,7 +262,7 @@ function MainScreen() {
         });
     }
 
-    function handleLocationValidation(enteredLocation) {
+    function handleFormLocationChange(enteredLocation) {
       setLocationData((prevState) => {
         return {
           ...prevState,
@@ -271,6 +271,14 @@ function MainScreen() {
           enteredCountry: enteredLocation.country,
         }
       })
+    }
+
+    function clearFormLocationData() {
+      setLocationData({
+        enteredCity: "", 
+        enteredRegion: "", 
+        enteredCountry: ""
+      });
     }
 
     function handleLocationChange(newLocation) {
@@ -282,13 +290,19 @@ function MainScreen() {
           country: newLocation.country
         }
       });
+      clearFormLocationData();
+      // setLocationData({
+      //   enteredCity: "", 
+      //   enteredRegion: "", 
+      //   enteredCountry: ""
+      // });
     }
 
     //END FUNCTIONS
 
     return (
         <div className="MainScreen">
-            <Header location={location} locationData={locationData} changeLocation={handleLocationChange} validateLocation={handleLocationValidation} date={date} changeDate={handleDateChange}/>
+            <Header location={location} locationData={locationData} changeLocation={handleLocationChange} clearFormLocationData={clearFormLocationData} changeFormLocation={handleFormLocationChange} date={date} changeDate={handleDateChange}/>
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
         </div>

@@ -4,14 +4,14 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import './LocationPicker.css';
 
 LocationPicker.propTypes = {
-    validateLocation: PropTypes.func,
+    changeFormLocation: PropTypes.func,
     changeLocation: PropTypes.func, 
     locationData: PropTypes.object,
     hideModal: PropTypes.func,
     location: PropTypes.object
 };
 
-function LocationPicker({validateLocation, changeLocation, locationData, hideModal, location}) {
+function LocationPicker({changeFormLocation, changeLocation, locationData, hideModal, location}) {
 
     const [inputText, setInputText] = useState({
         city: "",
@@ -30,7 +30,6 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
     useEffect(() => {
         if (locationData.city) {
             setDisplayMessage(true);
-            console.log("ran");
             if (!locationData.isCityFound) {
                 setInputText((prevState) => {
                     return {
@@ -49,6 +48,9 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                 setDisplaySubmit(true);
             }
         }
+        // return () => {
+
+        // }
     }, [locationData.isCityFound, locationData.city, locationData.isCityMatch]);
 
     function handleCityChange(e) {
@@ -94,7 +96,7 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
     }
 
     function handleLocateClick() {
-        validateLocation(inputText);
+        changeFormLocation(inputText);
     }
 
     function handleChoiceClick() {
@@ -125,13 +127,13 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
     
     function handleSubmitClick() {
         changeLocation(inputText);
-        hideModal();
         setDisplayMessage(false);
         setMessage("");
         setDisplayChoice(false);
         setUserResponse("");
         setDisplaySubmit(false);
         setDisplayLocateBtn(true);
+        hideModal();
     }
 
     return (
@@ -160,7 +162,7 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                         <React.Fragment>
                             <h3>City</h3>
                             <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
-                            {displayLocateBtn &&
+                            {(inputText.country && inputText.region && inputText.city && displayLocateBtn) &&
                                 <button className="Location__submit-btn" onClick={handleLocateClick}>Locate</button>
                             }
                         </React.Fragment>
@@ -170,7 +172,7 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                 <React.Fragment>
                     <h3>City</h3>
                     <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
-                    {displayLocateBtn &&
+                    {(inputText.country && inputText.city && displayLocateBtn) &&
                                 <button className="Location__submit-btn" onClick={handleLocateClick}>Locate</button>
                     }
                 </React.Fragment>
@@ -180,14 +182,17 @@ function LocationPicker({validateLocation, changeLocation, locationData, hideMod
                 <React.Fragment>
                     <p className="LocationPicker__message">{message}</p>
                     { displayChoice &&
-                        <form>
+                        <React.Fragment>
                             <select value={userResponse} onChange={handleSelectChange}>
                                 <option value="">-</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
-                            <button type="button" onClick={handleChoiceClick}>Choose</button>
-                        </form>
+
+                            {userResponse && 
+                                <button type="button" onClick={handleChoiceClick}>Choose</button>
+                            }
+                        </React.Fragment>
                     }
                 </React.Fragment>
             }

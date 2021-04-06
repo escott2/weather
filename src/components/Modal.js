@@ -9,8 +9,11 @@ import {IoIosCloseCircle} from 'react-icons/io'
 
     function Modal(props) {
 
+    const clearFormLocationData = props.clearFormLocationData;
+
     function handleExit() {
         props.hideModal();
+        clearFormLocationData();
     }
 
     return (

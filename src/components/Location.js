@@ -12,7 +12,7 @@ Location.propTypes = {
     locationData: PropTypes.object
 };
 
-function Location({location, changeLocation, locationData, validateLocation}) {
+function Location({location, changeLocation, locationData, changeFormLocation, clearFormLocationData}) {
 
     const [isDisplayModal, setIsDisplayModal] = useState(true);
 
@@ -22,13 +22,14 @@ function Location({location, changeLocation, locationData, validateLocation}) {
 
     function hideModal() {
         setIsDisplayModal(false);
+        clearFormLocationData();
     }
 
     return (
         <div className="Location">
             {isDisplayModal && 
-                <Modal hideModal={hideModal}>
-                    <LocationPicker changeLocation={changeLocation} hideModal={hideModal} location={location} locationData={locationData} validateLocation={validateLocation}/>
+                <Modal hideModal={hideModal} clearFormLocationData={clearFormLocationData}>
+                    <LocationPicker changeLocation={changeLocation} hideModal={hideModal} location={location} locationData={locationData} changeFormLocation={changeFormLocation}/>
                 </Modal>
             }
 

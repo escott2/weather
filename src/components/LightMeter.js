@@ -18,12 +18,20 @@ function LightMeter({dayLength, dayHours, nightHours}) {
             `conic-gradient(from 270deg, #E8F6FD ${dayDegrees}deg, #024959 0)`
     }
 
-    function toggleHover() {
-        setIsShown(!isShown);
+    // function toggleHover() {
+    //     setIsShown(!isShown);
+    // }
+
+    function displayStats() {
+        setIsShown(true);
+    }
+
+    function hideStats() {
+        setIsShown(false);
     }
 
     return (
-    <div className="LightMeter" style={percentStyle} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+    <div className="LightMeter" style={percentStyle} onMouseEnter={displayStats} onMouseLeave={hideStats}>
         {isShown && (
             <div className="light-stats">
                 <p>Sunlight: {dayHours} hrs</p>
