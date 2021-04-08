@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import halfSun from '../img/half-sun.svg';
-import './Container.css';
+import './Container.scss';
 import Temperature from './Temperature';
 import LightMeter from './LightMeter';
 import Sunrise from './Sunrise';

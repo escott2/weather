@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Sunset.css';
+import './Sunset.scss';
 
 Sunset.propTypes = {
     sunset: PropTypes.string

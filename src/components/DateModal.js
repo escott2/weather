@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import './DateModal.css';
+import './DateModal.scss';
 import {IoIosCloseCircle} from 'react-icons/io'
 import DayPicker from 'react-day-picker';
 import './custom-day-picker.css';
@@ -34,7 +34,7 @@ DateModal.propTypes = {
     return (
         <div className="DateModal">
             <div className="DateModal__wrapper">
-                <button className="DateModal__exit-btn" onClick={handleExit}><IoIosCloseCircle className="close-icon"/></button>
+                <button className="DateModal__exit-btn icon-btn" onClick={handleExit}><IoIosCloseCircle className="close-icon"/></button>
                 <DayPicker onDayClick={handleDayClick} />
                 {isSelected ? 
                     <React.Fragment>

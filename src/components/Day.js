@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Proptypes from 'prop-types';
-import './Day.css';
+import './Day.scss';
 import {GoCalendar} from 'react-icons/go';
 import DateModal from './DateModal';
 
@@ -28,7 +28,7 @@ function Day({date, changeDate}) {
         <div className="Day">
             {isDisplayModal && <DateModal changeDate={changeDate} hideModal={handleHideModal} />}
             <h2>{months[date.month]} {date.date}, {date.year}</h2>
-            <button className="Day__button icon" onClick={handleShowModal}><GoCalendar /></button>            
+            <button className="Day__button icon icon-btn" onClick={handleShowModal}><GoCalendar /></button>            
         </div>
     )
 }
