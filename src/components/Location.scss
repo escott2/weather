@@ -1,3 +1,5 @@
+@import '../styles/main.scss';
+
 .Location {
     background-color: white;
    width: 80%;
@@ -16,14 +18,4 @@
     font-size: 1.25rem;
     display: inline-block;
     margin-right: 1em;
-}
-
-.Location__submit-btn {
-    font-size: 1.1rem;
-    border: 0.15em solid black;
-    padding: 0.4em 1em;
-    border-radius: 10px;
-    font-weight: 600;
-    color: black;
-    margin-left: 1em;
 }

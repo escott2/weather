@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import spacetime from 'spacetime';
-import './MainScreen.css';
+import './MainScreen.scss';
 import Header from './Header';
 import Container from './Container';
 import Footer from './Footer';
@@ -66,7 +66,7 @@ function MainScreen() {
       locationData
 
       --- DEPENDENCIES ---
-      performLocationValidation
+      locationData.enteredCity, locationData.enteredRegion, locationData.enteredCountry, geoCodeAPI.base, geoCodeAPI.key
     */
       useEffect(() => {
         if (locationData.enteredCity) {
@@ -113,10 +113,10 @@ function MainScreen() {
       Mapquest Geolocation API Data
 
       --- SETS STATE ---
-      location
+      location.lat and location.long
 
       --- DEPENDENCIES ---
-      location.city, location.region, location.country
+      location.city, location.region, location.country, geoCodeAPI.base, geoCodeAPI.key
     */
     useEffect(() => {
       if (location.city) {
@@ -150,7 +150,7 @@ function MainScreen() {
       temp, timezone
 
       --- DEPENDENCIES ---
-      location.lat, location.long
+      location.lat, location.long, weatherAPI.base, weatherAPI.key
     */
     useEffect(() => {
       if (location.lat) {
@@ -181,7 +181,7 @@ function MainScreen() {
       sunrise, sunset, dayLengthInMinutes
 
       --- DEPENDENCIES ---
-      location.lat, location.long, timezone
+      date, location.lat, location.long, timezone, fullDate
     */
     useEffect(() => {
       if (location.lat) {
@@ -251,6 +251,31 @@ function MainScreen() {
       return totalMinutes;
     }
 
+    function capitalizeWord(word) {
+      word = word.toLowerCase();
+      const firstLetter = word[0].toUpperCase();
+      const remainingLetters = word.substring(1);
+      const capitalWord = firstLetter + remainingLetters;
+      return capitalWord;
+    }
+
+    function capitalizeMultipleWords(words) {
+      const wordsArray = words.split(" ");
+      const formattedWordsArray = wordsArray.map(word => capitalizeWord(word));
+      const formattedWordsString = formattedWordsArray.join(" ");
+      return formattedWordsString;
+    }
+
+    function formatCityName(name) {
+      let formattedCity;
+      if (name.includes(" ")) {
+        formattedCity = capitalizeMultipleWords(name)
+      } else {
+        formattedCity = capitalizeWord(name);
+      }
+      return formattedCity;
+    }
+
     // --- EVENT HANDLERS
 
     function handleDateChange(day) {
@@ -264,9 +289,10 @@ function MainScreen() {
 
     function handleFormLocationChange(enteredLocation) {
       setLocationData((prevState) => {
+        const formattedCity = formatCityName(enteredLocation.city.replace(/\s+/g, ' ').trim());
         return {
           ...prevState,
-          enteredCity: enteredLocation.city, 
+          enteredCity: formattedCity, 
           enteredRegion: enteredLocation.region,
           enteredCountry: enteredLocation.country,
         }
@@ -283,19 +309,15 @@ function MainScreen() {
 
     function handleLocationChange(newLocation) {
       setLocation((prevState) => {
+        const formattedCity = formatCityName(newLocation.city.replace(/\s+/g, ' ').trim());
         return {
           ...prevState,
-          city: newLocation.city,
+          city: formattedCity,
           region: newLocation.region,
           country: newLocation.country
         }
       });
       clearFormLocationData();
-      // setLocationData({
-      //   enteredCity: "", 
-      //   enteredRegion: "", 
-      //   enteredCountry: ""
-      // });
     }
 
     //END FUNCTIONS

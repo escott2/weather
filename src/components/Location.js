@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {GoLocation} from 'react-icons/go';
-import './Location.css';
+import './Location.scss';
 import Modal from './Modal';
 import LocationPicker from './LocationPicker';
 
@@ -25,6 +25,12 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
         clearFormLocationData();
     }
 
+    const locationName = location.country === "United States" ?
+        <h2>{location.city}, {location.region}, {location.country}</h2>
+    :
+        <h2>{location.city}, {location.country}</h2>
+
+
     return (
         <div className="Location">
             {isDisplayModal && 
@@ -32,24 +38,12 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
                     <LocationPicker changeLocation={changeLocation} hideModal={hideModal} location={location} locationData={locationData} changeFormLocation={changeFormLocation}/>
                 </Modal>
             }
-
             {location.city ? 
-                <React.Fragment>
-                { location.country === "United States" ?
-                    <h2>{location.city}, {location.region}, {location.country}</h2>
-                :
-                    <h2>{location.city}, {location.country}</h2>
-                }
-                </React.Fragment>
+                locationName
             :
-                
                 <h2>Choose a location to get started!</h2> 
-
             }
-
-            <button className="icon" onClick={handleClick}><GoLocation /></button>
-           
-
+            <button className="icon icon-btn" onClick={handleClick}><GoLocation /></button>
         </div>
     );
 }

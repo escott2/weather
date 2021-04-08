@@ -16,9 +16,9 @@
 
 .Modal__wrapper {
     background-color: white;
-    width: 40%;
+    // width: 40%;
     color: black;
-    padding-bottom: 2em;
+    padding: 0 0.5em 2em;
     border: 0.15em solid $color-primary;
     border-radius: 15px;
     opacity: 1;
@@ -34,9 +34,4 @@
     display: block;
     margin-left: auto;
 
-}
-
-.close-icon {
-    color: rgba(2, 73, 89, 0.4);
-    margin-left: auto;
 }

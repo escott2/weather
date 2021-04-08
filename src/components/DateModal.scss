@@ -1,3 +1,5 @@
+@import '../styles/main.scss';
+
 .DateModal {
     background-color: rgba(2, 73, 89, 0.9);
     position: fixed;
@@ -49,12 +51,5 @@
 
 .DateModal__exit-btn {
     display: block;
-    margin-left: auto;
-
-}
-
-.close-icon {
-    color: rgba(2, 73, 89, 0.4);
-    /* display: block; */
     margin-left: auto;
 }

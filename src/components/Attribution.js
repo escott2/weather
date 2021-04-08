@@ -1,5 +1,5 @@
 import React from 'react';
-import './Attribution.css';
+import './Attribution.scss';
 
 function Attribution() {
     return (

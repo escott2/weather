@@ -1,3 +1,5 @@
+@import '../styles/main.scss';
+
 .Day {
     width: 80%;
     text-align: center;
@@ -14,15 +16,15 @@
     margin: 0.75em 0 0.5em; 
 }
 
-button {
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
+// button {
+//     background: none;
+// 	color: inherit;
+// 	border: none;
+// 	padding: 0;
+// 	font: inherit;
+// 	cursor: pointer;
+// 	outline: inherit;
+// }
 
 .Day__button {
     margin-bottom: 0.25em;
