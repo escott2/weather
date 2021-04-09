@@ -13,10 +13,10 @@ Header.propTypes = {
     
 };
 
-function Header({location, changeLocation, date, changeDate, locationData, changeFormLocation, clearFormLocationData}) {
+function Header({location, changeLocation, date, changeDate, locationData, changeFormLocation, clearFormLocationData, saveLocation, savedLocations}) {
     return (
         <header>
-            <Location location={location} changeLocation={changeLocation} clearFormLocationData={clearFormLocationData} changeFormLocation={changeFormLocation} locationData={locationData}/>
+            <Location location={location} changeLocation={changeLocation} clearFormLocationData={clearFormLocationData} changeFormLocation={changeFormLocation} locationData={locationData} saveLocation={saveLocation} savedLocations={savedLocations}/>
             <Day date={date} changeDate={changeDate} />
         </header>
     );

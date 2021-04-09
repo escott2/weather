@@ -9,6 +9,7 @@ import Footer from './Footer';
 function MainScreen() {
 
     const today = new Date();
+    const initialSavedLocations = JSON.parse(window.localStorage.getItem("savedLocations" || "[]"));
 
     //START STATE INITIALIZATION
     const [date, setDate] = useState({
@@ -23,6 +24,7 @@ function MainScreen() {
         lat: "",
         long: ""
     });
+    const [savedLocations, setSavedLocations] = useState(initialSavedLocations);
     const [locationData, setLocationData] = useState({
       enteredCity: "", 
       enteredRegion: "", 
@@ -58,6 +60,17 @@ function MainScreen() {
     const nightLengthInHours = Math.round((nightLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
     const dayLengthInHours = Math.round((dayLengthPercentRounded * HOURS_PER_DAY) * 10) / 10;
     //END VARIABLE DECLARATION
+
+    
+     /*
+      Local Storage
+      --- SETS STATE ---
+
+      --- DEPENDENCIES ---
+    */
+    useEffect(() => {
+      window.localStorage.setItem("savedLocations", JSON.stringify(savedLocations));
+    }, [savedLocations]);
 
      /*
       Mapquest Geolocation API Data
@@ -320,11 +333,17 @@ function MainScreen() {
       clearFormLocationData();
     }
 
+    function handleSaveLocation() {
+      setSavedLocations((prevState) => {
+        return [ ...prevState, location]        
+      });
+    }
+
     //END FUNCTIONS
 
     return (
         <div className="MainScreen">
-            <Header location={location} locationData={locationData} changeLocation={handleLocationChange} clearFormLocationData={clearFormLocationData} changeFormLocation={handleFormLocationChange} date={date} changeDate={handleDateChange}/>
+            <Header location={location} locationData={locationData} changeLocation={handleLocationChange} clearFormLocationData={clearFormLocationData} changeFormLocation={handleFormLocationChange} date={date} changeDate={handleDateChange} saveLocation={handleSaveLocation} savedLocations={savedLocations}/>
             <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
             <Footer />
         </div>
