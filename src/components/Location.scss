@@ -1,4 +1,5 @@
-@import '../styles/main.scss';
+@import '../styles/abstracts/index';
+
 
 .Location {
     background-color: white;
@@ -7,11 +8,17 @@
    border: solid 0.1em #D9F0FC;
    margin: 0 auto;
    margin-bottom: 1em;
+   position: relative;
+
+}
+
+.icon--plus-sign {
+    transform: translateY(18px);
+    padding-left: 10px;
 }
 
 .Location h2 {
-    /* font-size: 3rem; */
-    margin: 0.75em 0 0.5em; 
+    margin: 1em 0 0.4em; 
 }
 
 .Location p {

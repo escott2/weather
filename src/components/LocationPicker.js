@@ -70,6 +70,7 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 city: newCity      
             }
         });
+        setDisplayMessage(false);
     }
 
     function handleCountryChange(val) {
@@ -79,6 +80,8 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 country: val
             }
         });
+        setDisplayMessage(false);
+
     }
 
     function handleRegionChange(val) {
@@ -88,6 +91,8 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 region: val
             }
         });
+        setDisplayMessage(false);
+
     }
 
     function handleEditCountry() {

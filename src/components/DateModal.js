@@ -34,7 +34,7 @@ DateModal.propTypes = {
     return (
         <div className="DateModal">
             <div className="DateModal__wrapper">
-                <button className="DateModal__exit-btn icon-btn" onClick={handleExit}><IoIosCloseCircle className="close-icon"/></button>
+                <button className="DateModal__exit-btn icon-btn" onClick={handleExit}><IoIosCloseCircle className="close-icon" aria-label="close"/></button>
                 <DayPicker onDayClick={handleDayClick} />
                 {isSelected ? 
                     <React.Fragment>
@@ -45,7 +45,6 @@ DateModal.propTypes = {
                     :
                     <h2 className="modal-text">Select a day to view sunrise and sunset times.</h2>
                 }
-                {/* <button onClick={handleSubmit}>Submit</button> */}
             </div>      
         </div>
     );
