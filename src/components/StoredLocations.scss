@@ -1,0 +1,36 @@
+@import '../styles/main.scss';
+
+.StoredLocations {
+  padding: 0.25em;
+  position: absolute;
+  top: -35px;
+  left: -12px;
+  width: 100%;
+  
+}
+
+.save-form {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  select {
+    border-radius: 10px;
+    padding: 0.3em 0.5em;
+    margin-right: 0.8em;
+    height: 30px;
+    background-color: $lightest-blue;
+    border: solid 0.25em $light-blue;
+  }
+
+  button {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    // border: solid 0.1em black;
+    border: none;
+    background-color: $orange;
+
+  }
+}

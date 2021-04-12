@@ -7,6 +7,14 @@
    border: solid 0.1em #D9F0FC;
    margin: 0 auto;
    margin-bottom: 1em;
+   position: relative;
+
+}
+
+.icon--plus-sign {
+    transform: translateY(12px);
+    padding-left: 10px;
+    color: red;
 }
 
 .Location h2 {

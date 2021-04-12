@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {GoLocation} from 'react-icons/go';
+import {AiFillPlusCircle} from 'react-icons/ai';
 import './Location.scss';
 import StoredLocations from './StoredLocations';
 import Modal from './Modal';
@@ -39,18 +40,19 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
 
     return (
         <div className="Location">
-            <StoredLocations savedLocations={savedLocations}/>
+            {(savedLocations) && 
+                <StoredLocations savedLocations={savedLocations} changeLocation={changeLocation}/>
+            }
             {isDisplayModal && 
                 <Modal hideModal={hideModal} clearFormLocationData={clearFormLocationData}>
                     <LocationPicker changeLocation={changeLocation} hideModal={hideModal} location={location} locationData={locationData} changeFormLocation={changeFormLocation} saveLocation={saveLocation}/>
                 </Modal>
             }
             {location.city ? 
-                <React.Fragment>
+                <div className="flex--responsive">
                 {locationName}
-                {/* onClick - save current location in an object */}
-                <button onClick={handleSaveClick}>save</button>
-                </React.Fragment>
+                <button className="icon icon-btn icon--plus-sign" onClick={handleSaveClick}><AiFillPlusCircle aria-label="save-location"/></button>
+                </div>
             :
                 <h2>Choose a location to get started!</h2> 
             }

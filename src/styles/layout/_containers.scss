@@ -1,4 +1,6 @@
-.flex--align-vertical {
+.flex--responsive {
   display: flex;
+  justify-content: center;
   align-items: center;
+  //add media query
 }

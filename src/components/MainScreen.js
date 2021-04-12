@@ -289,6 +289,8 @@ function MainScreen() {
       return formattedCity;
     }
 
+    
+
     // --- EVENT HANDLERS
 
     function handleDateChange(day) {
@@ -322,23 +324,40 @@ function MainScreen() {
 
     function handleLocationChange(newLocation) {
       setLocation((prevState) => {
+        let locationName;
+        if (newLocation.country === "United States") {
+          locationName = `${newLocation.city}, ${newLocation.region}, ${newLocation.country}`
+        } else {
+          locationName = `${newLocation.city}, ${newLocation.country}`;
+        }
+
         const formattedCity = formatCityName(newLocation.city.replace(/\s+/g, ' ').trim());
+
         return {
           ...prevState,
           city: formattedCity,
           region: newLocation.region,
-          country: newLocation.country
+          country: newLocation.country,
+          name: locationName,
+          id: locationName.toLowerCase().replace(/\s+/g, '-')
         }
       });
       clearFormLocationData();
     }
 
     function handleSaveLocation() {
+
       setSavedLocations((prevState) => {
-        return [ ...prevState, location]        
+        if (prevState) {
+          return [ ...prevState, location]
+        }
+        else {
+          return [location]
+        }       
       });
     }
 
+    console.log(savedLocations);
     //END FUNCTIONS
 
     return (
