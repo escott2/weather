@@ -357,7 +357,6 @@ function MainScreen() {
       });
     }
 
-    console.log(savedLocations);
     //END FUNCTIONS
 
     return (

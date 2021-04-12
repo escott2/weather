@@ -12,7 +12,6 @@ function StoredLocations({savedLocations, changeLocation}) {
     } else {
       locationName = `${location.city}, ${location.country}`;
     }
-    console.log("ran");
 
     return (
       <option key={location.id} value={location.id}>{locationName}</option>
@@ -23,12 +22,10 @@ function StoredLocations({savedLocations, changeLocation}) {
     const selectedLocation = e.target.value;
     setChosenLocation(selectedLocation);
     e.preventDefault();
-    console.log("changed");
   }
 
   function handleClick(){
     const chosenLocationObject = savedLocations.filter(location => location.id === chosenLocation);
-    console.log(chosenLocationObject[0]);
     changeLocation(chosenLocationObject[0]);
   }
 

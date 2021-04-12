@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './LightMeter.css';
+import './LightMeter.scss';
 import PropTypes from 'prop-types';
 
 LightMeter.propTypes = {
