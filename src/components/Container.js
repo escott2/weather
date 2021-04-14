@@ -4,6 +4,7 @@ import halfSun from '../img/half-sun.svg';
 import './Container.scss';
 import Temperature from './Temperature';
 import LightMeter from './LightMeter';
+import Sun from './Sun';
 import Sunrise from './Sunrise';
 import Sunset from './Sunset';
 
@@ -16,10 +17,11 @@ Container.propTypes = {
     sunset: PropTypes.string
 };
 
-function Container({temp, dayLength, dayHours, nightHours, sunrise, sunset}) {
+function Container({currentWeather, dayLength, dayHours, nightHours, sunrise, sunset, displayTemp}) {
     return (
         <main className="Container">
-            <Temperature temp={temp} dayHours={dayHours} nightHours={nightHours}/>
+            <Temperature currentWeather={currentWeather} dayHours={dayHours} nightHours={nightHours} displayTemp={displayTemp} />
+            <Sun />
             <LightMeter dayLength={dayLength} dayHours={dayHours} nightHours={nightHours}/>
 
             <div className="SunTimes">

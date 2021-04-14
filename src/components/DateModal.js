@@ -24,6 +24,7 @@ DateModal.propTypes = {
     function handleSubmit() {
         changeDate(chosenDate);
         hideModal();
+    
     }
 
     function handleExit() {

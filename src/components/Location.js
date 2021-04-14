@@ -39,7 +39,7 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
 
 
     return (
-        <div className="Location">
+        <div className="Location flex--column">
             {(savedLocations) && 
                 <StoredLocations savedLocations={savedLocations} changeLocation={changeLocation}/>
             }

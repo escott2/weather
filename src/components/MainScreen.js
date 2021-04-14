@@ -30,7 +30,10 @@ function MainScreen() {
       enteredRegion: "", 
       enteredCountry: "",
     });
-    const [temp, setTemp] = useState(-500);
+
+    //Change temp to include more weather data, ex: setDisplayCurrentWeather
+    const [currentWeather, setCurrentWeather] = useState({temp: -500});
+    const [displayTemp, setDisplayTemp] = useState(true);
     const [sunrise, setSunrise] = useState("");
     const [sunset, setSunset] = useState("");
     const [dayLengthInMinutes, setDayLengthInMinutes] = useState("");
@@ -167,13 +170,35 @@ function MainScreen() {
     */
     useEffect(() => {
       if (location.lat) {
-        const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,daily,minutely&units=imperial&appid=${weatherAPI.key}`
+        const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,minutely&units=imperial&appid=${weatherAPI.key}`
         axios.get(weatherURL)
           .then(response => {
-          setTemp(() => {
+          setCurrentWeather(() => {
               let currentTemp = response.data.current.temp;
               currentTemp = Math.round(Number(currentTemp));
-              return currentTemp;
+              const date = response.data.daily[0].dt;
+              const highTemp = Math.round(response.data.daily[0].temp.max);
+              const lowTemp = Math.round(response.data.daily[0].temp.min);
+              const feelsLike = response.data.current.feels_like;
+              const windSpeed = response.data.current.wind_speed;
+              const windDirection = response.data.current.wind_deg;
+              const humidity = response.data.current.humidity;
+              const icon = response.data.current.weather[0].icon;
+              const condition = response.data.current.weather[0].main;
+
+
+              return {
+                temp: currentTemp,
+                highTemp: highTemp,
+                lowTemp: lowTemp,
+                feelsLike: feelsLike,
+                windSpeed: windSpeed,
+                windDirection: windDirection,
+                humidity: humidity,
+                icon: icon,
+                condition: condition,
+                date: date
+              };
           });
           setTimezone(() => {
               const newTimezone = response.data.timezone;
@@ -289,17 +314,27 @@ function MainScreen() {
       return formattedCity;
     }
 
+    function displayWeatherIfToday(date) {
+      const isSameDate = `${date.getMonth()} ${date.getDate()} ${date.getFullYear}` === `${today.getMonth()} ${today.getDate()} ${today.getFullYear}`;
+      if (isSameDate) {
+        setDisplayTemp(true);
+      } else {
+        setDisplayTemp(false);
+      }
+    }
+
     
 
     // --- EVENT HANDLERS
 
     function handleDateChange(day) {
-        setDate(
-         {
-          month: day.getMonth(),
-          date: day.getDate(),
-          year: day.getFullYear()
-        });
+      displayWeatherIfToday(day);
+      setDate(
+        {
+        month: day.getMonth(),
+        date: day.getDate(),
+        year: day.getFullYear()
+      });
     }
 
     function handleFormLocationChange(enteredLocation) {
@@ -357,12 +392,13 @@ function MainScreen() {
       });
     }
 
+
     //END FUNCTIONS
 
     return (
         <div className="MainScreen">
-            <Header location={location} locationData={locationData} changeLocation={handleLocationChange} clearFormLocationData={clearFormLocationData} changeFormLocation={handleFormLocationChange} date={date} changeDate={handleDateChange} saveLocation={handleSaveLocation} savedLocations={savedLocations}/>
-            <Container temp={temp} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset}/> 
+            <Header location={location} locationData={locationData} changeLocation={handleLocationChange} clearFormLocationData={clearFormLocationData} changeFormLocation={handleFormLocationChange} date={date} changeDate={handleDateChange} saveLocation={handleSaveLocation} savedLocations={savedLocations} />
+            <Container currentWeather={currentWeather} dayHours={dayLengthInHours} nightHours={nightLengthInHours} dayLength={dayLengthPercentRounded} sunrise={sunrise} sunset={sunset} displayTemp={displayTemp}/> 
             <Footer />
         </div>
     )

@@ -1,0 +1,48 @@
+@import '../styles/abstracts/index';
+
+.weather-icon {
+  font-size: 200px;
+  color: $dark-blue;
+  position: absolute;
+  left: 100px;
+}
+
+.few-clouds {
+  position: absolute;
+  left: 100px;
+  // font-size: 200px;
+  // color: $dark-blue;
+}
+
+.cloud-container {
+  position: relative;
+}
+
+.cloud--1 {
+  position: absolute;
+  z-index: 5;
+
+}
+
+.cloud--2 {
+  left: 200px;
+  top: -220px;
+  position: absolute;
+  color: lightgray;
+  font-size: 150px;
+
+}
+
+.cloud--3 {
+  left: 260px;
+  top: 20px;
+  position: absolute;
+  transform: scale(-1, 1);
+  color: lightgray;
+  font-size: 100px;
+}
+
+.mist {
+  position: absolute;
+  left: 100px;
+}

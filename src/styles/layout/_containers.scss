@@ -1,6 +1,16 @@
 .flex--responsive {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   //add media query
+
+  @media (min-width: 796px) {
+    flex-direction: row;
+  }
+}
+
+.flex--column {
+  display: flex;
+  flex-direction: column;
 }
