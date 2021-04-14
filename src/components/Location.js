@@ -56,7 +56,7 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
             :
                 <h2>Choose a location to get started!</h2> 
             }
-            <button className="icon icon-btn" onClick={handleClick}><GoLocation aria-label="choose-location" /></button>
+            <button className="icon icon--orange icon-btn" onClick={handleClick}><GoLocation aria-label="choose-location" /></button>
         </div>
     );
 }

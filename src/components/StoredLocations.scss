@@ -31,22 +31,28 @@
     border: solid 0.25em $light-blue;
   }
 
-  button {
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    border: none;
-    background-color: $orange;
-    transform:translateY(-5px);
+  // button {
+  //   // border-radius: 50%;
+  //   height: 40px;
+  //   width: 40px;
+  //   border: 0.2em solid $dark-blue;
+  //   background-color: $lightest-blue;
+  //   // color: white;
+  //   transform:translateY(-5px);
 
-    @media (min-width: 796px) {
-      // margin-top: inherit;
-      transform:translateY(0px);
+  //   @media (min-width: 796px) {
+  //     // margin-top: inherit;
+  //     transform:translateY(0px);
 
-    }
+  //   }
 
     
 
+  // }
+
+  .icon--arrow {
+    color: $dark-blue;
+    transform: translateY(5px);
   }
 
   @media (min-width: 796px) {

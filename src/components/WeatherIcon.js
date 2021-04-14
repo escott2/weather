@@ -8,12 +8,11 @@ import {IoIosSnow} from 'react-icons/io';
 
 
 function WeatherIcon({currentWeather}) {
-  // const conditionCode = currentWeather.icon;
-  // const condition = currentWeather.condition;
-  const conditionCode = '04d';
-  const condition = "scattered-clouds";
+  const conditionCode = currentWeather.icon;
+  const condition = currentWeather.condition;
+  // const conditionCode = '04d';
+  // const condition = "scattered-clouds";
 
-  //Add icon and style
   let conditionIcon;
   switch (conditionCode) {
       case "01d":
@@ -30,10 +29,6 @@ function WeatherIcon({currentWeather}) {
             <IoIosCloud className="cloud--1" alt="cloud"/>
             <IoIosCloud className="cloud--2" alt="cloud"/>
             </div>
-          // conditionIcon = <div className={`weather-icon ${condition.replace(/\s+/g, '-')}`}>
-          //   <IoIosCloud className={`${condition.replace(/\s+/g, '-')}--1`} alt="cloud"/>
-          //   <IoIosCloud className={`${condition.replace(/\s+/g, '-')}--2`} alt="cloud"/>
-          // </div>
           break;
       case '04d':
       case '04n':
@@ -42,11 +37,6 @@ function WeatherIcon({currentWeather}) {
             <IoIosCloud className="cloud--2" alt="cloud"/>
             <IoIosCloud className="cloud--3" alt="cloud"/>
             </div>
-          // conditionIcon = <div className={`weather-icon ${condition.replace(/\s+/g, '-')}`}>
-          // <IoIosCloud className={`weather-icon ${condition.replace(/\s+/g, '-')}--1`} alt="cloud"/>
-          // <IoIosCloud className={`weather-icon ${condition.replace(/\s+/g, '-')}--2`} alt="cloud"/>
-          // <IoIosCloud className={`weather-icon ${condition.replace(/\s+/g, '-')}--3`} alt="cloud"/>
-          // </div>
           break;
       case '09d':
       case '09n':
@@ -70,17 +60,10 @@ function WeatherIcon({currentWeather}) {
           conditionIcon = undefined;
   }
 
-  // const conditionIconUrl = `http://openweathermap.org/img/wn/${conditionIcon}@2x.png`;
-
-
-
   return (
     <div>
-      {/* <img src={conditionIconUrl} alt={currentWeather.condition} /> */}
-      {/* <IoIosCloud className={condition.replace(/\s+/g, '-')} alt="cloud"/> */}
- 
-      {conditionIcon}
-
+        {conditionIcon}
+        <p>{currentWeather.condition}</p>
     </div>
   )
 }

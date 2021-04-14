@@ -28,7 +28,7 @@ function Day({date, changeDate}) {
         <div className="Day flex--column">
             {isDisplayModal && <DateModal changeDate={changeDate} hideModal={handleHideModal} />}
             <h2>{months[date.month]} {date.date}, {date.year}</h2>
-            <button className="Day__button icon icon-btn" onClick={handleShowModal}><GoCalendar aria-label="choose-date" /></button>            
+            <button className="Day__button icon icon-btn icon--orange" onClick={handleShowModal}><GoCalendar aria-label="choose-date" /></button>            
         </div>
     )
 }

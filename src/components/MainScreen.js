@@ -179,7 +179,7 @@ function MainScreen() {
               const date = response.data.daily[0].dt;
               const highTemp = Math.round(response.data.daily[0].temp.max);
               const lowTemp = Math.round(response.data.daily[0].temp.min);
-              const feelsLike = response.data.current.feels_like;
+              const feelsLike = Math.round(response.data.current.feels_like);
               const windSpeed = response.data.current.wind_speed;
               const windDirection = response.data.current.wind_deg;
               const humidity = response.data.current.humidity;

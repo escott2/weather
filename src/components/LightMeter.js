@@ -11,12 +11,17 @@ LightMeter.propTypes = {
 function LightMeter({dayLength, dayHours, nightHours}) {
 
     const [isShown, setIsShown] = useState(false);
-    const dayDegrees = Math.round(dayLength * 360);
+    // const dayDegrees = Math.round(dayLength * 360);
+    const dayPercent = Math.round(dayLength * 100);
 
-    const percentStyle = {
-        backgroundImage:
-            `conic-gradient(from 270deg, #E8F6FD ${dayDegrees}deg, #024959 0)`
-    }
+    // const percentStyle = {
+    //     backgroundImage:
+    //         `conic-gradient(from 270deg, #E8F6FD ${dayDegrees}deg, #024959 0)`
+    // }
+
+    const percentFill = {
+        height: `${dayPercent}%`
+    };
 
     // function toggleHover() {
     //     setIsShown(!isShown);
@@ -31,12 +36,13 @@ function LightMeter({dayLength, dayHours, nightHours}) {
     }
 
     return (
-    <div className="LightMeter" style={percentStyle} onMouseEnter={displayStats} onMouseLeave={hideStats}>
+    <div className="LightMeter" onMouseEnter={displayStats} onMouseLeave={hideStats}>
+        <div className="percent" style={percentFill}></div>
         {isShown && (
-            <div className="light-stats">
-                <p>Sunlight: {dayHours} hrs</p>
-                <p>Darkness: {nightHours} hrs</p>
-            </div>
+                <div className="light-stats">
+                    <p>Sunlight: {dayHours} hrs</p>
+                    <p>Darkness: {nightHours} hrs</p>
+                </div>
         )}
 
     </div>

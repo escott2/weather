@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './StoredLocations.scss';
+import {RiArrowRightCircleFill} from 'react-icons/ri';
 
 function StoredLocations({savedLocations, changeLocation}) {
 
@@ -37,7 +38,7 @@ function StoredLocations({savedLocations, changeLocation}) {
           <option value="">-</option>
           {locationOptions}
         </select>
-        <button onClick={handleClick} type="button">GO</button>
+        <button className="icon icon-btn icon--arrow" onClick={handleClick} type="button"><RiArrowRightCircleFill /></button>
       </form>
     </div>
 
