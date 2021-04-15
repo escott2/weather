@@ -2,36 +2,31 @@
 
 
 .Temperature {
-    // width: 250px;
-    // height: 250px;
-    // border: 0.1em solid white;
-    // border-radius: 50%;
+    width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'News Cycle', sans-serif;
     font-size: 1.25rem;
     letter-spacing: 2px;
-    // background-color: $yellow;
     position: absolute;
     top: 20px;
     left: 20px;
-    // z-index: 5;
-    // box-shadow: 18px 15px 9px 4px rgba(2, 73, 89, 0.3);
 
-    .text--min-max {
-        // font-size: 1.5rem;
-        color: gray;
-    }
+    // .text--min-max {
+    //     // font-size: 1.5rem;
+    //     color: gray;
+    // }
 
     .current-temp {
         font-size: 4rem;
+        font-weight: 700;
         
     }
 
     p {
         margin: 0;
+        padding: 0.5rem 0;
     }
     
     img {

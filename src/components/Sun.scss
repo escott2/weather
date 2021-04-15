@@ -1,7 +1,11 @@
 @import '../styles/abstracts/index';
 
-
 .Sun {
+    width: 250px;
+
+}
+
+.sun-img {
     width: 200px;
     height: 200px;
     border: 0.1em solid white;
@@ -15,7 +19,7 @@
     background-color: $yellow;
     position: absolute;
     top: 40px;
-    left: 220px;
+    // left: 220px;
     z-index: 5;
     box-shadow: 18px 15px 9px 4px rgba(2, 73, 89, 0.3);
 }

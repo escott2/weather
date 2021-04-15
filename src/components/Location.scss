@@ -10,6 +10,7 @@
    margin-bottom: 0.5em;
    position: relative;
    
+   
 
    @media (min-width: 796px) {
     width: 80%;
@@ -32,6 +33,8 @@
 
 .Location h2 {
     margin: 1em 0 0.4em;
+    font-weight: 500;
+
     @media (min-width: 796px) {
         margin-top: 1.5em;
     }

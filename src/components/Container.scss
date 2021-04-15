@@ -2,8 +2,8 @@
 
 
 .Container {
-    /* width: 80%; */
-    min-width: 1000px;
+    width: 80%;
+    // min-width: 1000px;
     height: 600px;
     background-color: #D9F0FC;
     /* background-color: #6d787e; */
@@ -13,6 +13,14 @@
     justify-content: flex-end;
     box-sizing: border-box;
     position: relative;
+
+    .weather-scene {
+        width: 60%;
+        height: 600px;
+        position: absolute;
+        right: 0;
+        // background-color: red;
+    }
 }
 
 .SunTimes {
@@ -40,7 +48,7 @@
     /* align-self: center; */
 }
 
-.sun-img {
+.half-sun-img {
     position: absolute;
     width: 60px;
 }

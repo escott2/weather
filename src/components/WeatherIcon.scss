@@ -4,18 +4,15 @@
   font-size: 200px;
   color: $dark-blue;
   position: absolute;
-  left: 100px;
-}
-
-.few-clouds {
-  position: absolute;
-  left: 100px;
-  // font-size: 200px;
-  // color: $dark-blue;
+  // left: 100px;
+  top: 200px;
+  left: -80px;
 }
 
 .cloud-container {
   position: relative;
+  // top: 175px;
+  // left: -50px;
 }
 
 .cloud--1 {
@@ -28,7 +25,7 @@
   left: 200px;
   top: -220px;
   position: absolute;
-  color: lightgray;
+  color: white;
   font-size: 150px;
 
 }
@@ -38,11 +35,6 @@
   top: 20px;
   position: absolute;
   transform: scale(-1, 1);
-  color: lightgray;
+  color: white;
   font-size: 100px;
-}
-
-.mist {
-  position: absolute;
-  left: 100px;
 }

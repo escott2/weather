@@ -22,8 +22,10 @@ function Temperature({displayTemp, currentWeather}) {
                     </div>
                 <p className="current-temp">{currentWeather.temp}°F</p>
                 <p>Feels like: {currentWeather.feelsLike}°</p>
-               
-                <WeatherIcon currentWeather={currentWeather}/>
+                {/* <p>Wind: {currentWeather.windSpeed}</p> */}
+                {/* <p>{currentWeather.windDirection}</p> */}
+                <p>Humidity: {currentWeather.humidity}%</p>
+                <p>{currentWeather.condition}</p>
                 </div>
             }
 

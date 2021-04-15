@@ -6,7 +6,7 @@ function StoredLocations({savedLocations, changeLocation}) {
 
   const [chosenLocation, setChosenLocation] = useState("test");
 
-  const locationOptions = savedLocations.map((location, index) => {
+  const locationOptions = savedLocations.map((location) => {
     let locationName;
     if (location.country === "United States") {
       locationName = `${location.city}, ${location.region}, ${location.country}`

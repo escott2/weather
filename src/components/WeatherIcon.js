@@ -9,8 +9,7 @@ import {IoIosSnow} from 'react-icons/io';
 
 function WeatherIcon({currentWeather}) {
   const conditionCode = currentWeather.icon;
-  const condition = currentWeather.condition;
-  // const conditionCode = '04d';
+  // const conditionCode = '11d';
   // const condition = "scattered-clouds";
 
   let conditionIcon;
@@ -21,7 +20,7 @@ function WeatherIcon({currentWeather}) {
           break;
       case '02d':
       case '02n':
-          conditionIcon = <IoIosCloud className={`weather-icon ${condition.replace(/\s+/g, '-')}`} alt="cloud"/>
+          conditionIcon = <IoIosCloud className="weather-icon" alt="cloud"/>
           break;
       case '03d':
       case '03n':
@@ -42,19 +41,19 @@ function WeatherIcon({currentWeather}) {
       case '09n':
       case '10d':
       case '10n':
-        conditionIcon = <IoRainySharp className={`weather-icon ${condition.replace(/\s+/g, '-')}`} alt="rain-cloud"/>
+        conditionIcon = <IoRainySharp className="weather-icon" alt="rain-cloud"/>
         break;
       case '11d':
       case '11n':
-        conditionIcon = <IoIosThunderstorm className={`weather-icon ${condition.replace(/\s+/g, '-')}`} alt="rain-cloud"/>
+        conditionIcon = <IoIosThunderstorm className="weather-icon" alt="rain-cloud"/>
         break;
       case '13d':
       case '13n':
-        conditionIcon = <IoIosSnow className={`weather-icon ${condition.replace(/\s+/g, '-')}`} alt="rain-cloud"/>
+        conditionIcon = <IoIosSnow className="weather-icon" alt="rain-cloud"/>
         break;
       case '50d':
       case '50n':
-        conditionIcon = <WiFog className={`weather-icon ${condition.replace(/\s+/g, '-')}`} alt="mist"/>
+        conditionIcon = <WiFog className="weather-icon" alt="mist"/>
         break;
       default:
           conditionIcon = undefined;
@@ -63,7 +62,6 @@ function WeatherIcon({currentWeather}) {
   return (
     <div>
         {conditionIcon}
-        <p>{currentWeather.condition}</p>
     </div>
   )
 }
