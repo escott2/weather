@@ -4,7 +4,7 @@ import {RiArrowRightCircleFill} from 'react-icons/ri';
 
 function StoredLocations({savedLocations, changeLocation}) {
 
-  const [chosenLocation, setChosenLocation] = useState("test");
+  const [chosenLocation, setChosenLocation] = useState("");
 
   const locationOptions = savedLocations.map((location) => {
     let locationName;
@@ -38,7 +38,9 @@ function StoredLocations({savedLocations, changeLocation}) {
           <option value="">-</option>
           {locationOptions}
         </select>
-        <button className="icon icon-btn icon--arrow" onClick={handleClick} type="button"><RiArrowRightCircleFill /></button>
+        {chosenLocation && 
+          <button className="icon icon-btn icon--arrow" onClick={handleClick} type="button"><RiArrowRightCircleFill /></button>
+        }
       </form>
     </div>
 
