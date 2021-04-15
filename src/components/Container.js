@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import halfSun from '../img/half-sun.svg';
+// import halfSun from '../img/half-sun.svg';
 import './Container.scss';
 import Temperature from './Temperature';
 import LightMeter from './LightMeter';
+import Sun from './Sun';
+import WeatherIcon from './WeatherIcon';
 import Sunrise from './Sunrise';
 import Sunset from './Sunset';
 
@@ -16,20 +18,24 @@ Container.propTypes = {
     sunset: PropTypes.string
 };
 
-function Container({temp, dayLength, dayHours, nightHours, sunrise, sunset}) {
+function Container({currentWeather, dayLength, dayHours, nightHours, sunrise, sunset, displayTemp}) {
+
     return (
         <main className="Container">
-            <Temperature temp={temp} dayHours={dayHours} nightHours={nightHours}/>
-            <LightMeter dayLength={dayLength} dayHours={dayHours} nightHours={nightHours}/>
 
+            <Temperature currentWeather={currentWeather} dayHours={dayHours} nightHours={nightHours} displayTemp={displayTemp} />
+         
+            <div className="weather-scene">
+                <Sun />
+                <WeatherIcon currentWeather={currentWeather}/>
+                <LightMeter dayLength={dayLength} dayHours={dayHours} nightHours={nightHours}/>
+             </div>
+          
             <div className="SunTimes">
-              <img className="sun-img sunrise-img" src={halfSun} alt="sun"></img>
               <Sunrise sunrise={sunrise}/>
               <div className="horizon"></div>
               <Sunset sunset={sunset}/>
-              <img className="sun-img sunset-img" src={halfSun} alt="sun"></img>
-
-
+              {/* <img className="half-sun-img sunset-img" src={halfSun} alt="sun"></img> */}
             </div>     
         </main>
     );

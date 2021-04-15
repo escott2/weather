@@ -1,0 +1,40 @@
+@import '../styles/abstracts/index';
+
+.weather-icon {
+  font-size: 200px;
+  color: $dark-blue;
+  position: absolute;
+  // left: 100px;
+  top: 200px;
+  left: -80px;
+}
+
+.cloud-container {
+  position: relative;
+  // top: 175px;
+  // left: -50px;
+}
+
+.cloud--1 {
+  position: absolute;
+  z-index: 5;
+
+}
+
+.cloud--2 {
+  left: 200px;
+  top: -220px;
+  position: absolute;
+  color: white;
+  font-size: 150px;
+
+}
+
+.cloud--3 {
+  left: 260px;
+  top: 20px;
+  position: absolute;
+  transform: scale(-1, 1);
+  color: white;
+  font-size: 100px;
+}

@@ -2,23 +2,40 @@
 
 
 .Location {
-    background-color: white;
-   width: 80%;
+   background-color: white;
+   width: 100%;
    text-align: center;
    border: solid 0.1em #D9F0FC;
    margin: 0 auto;
-   margin-bottom: 1em;
+   margin-bottom: 0.5em;
    position: relative;
+
+   .icon--location {
+       color: $color-accent
+   }
 
 }
 
 .icon--plus-sign {
-    transform: translateY(18px);
-    padding-left: 10px;
+    align-self: flex-end;
+    margin-right: 0.4em;
+    color: $color-primary;
+
+    @media (min-width: 796px) {
+        transform: translateY(5px);
+        padding-left: 10px;
+    }
+
+
 }
 
 .Location h2 {
-    margin: 1em 0 0.4em; 
+    margin: 1em 0 0.4em;
+    font-weight: 500;
+
+    @media (min-width: 796px) {
+        margin-top: 1.5em;
+    }
 }
 
 .Location p {

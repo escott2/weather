@@ -2,8 +2,8 @@
 
 
 .Container {
-    /* width: 80%; */
-    min-width: 1000px;
+    width: 90%;
+    // min-width: 1000px;
     height: 600px;
     background-color: #D9F0FC;
     /* background-color: #6d787e; */
@@ -13,6 +13,14 @@
     justify-content: flex-end;
     box-sizing: border-box;
     position: relative;
+
+    .weather-scene {
+        width: 60%;
+        height: 600px;
+        position: absolute;
+        right: 0;
+        // background-color: red;
+    }
 }
 
 .SunTimes {
@@ -22,7 +30,7 @@
     justify-content: space-between;
     justify-self: end;
     position: relative;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.9em;
 
 }
 
@@ -36,23 +44,9 @@
 .horizon {
     height: 10px;
     width: 100%;
-    background-color: #FFA500;
-    /* align-self: center; */
+    background-color: $dark-blue;
 }
 
-.sun-img {
-    position: absolute;
+.half-sun-img {
     width: 60px;
-}
-
-.sunrise-img {
-    top: -3px;
-    left: 2px;
-    transform: rotate(180deg);
-}
-
-.sunset-img {
-    left: 920px;
-    top: 47px;
-
 }

@@ -1,26 +1,38 @@
 @import '../styles/abstracts/index';
 
 
+// .LightMeter {
+//     width: 200px;
+//     height: 200px;
+//     border-radius: 50%;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     position: absolute;
+//     top: -50px;
+//     right: 0;
+//     z-index: 5;
+//     font-size: 1rem;
+//     font-weight: 700;
+//     border: solid 0.5em #024959;
+// }
+
 .LightMeter {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
+    width: 50px;
+    height: 600px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: $dark-blue;
+    font-size: 1rem;
+    // font-weight: 700;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: 100px;
-    left: 500px;
-    font-size: 1rem;
-    font-weight: 700;
-    border: solid 0.5em #024959;
-    /* box-shadow: 9px 10px 3px 4px rgba(195, 216, 227, 1); */
-    /* box-shadow: 9px 10px 3px 4px rgba(2, 73, 89, 0.3); */
-    box-shadow: 18px 15px 9px 4px rgba(2, 73, 89, 0.3);
+    margin-right: 4em;
 
-
-    /* rgb(2,73,89) */
 }
 
 .light-stats {
@@ -31,20 +43,26 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* border: solid 0.5em #024959; */
     box-shadow: 18px 15px 9px 4px rgba(0, 0, 0, 0.4);
     transform: translateX(-120px);
-    /* transform: translateY(-50px); */
-
-
-
-
-    /* background-image: conic-gradient(from 270deg, #D9F0FC 180deg, #024250 0); */
+    z-index: 20;
 }
 
 .light-stats p {
     color: black;
     text-align: center;
     margin: 0.2em 0;
-    
+
+}
+
+.percent {
+    width: 50px;
+    // height: 80%;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: $yellow;
+
+
 }

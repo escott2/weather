@@ -24,6 +24,7 @@ DateModal.propTypes = {
     function handleSubmit() {
         changeDate(chosenDate);
         hideModal();
+    
     }
 
     function handleExit() {
@@ -40,7 +41,7 @@ DateModal.propTypes = {
                     <React.Fragment>
                         <h2 className="modal-text">You selected:</h2>
                         <p className="modal-text">{chosenDate.toDateString()}</p>
-                        <button className="DateModal__submit-btn" onClick={handleSubmit}>Submit</button>
+                        <button className=" btn DateModal__submit-btn" onClick={handleSubmit}>Submit</button>
                     </React.Fragment>
                     :
                     <h2 className="modal-text">Select a day to view sunrise and sunset times.</h2>

@@ -11,7 +11,7 @@
 
 .edit-btn {
   font-weight: 400;
-  background-color: #FFA500;
+  background-color: $color-accent;
   border: none;
   margin-left: 1em;
 
@@ -22,7 +22,22 @@
   color: inherit;
   border: none;
   padding: 0;
-  font: inherit;
+  font-size: 50px;
   cursor: pointer;
   outline: inherit;
-  }
+}
+
+.input {
+  border-radius: 10px;
+  padding: 0.5em 0.5em;
+  border: solid 0.25em $light-blue;
+  font-size: 1.1rem;
+}
+
+// .select {
+//   border-radius: 10px;
+//   padding: 0.5em 0.5em;
+//   height: 45px;
+//   border: solid 0.25em $color-accent;
+
+// }

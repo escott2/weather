@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import './StoredLocations.scss';
+import {RiArrowRightCircleFill} from 'react-icons/ri';
 
 function StoredLocations({savedLocations, changeLocation}) {
 
-  const [chosenLocation, setChosenLocation] = useState("test");
+  const [chosenLocation, setChosenLocation] = useState("");
 
-  const locationOptions = savedLocations.map((location, index) => {
+  const locationOptions = savedLocations.map((location) => {
     let locationName;
     if (location.country === "United States") {
       locationName = `${location.city}, ${location.region}, ${location.country}`
@@ -33,11 +34,13 @@ function StoredLocations({savedLocations, changeLocation}) {
   return (
     <div className="StoredLocations">
       <form className="save-form">
-        <select value={chosenLocation} onChange={handleSelectChange}>
+        <select className="input" value={chosenLocation} onChange={handleSelectChange}>
           <option value="">-</option>
           {locationOptions}
         </select>
-        <button onClick={handleClick} type="button">GO</button>
+        {chosenLocation && 
+          <button className="icon icon-btn icon--arrow" onClick={handleClick} type="button"><RiArrowRightCircleFill /></button>
+        }
       </form>
     </div>
 

@@ -18,6 +18,28 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
 
     const [isDisplayModal, setIsDisplayModal] = useState(true);
 
+    const locationName = location.country === "United States" ?
+        <h2>{location.city}, {location.region}, {location.country}</h2>
+    :
+        <h2>{location.city}, {location.country}</h2>
+
+    const locationNotSaved = !isSaved();
+
+    
+    
+    
+    function isSaved() {
+        let isSaved = false;
+        if (savedLocations !== null) {
+            for (let i = 0; i < savedLocations.length; i++) {
+                if (location.id === savedLocations[i].id) {
+                    isSaved = true;
+                }
+            }
+        }
+        return isSaved;
+    }
+
     function handleClick() {
         setIsDisplayModal(true);
     }
@@ -32,14 +54,8 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
         clearFormLocationData();
     }
 
-    const locationName = location.country === "United States" ?
-        <h2>{location.city}, {location.region}, {location.country}</h2>
-    :
-        <h2>{location.city}, {location.country}</h2>
-
-
     return (
-        <div className="Location">
+        <div className="Location flex--column">
             {(savedLocations) && 
                 <StoredLocations savedLocations={savedLocations} changeLocation={changeLocation}/>
             }
@@ -51,12 +67,14 @@ function Location({location, changeLocation, locationData, changeFormLocation, c
             {location.city ? 
                 <div className="flex--responsive">
                 {locationName}
-                <button className="icon icon-btn icon--plus-sign" onClick={handleSaveClick}><AiFillPlusCircle aria-label="save-location"/></button>
+                {locationNotSaved &&
+                    <button className="icon icon-btn icon--plus-sign" onClick={handleSaveClick}><AiFillPlusCircle aria-label="save-location"/></button>
+                }
                 </div>
             :
                 <h2>Choose a location to get started!</h2> 
             }
-            <button className="icon icon-btn" onClick={handleClick}><GoLocation aria-label="choose-location" /></button>
+            <button className="icon icon-btn icon--location" onClick={handleClick}><GoLocation aria-label="choose-location" /></button>
         </div>
     );
 }

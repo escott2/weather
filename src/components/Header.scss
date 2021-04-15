@@ -2,11 +2,13 @@
 
 
 header {
-    margin-top: 1em;
-    width: 80%;
-    // background-color: $white;
-    .icon {
-        color: $orange;
+    margin-top: 1.2em;
+    font-size: 2em;
+    width: 100%;
+
+    @media (min-width: 796px) {
+        width: 90%;
+        margin-top: 1em;
     }
 }
 
