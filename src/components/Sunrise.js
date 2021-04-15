@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import halfSun from '../img/half-sun--orange.svg';
+
 import './Sunrise.scss';
 
 Sunrise.propTypes = {
@@ -8,10 +10,9 @@ Sunrise.propTypes = {
 
 function Sunrise({sunrise}) {
     return (
-        <div className="Sunrise">
-            {/* <p>{`${sunrise.sunriseHour}:${sunrise.sunriseMinute}`} AM</p> */}
+        <div className="Sunrise flex--row">
+            <img className="half-sun-img sunrise-img" src={halfSun} alt="sun"></img>
             <p>{sunrise}</p>
-
         </div>
     )
 }

@@ -34,7 +34,7 @@ function StoredLocations({savedLocations, changeLocation}) {
   return (
     <div className="StoredLocations">
       <form className="save-form">
-        <select value={chosenLocation} onChange={handleSelectChange}>
+        <select className="input" value={chosenLocation} onChange={handleSelectChange}>
           <option value="">-</option>
           {locationOptions}
         </select>

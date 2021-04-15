@@ -2,7 +2,7 @@
 
 
 .Container {
-    width: 80%;
+    width: 90%;
     // min-width: 1000px;
     height: 600px;
     background-color: #D9F0FC;
@@ -30,7 +30,7 @@
     justify-content: space-between;
     justify-self: end;
     position: relative;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.9em;
 
 }
 
@@ -45,22 +45,8 @@
     height: 10px;
     width: 100%;
     background-color: $dark-blue;
-    /* align-self: center; */
 }
 
 .half-sun-img {
-    position: absolute;
     width: 60px;
-}
-
-.sunrise-img {
-    top: -3px;
-    left: 2px;
-    transform: rotate(180deg);
-}
-
-.sunset-img {
-    left: 920px;
-    top: 47px;
-
 }

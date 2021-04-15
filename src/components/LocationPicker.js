@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import {GrEdit} from 'react-icons/gr';
 import './LocationPicker.scss';
 
 LocationPicker.propTypes = {
@@ -51,7 +52,7 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
             } else if (locationData.isCityMatch) {
                 setMessage({
                     message: "Location found!",
-                    className: "LocationPicker__message"
+                    className: "LocationPicker__message--info"
                 });
                 setDisplayLocateBtn(false);
                 setDisplaySubmit(true);
@@ -126,7 +127,7 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
             setDisplaySubmit(true);
             setMessage({
                 message: "Location found!",
-                className: "LocationPicker__message"
+                className: "LocationPicker__message--info"
             });
         } else if (userResponse === "no") {
             setInputText((prevState) => {
@@ -171,14 +172,14 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 
                     <React.Fragment>
                         <h3>Country</h3>
-                        <CountryDropdown classes="LocationPicker__input" name="country" value={inputText.country} onChange={handleCountryChange}/>
+                        <CountryDropdown classes="input" name="country" value={inputText.country} onChange={handleCountryChange}/>
                     </React.Fragment>
                 :
                     <React.Fragment>
                         <h3>Country</h3>
-                        <div className="flex--align-vertical">
+                        <div className="country-name">
                             <p>{inputText.country}</p>
-                            <button className="btn edit-btn" onClick={handleEditCountry}>edit</button>
+                            <button className="btn edit-btn" onClick={handleEditCountry}><GrEdit aria-label="edit"/></button>
                         </div>
                     </React.Fragment>
                 }
@@ -186,14 +187,14 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 { inputText.country === "United States" ?
                     <React.Fragment>
                         <h3>State</h3>
-                        <RegionDropdown classes="LocationPicker__input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
+                        <RegionDropdown classes="input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
 
                         {inputText.region !== "" &&
                             <React.Fragment>
                                 <h3>City</h3>
-                                <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+                                <input className="input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
                                 {(inputText.country && inputText.region && inputText.city && displayLocateBtn) &&
-                                    <button className="btn" onClick={handleLocateClick}>Locate</button>
+                                    <button className="btn locate-btn" onClick={handleLocateClick}>Locate</button>
                                 }
                             </React.Fragment>
                         }
@@ -201,7 +202,7 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 :
                     <React.Fragment>
                         <h3>City</h3>
-                        <input className="LocationPicker__input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+                        <input className="input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
                         {(inputText.country && inputText.city && displayLocateBtn) &&
                                     <button className="btn" onClick={handleLocateClick}>Locate</button>
                         }
@@ -215,10 +216,10 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
 
             {displayMessage &&
                 <React.Fragment>
-                    <p className={message.className}>{message.message}</p>
+                    <p className={`${message.className} message`}>{message.message}</p>
                     { displayChoice &&
                         <React.Fragment>
-                            <select value={userResponse} onChange={handleSelectChange}>
+                            <select className="input" value={userResponse} onChange={handleSelectChange}>
                                 <option value="">-</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
@@ -236,7 +237,8 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
             
             {displaySubmit &&
                 <React.Fragment>
-                    {enteredLocationName}
+                    {/* --fix, location name will display incorrectly if typed incorrectly */}
+                    {/* {enteredLocationName} */}
                     <button className="btn" onClick={handleSubmitClick}>Check Forecast</button>     
                 </React.Fragment>
             }

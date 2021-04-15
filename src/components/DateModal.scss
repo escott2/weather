@@ -19,10 +19,17 @@
     background-color: white;
     width: 40%;
     color: black;
-    padding-bottom: 2em;
+    padding-bottom: 1rem;
     border: 0.15em solid rgb(2, 73, 89);
     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+    .btn {
+        background-color: $color-accent;
+    }
 
 }
 
@@ -39,16 +46,15 @@
     border-radius: 10px;
 }
 
-.DateModal__submit-btn {
-    font-size: 1.1rem;
-    border: 0.15em solid rgb(2, 73, 89);
-    padding: 0.4em 1em;
-    border-radius: 10px;
-    font-weight: 600;
-    color: rgb(2, 73, 89);
-    /* background-color: black; */
-    /* color: white; */
-}
+// .DateModal__submit-btn {
+//     font-size: 1.1rem;
+//     border: 0.15em solid rgb(2, 73, 89);
+//     padding: 0.8em 1em;
+//     border-radius: 10px;
+//     font-weight: 600;
+//     background-color: $color-accent;
+ 
+// }
 
 .DateModal__exit-btn {
     display: block;

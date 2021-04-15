@@ -5,11 +5,9 @@ header {
     margin-top: 1.2em;
     font-size: 2em;
     width: 100%;
-    // .header__icon {
-    //     color: $orange;
-    // }
+
     @media (min-width: 796px) {
-        width: 80%;
+        width: 90%;
         margin-top: 1em;
     }
 }

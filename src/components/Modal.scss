@@ -17,14 +17,17 @@
 
 .Modal__wrapper {
     background-color: white;
-    // width: 40%;
     color: black;
-    padding: 0 0.5em 2em;
+    padding: 0 0.4em;
     border: 0.15em solid $color-primary;
     border-radius: 15px;
     opacity: 1;
+    height: 500px;
+    overflow-y: auto;
 
-
+    // .input {
+    //     margin: 0.5em;
+    // }
 }
 
 .modal-text {
@@ -34,5 +37,7 @@
 .Modal__exit-btn {
     display: block;
     margin-left: auto;
+    transform: translateX(35px) translateY(5px);
+    // position: absolute;
 
 }

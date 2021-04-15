@@ -9,11 +9,9 @@
    margin: 0 auto;
    margin-bottom: 0.5em;
    position: relative;
-   
-   
 
-   @media (min-width: 796px) {
-    width: 80%;
+   .icon--location {
+       color: $color-accent
    }
 
 }
@@ -21,7 +19,7 @@
 .icon--plus-sign {
     align-self: flex-end;
     margin-right: 0.4em;
-    color: $dark-blue;
+    color: $color-primary;
 
     @media (min-width: 796px) {
         transform: translateY(5px);
