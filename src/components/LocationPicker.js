@@ -157,10 +157,10 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
         hideModal();
     }
 
-    const enteredLocationName = locationData.enteredCountry === "United States" ?
-    <p>{locationData.enteredCity}, {locationData.enteredRegion}, {locationData.enteredCountry}</p>
-:
-    <p>{locationData.enteredCity}, {locationData.enteredCountry}</p>
+//     const enteredLocationName = locationData.enteredCountry === "United States" ?
+//     <p>{locationData.enteredCity}, {locationData.enteredRegion}, {locationData.enteredCountry}</p>
+// :
+//     <p>{locationData.enteredCity}, {locationData.enteredCountry}</p>
 
     return (
         <div className="LocationPicker">

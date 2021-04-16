@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Temperature.scss';
-import WeatherIcon from './WeatherIcon';
 
 Temperature.propTypes = {
     temp: PropTypes.number
@@ -22,8 +21,8 @@ function Temperature({displayTemp, currentWeather}) {
                     </div>
                 <p className="current-temp">{currentWeather.temp}°F</p>
                 <p>Feels like: {currentWeather.feelsLike}°</p>
-                {/* <p>Wind: {currentWeather.windSpeed}</p> */}
-                {/* <p>{currentWeather.windDirection}</p> */}
+                <p>Wind: {currentWeather.windSpeed}</p>
+                <p>{currentWeather.windDirection}</p>
                 <p>Humidity: {currentWeather.humidity}%</p>
                 <p>{currentWeather.condition}</p>
                 </div>

@@ -4,10 +4,11 @@
 .Sunset {
     font-size: 2.5rem; 
     align-self: flex-end;
-    margin-right: 125px;
+    margin-right: 10px;
     position: absolute;
     top: 13px;
     align-items: center;
+    z-index: 10;
 
     .sunset-img {
         // left: 920px;

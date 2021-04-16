@@ -3,22 +3,26 @@
 
 .Container {
     width: 90%;
-    // min-width: 1000px;
     height: 600px;
     background-color: #D9F0FC;
-    /* background-color: #6d787e; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: flex-end;
     box-sizing: border-box;
     position: relative;
 
     .weather-scene {
-        width: 60%;
+        width: 80%;
         height: 600px;
-        position: absolute;
+        // position: absolute;
+        position: relative;
+        margin-left: auto;
         right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
         // background-color: red;
     }
 }
@@ -30,7 +34,7 @@
     justify-content: space-between;
     justify-self: end;
     position: relative;
-    margin-bottom: 0.9em;
+    margin-bottom: 50px;
 
 }
 
@@ -44,7 +48,7 @@
 .horizon {
     height: 10px;
     width: 100%;
-    background-color: $dark-blue;
+    background-color: $color-primary;
 }
 
 .half-sun-img {
