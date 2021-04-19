@@ -6,8 +6,11 @@ import Temperature from './Temperature';
 import LightMeter from './LightMeter';
 import Sun from './Sun';
 import WeatherIcon from './WeatherIcon';
-import Sunrise from './Sunrise';
-import Sunset from './Sunset';
+import SunTime from './SunTime';
+
+
+import halfSun from '../img/half-sun--orange.svg';
+
 
 Container.propTypes = {
     temp: PropTypes.number,
@@ -29,14 +32,20 @@ function Container({currentWeather, dayLength, dayHours, nightHours, sunrise, su
                 <Sun />
                 <WeatherIcon currentWeather={currentWeather}/>
                 <LightMeter dayLength={dayLength} dayHours={dayHours} nightHours={nightHours}/>
+                <div className="SunTimes">
+                    <SunTime time={sunrise} imgSrc={halfSun} imgClassName="half-sun-img sunrise-img" />
+                    <SunTime time={sunset} imgSrc={halfSun} imgClassName="half-sun-img sunset-img" />
+
+                    {/* <div className="horizon"></div> */}
+                    {/* <Sunset sunset={sunset}/> */}
+                </div>  
              </div>
           
-            <div className="SunTimes">
+            {/* <div className="SunTimes">
               <Sunrise sunrise={sunrise}/>
               <div className="horizon"></div>
               <Sunset sunset={sunset}/>
-              {/* <img className="half-sun-img sunset-img" src={halfSun} alt="sun"></img> */}
-            </div>     
+            </div>      */}
         </main>
     );
 }

@@ -6,8 +6,8 @@
 }
 
 .sun-img {
-    width: 200px;
-    height: 200px;
+    width: 175px;
+    height: 175px;
     border: 0.1em solid white;
     border-radius: 50%;
     display: flex;
@@ -18,8 +18,14 @@
     letter-spacing: 2px;
     background-color: $yellow;
     position: absolute;
-    top: 40px;
-    // left: 220px;
+    top: 10%;
+    left: 40%;
     z-index: 5;
     box-shadow: 18px 15px 9px 4px rgba(2, 73, 89, 0.3);
+
+    @media (min-width: 796px) {
+        width: 200px;
+        height: 200px;
+
+    }
 }

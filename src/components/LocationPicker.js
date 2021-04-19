@@ -157,10 +157,10 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
         hideModal();
     }
 
-    const enteredLocationName = locationData.enteredCountry === "United States" ?
-    <p>{locationData.enteredCity}, {locationData.enteredRegion}, {locationData.enteredCountry}</p>
-:
-    <p>{locationData.enteredCity}, {locationData.enteredCountry}</p>
+//     const enteredLocationName = locationData.enteredCountry === "United States" ?
+//     <p>{locationData.enteredCity}, {locationData.enteredRegion}, {locationData.enteredCountry}</p>
+// :
+//     <p>{locationData.enteredCity}, {locationData.enteredCountry}</p>
 
     return (
         <div className="LocationPicker">
@@ -172,7 +172,7 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 
                     <React.Fragment>
                         <h3>Country</h3>
-                        <CountryDropdown classes="input" name="country" value={inputText.country} onChange={handleCountryChange}/>
+                        <CountryDropdown classes="input responsive-input" name="country" value={inputText.country} onChange={handleCountryChange}/>
                     </React.Fragment>
                 :
                     <React.Fragment>
@@ -187,12 +187,12 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 { inputText.country === "United States" ?
                     <React.Fragment>
                         <h3>State</h3>
-                        <RegionDropdown classes="input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
+                        <RegionDropdown classes="input responsive-input" name="region" country={inputText.country} value={inputText.region} onChange={handleRegionChange}/>
 
                         {inputText.region !== "" &&
                             <React.Fragment>
                                 <h3>City</h3>
-                                <input className="input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+                                <input className="input responsive-input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
                                 {(inputText.country && inputText.region && inputText.city && displayLocateBtn) &&
                                     <button className="btn locate-btn" onClick={handleLocateClick}>Locate</button>
                                 }
@@ -202,7 +202,7 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                 :
                     <React.Fragment>
                         <h3>City</h3>
-                        <input className="input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
+                        <input className="input responsive-input" type="text" name="city" value={inputText.city} onChange={handleCityChange}></input>
                         {(inputText.country && inputText.city && displayLocateBtn) &&
                                     <button className="btn" onClick={handleLocateClick}>Locate</button>
                         }
@@ -219,7 +219,7 @@ function LocationPicker({changeFormLocation, changeLocation, locationData, hideM
                     <p className={`${message.className} message`}>{message.message}</p>
                     { displayChoice &&
                         <React.Fragment>
-                            <select className="input" value={userResponse} onChange={handleSelectChange}>
+                            <select className="input responsive-input" value={userResponse} onChange={handleSelectChange}>
                                 <option value="">-</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
