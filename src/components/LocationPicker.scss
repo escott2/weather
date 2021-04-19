@@ -2,7 +2,7 @@
 
 
 .LocationPicker {
-    width: 575px;
+    // width: 575px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,7 +13,7 @@
 
     h3 {
         width: 100%;
-        min-width: 365px;
+        // min-width: 365px;
         margin: 0.5em;
         padding: 0.5em;
         font-size: 1.25rem;
@@ -34,6 +34,13 @@
     .input {
         text-align: center;
         margin: 0.5em;
+        // font-size: 1rem;
+
+        // font-size: 0.7rem;
+
+        // @media (min-width: 576px) {
+        //     font-size: 1rem;
+        // }
     }
 
     .btn {

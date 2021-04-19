@@ -1,0 +1,25 @@
+@import '../styles/abstracts/index';
+
+
+.SunTime {
+    font-size: 2rem;
+    // margin-left: 60px;
+    // position: absolute;
+    // top: -35px;
+    // left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 90px;
+    height: 90px;
+    border-radius: 50px;
+    
+    
+    .sunrise-img {
+        // top: -35px;
+        // left: 2px;
+        transform: rotate(180deg);
+    }
+}
