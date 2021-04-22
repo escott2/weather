@@ -1,25 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Header.scss';
-import Location from './Location';
-import Day from './Day';
+import React from "react";
+import PropTypes from "prop-types";
+import "./Header.scss";
+import Location from "./Location";
+import Day from "./Day";
+import Card from "./Card";
 
 Header.propTypes = {
-    location: PropTypes.object,
-    changeLocation: PropTypes.func,
-    date: PropTypes.object,
-    changeDate: PropTypes.func, 
-    locationData: PropTypes.object
-    
+  location: PropTypes.object,
+  changeLocation: PropTypes.func,
+  date: PropTypes.object,
+  changeDate: PropTypes.func,
+  locationData: PropTypes.object,
 };
 
-function Header({location, changeLocation, date, changeDate, locationData, changeFormLocation, clearFormLocationData, saveLocation, savedLocations}) {
-    return (
-        <header>
-            <Location location={location} changeLocation={changeLocation} clearFormLocationData={clearFormLocationData} changeFormLocation={changeFormLocation} locationData={locationData} saveLocation={saveLocation} savedLocations={savedLocations}/>
-            <Day date={date} changeDate={changeDate} />
-        </header>
-    );
+function Header({
+  location,
+  changeLocation,
+  date,
+  changeDate,
+  locationData,
+  changeFormLocation,
+  clearFormLocationData,
+  saveLocation,
+  savedLocations,
+}) {
+  return (
+    <header>
+      <Card>
+        <Location
+          location={location}
+          changeLocation={changeLocation}
+          clearFormLocationData={clearFormLocationData}
+          changeFormLocation={changeFormLocation}
+          locationData={locationData}
+          saveLocation={saveLocation}
+          savedLocations={savedLocations}
+        />
+      </Card>
+      <Card>
+        <Day date={date} changeDate={changeDate} />
+      </Card>
+    </header>
+  );
 }
 
 export default Header;

@@ -2,29 +2,18 @@
 
 
 .Day {
-    width: 100%;
-    text-align: center;
-    position: relative;
-    border: solid 0.1em #D9F0FC;
-    margin: 0 auto;
-    margin-bottom: 0.5em;
-    background-color: white;
-
-    // @media (min-width: 796px) {
-    //     width: 100%;
-    // }
-
     .icon--calendar {
         color: $color-accent;
     }
+
+    .Day h2 {
+        margin: 0.75em 0 0.5em;
+        font-weight: 500;
+    }
+    
+    .Day__button {
+        margin-bottom: 0.25em;
+    }
 }
 
-.Day h2 {
-    margin: 0.75em 0 0.5em;
-    font-weight: 500;
-}
-
-.Day__button {
-    margin-bottom: 0.25em;
-}
 
