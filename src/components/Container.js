@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import halfSun from '../img/half-sun.svg';
 import './Container.scss';
 import Temperature from './Temperature';
 import LightMeter from './LightMeter';
@@ -33,19 +32,11 @@ function Container({currentWeather, dayLength, dayHours, nightHours, sunrise, su
                 <WeatherIcon currentWeather={currentWeather}/>
                 <LightMeter dayLength={dayLength} dayHours={dayHours} nightHours={nightHours}/>
                 <div className="SunTimes">
+                    
                     <SunTime time={sunrise} imgSrc={halfSun} imgClassName="half-sun-img sunrise-img" />
                     <SunTime time={sunset} imgSrc={halfSun} imgClassName="half-sun-img sunset-img" />
-
-                    {/* <div className="horizon"></div> */}
-                    {/* <Sunset sunset={sunset}/> */}
                 </div>  
              </div>
-          
-            {/* <div className="SunTimes">
-              <Sunrise sunrise={sunrise}/>
-              <div className="horizon"></div>
-              <Sunset sunset={sunset}/>
-            </div>      */}
         </main>
     );
 }

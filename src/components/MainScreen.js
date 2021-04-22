@@ -185,7 +185,7 @@ function MainScreen() {
               const humidity = response.data.current.humidity;
               const icon = response.data.current.weather[0].icon;
               const condition = response.data.current.weather[0].main;
-
+              const description = response.data.current.weather[0].description;
 
               return {
                 temp: currentTemp,
@@ -197,6 +197,7 @@ function MainScreen() {
                 humidity: humidity,
                 icon: icon,
                 condition: condition,
+                description: description,
                 date: date
               };
           });
