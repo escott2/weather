@@ -1,5 +1,3 @@
-
-
 .btn {
   font-size: 1.1rem;
   background-color: $light-blue;
@@ -15,7 +13,6 @@
   background-color: $color-accent;
   border: none;
   margin-left: 1em;
-
 }
 
 .icon-btn {
@@ -30,9 +27,8 @@
 
 .input {
   border-radius: 10px;
-  padding: 0.5em 0.5em;
   border: solid 0.25em $light-blue;
-  font-size: 1.1rem;
+  padding: 0.3rem;
 }
 
 .responsive-input {
@@ -42,4 +38,3 @@
     font-size: 1rem;
   }
 }
-

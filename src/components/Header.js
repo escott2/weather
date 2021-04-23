@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./Header.scss";
 import Location from "./Location";
 import Day from "./Day";
-import Card from "./Card";
+import Card from "./UI/Card";
 
 Header.propTypes = {
   location: PropTypes.object,
@@ -26,7 +26,7 @@ function Header({
 }) {
   return (
     <header>
-      <Card>
+      <Card className="header__card">
         <Location
           location={location}
           changeLocation={changeLocation}
@@ -37,7 +37,7 @@ function Header({
           savedLocations={savedLocations}
         />
       </Card>
-      <Card>
+      <Card className="header__card">
         <Day date={date} changeDate={changeDate} />
       </Card>
     </header>

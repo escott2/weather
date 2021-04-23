@@ -1,39 +1,35 @@
-@import '../styles/abstracts/index';
-
+@import "../styles/abstracts/index";
 
 .Location {
-    position: relative;
+  position: relative;
 
-   .icon--location {
-       color: $color-accent
-   }
-
+  .icon--location {
+    color: $color-accent;
+  }
 }
 
 .icon--plus-sign {
-    align-self: flex-end;
-    margin-right: 0.4em;
-    color: $color-primary;
+  align-self: flex-end;
+  margin-right: 0.4em;
+  color: $color-primary;
 
-    @media (min-width: 796px) {
-        transform: translateY(5px);
-        padding-left: 10px;
-    }
-
-
+  @media (min-width: 796px) {
+    transform: translateY(5px);
+    padding-left: 10px;
+  }
 }
 
-.Location h2 {
-    margin: 1em 0 0.4em;
-    font-weight: 500;
+// .Location h2 {
+//   margin: 1em 0 0.4em;
+//   font-weight: 500;
 
-    @media (min-width: 796px) {
-        margin-top: 1.5em;
-    }
-}
+//   @media (min-width: 796px) {
+//     margin-top: 1.5em;
+//   }
+// }
 
 .Location p {
-    font-size: 1.25rem;
-    display: inline-block;
-    margin-right: 1em;
+  font-size: 1.25rem;
+  display: inline-block;
+  margin-right: 1em;
 }

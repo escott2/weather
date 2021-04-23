@@ -1,62 +1,50 @@
-@import '../styles/abstracts/index';
-
+@import "../styles/abstracts/index";
 
 .DateModal {
-    background-color: rgba(2, 73, 89, 0.9);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
+  background-color: rgba(2, 73, 89, 0.9);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
 }
 
 .DateModal__wrapper {
-    background-color: white;
-    width: 40%;
-    color: black;
-    padding-bottom: 1rem;
-    border: 0.15em solid rgb(2, 73, 89);
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background-color: white;
+  width: 40%;
+  color: black;
+  padding-bottom: 1rem;
+  border: 0.15em solid rgb(2, 73, 89);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    .btn {
-        background-color: $color-accent;
-    }
-
+  .btn {
+    background-color: $color-accent;
+  }
 }
 
 .modal-text {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 .DayPicker {
-    background-color: rgba(2, 73, 89, 0.4);
-    color: black;
-    margin-top: 2em;
-    margin-bottom: 1em;
-    border: 0.25em solid  rgb(2, 73, 89);
-    border-radius: 10px;
+  background-color: rgba(2, 73, 89, 0.4);
+  color: black;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  border: 0.25em solid rgb(2, 73, 89);
+  border-radius: 10px;
 }
 
-// .DateModal__submit-btn {
-//     font-size: 1.1rem;
-//     border: 0.15em solid rgb(2, 73, 89);
-//     padding: 0.8em 1em;
-//     border-radius: 10px;
-//     font-weight: 600;
-//     background-color: $color-accent;
- 
-// }
-
 .DateModal__exit-btn {
-    display: block;
-    margin-left: auto;
+  display: block;
+  margin-left: auto;
 }
