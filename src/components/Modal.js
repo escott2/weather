@@ -1,15 +1,15 @@
 import React from "react";
-// import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./Modal.scss";
 import { IoIosCloseCircle } from "react-icons/io";
 
-// Modal.propTypes = {
+Modal.propTypes = {
+  hideModal: PropTypes.func,
+};
 
-// };
-
-function Modal(props) {
+function Modal({ hideModal, children }) {
   function handleExit() {
-    props.hideModal();
+    hideModal();
   }
 
   return (
@@ -18,7 +18,7 @@ function Modal(props) {
         <button className="Modal__exit-btn icon-btn" onClick={handleExit}>
           <IoIosCloseCircle className="close-icon" aria-label="close" />
         </button>
-        {props.children}
+        {children}
       </div>
     </div>
   );

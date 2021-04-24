@@ -1,0 +1,10 @@
+@import "../styles/abstracts/index";
+
+.date-picker {
+  margin-bottom: 1rem;
+
+  &__text {
+    font-size: 1.1rem;
+    margin: 0.7rem 0;
+  }
+}

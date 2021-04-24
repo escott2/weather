@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Header.scss";
 import Location from "./Location";
-import Day from "./Day";
+import Date from "./Date";
 import Card from "./UI/Card";
 
 Header.propTypes = {
@@ -38,7 +38,7 @@ function Header({
         />
       </Card>
       <Card className="header__card">
-        <Day date={date} changeDate={changeDate} />
+        <Date date={date} changeDate={changeDate} />
       </Card>
     </header>
   );

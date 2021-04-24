@@ -28,7 +28,7 @@ function Main({
   displayTemp,
 }) {
   return (
-    <main className="Container">
+    <main className="main">
       <CurrentWeather
         currentWeather={currentWeather}
         dayHours={dayHours}

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import spacetime from "spacetime";
-import "./MainScreen.scss";
+import "./MainPage.scss";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 
-function MainScreen() {
+function MainPage() {
   const today = new Date();
   const initialSavedLocations = JSON.parse(
     window.localStorage.getItem("savedLocations" || "[]")
@@ -475,4 +475,4 @@ function MainScreen() {
   );
 }
 
-export default MainScreen;
+export default MainPage;
