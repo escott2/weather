@@ -1,18 +1,18 @@
-@import '../styles/abstracts/index';
+@import "../styles/abstracts/index";
 
-
-.StoredLocations {
-  padding: 0.25em;
+.stored-locations {
+  padding: 0.5rem;
   position: absolute;
-  top: -122px;
-  left: -8px;
+  top: -76px;
   width: 100%;
 
   @media (min-width: 796px) {
-    top: -60px;
-
+    top: -45px;
   }
-  
+
+  &__select {
+    font-size: 0.85rem;
+  }
 }
 
 .save-form {
@@ -34,8 +34,5 @@
 
   @media (min-width: 796px) {
     flex-direction: row;
-
   }
-
-  
 }

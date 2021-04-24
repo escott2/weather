@@ -1,4 +1,4 @@
-@import '../styles/abstracts/index';
+@import "../styles/abstracts/index";
 
 .weather-icon {
   font-size: 150px;
@@ -8,10 +8,8 @@
   top: 220px;
   left: 120px;
 
-
   @media (min-width: 576px) {
     // left: -200px;
-
   }
 
   @media (min-width: 796px) {
@@ -19,19 +17,16 @@
   }
 }
 
-
 .cloud-container {
   position: relative;
   top: -300px;
   left: -120px;
-
 }
 
 .cloud--1 {
   position: absolute;
   z-index: 5;
   color: white;
-
 }
 
 .cloud--2 {
@@ -49,7 +44,6 @@
   @media (min-width: 796px) {
     font-size: 150px;
   }
-
 }
 
 .cloud--3 {

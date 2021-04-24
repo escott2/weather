@@ -1,18 +1,22 @@
 // Descriptive color variables
 
-$lightest-blue: #ECF8FE;
-$light-blue: #D9F0FC;
+$lightest-blue: #ecf8fe;
+$light-blue: #d9f0fc;
 $dark-blue: rgb(2, 73, 89);
 $white: rgb(255, 255, 255);
-$yellow: #F6DE8E;
-$red-orange: #F0433A;
-$yellow-orange: #F27756;
-$orange: #FFA500;
-$gray: #D9D9D9;
-
+$yellow: #f6de8e;
+$red-orange: #f0433a;
+$yellow-orange: #f27756;
+$orange: #ffa500;
+$gray: #d9d9d9;
 
 // Functional color variables
 
 $color-primary: $dark-blue;
 $color-accent: $yellow-orange;
 $color-moon: $gray;
+
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
