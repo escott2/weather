@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Main.scss";
-import CurrentWeather from "./CurrentWeather";
 import LightMeter from "./LightMeter";
 import Sun from "./Sun";
 import WeatherIcon from "./WeatherIcon";
 import SunTime from "./SunTime";
+import Weather from "./Weather";
 
 import halfSun from "../img/half-sun--orange.svg";
 
@@ -26,19 +26,29 @@ function Main({
   sunrise,
   sunset,
   displayTemp,
+  date,
 }) {
+  //Ready to Forecast
+  //Current Weather and Sun Forecast
+  //Hourly Weather and Sun Forecast
+  //Sun Forecast
+  const forecastType = displayTemp ? "Weather and Sun" : "Sun";
+
   return (
     <main className="main">
-      <CurrentWeather
+      <div className="main__header">
+        <h2 className="main__heading">{forecastType} Forecast</h2>
+      </div>
+      <Weather
         currentWeather={currentWeather}
         dayHours={dayHours}
         nightHours={nightHours}
         displayTemp={displayTemp}
+        date={date}
       />
-
       <div className="weather-scene">
         <Sun />
-        <WeatherIcon currentWeather={currentWeather} />
+        {displayTemp && <WeatherIcon currentWeather={currentWeather} />}
         <LightMeter
           dayLength={dayLength}
           dayHours={dayHours}

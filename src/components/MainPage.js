@@ -11,12 +11,29 @@ function MainPage() {
   const initialSavedLocations = JSON.parse(
     window.localStorage.getItem("savedLocations" || "[]")
   );
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   //START STATE INITIALIZATION
   const [date, setDate] = useState({
     month: today.getMonth(),
     date: today.getDate(),
     year: today.getFullYear(),
+    fullDateString: `${
+      months[today.getMonth()]
+    } ${today.getDate()}, ${today.getFullYear()}`,
   });
   const [location, setLocation] = useState({
     city: "",
@@ -66,6 +83,7 @@ function MainPage() {
     Math.round(nightLengthPercentRounded * HOURS_PER_DAY * 10) / 10;
   const dayLengthInHours =
     Math.round(dayLengthPercentRounded * HOURS_PER_DAY * 10) / 10;
+
   //END VARIABLE DECLARATION
 
   /*
@@ -386,6 +404,9 @@ function MainPage() {
       month: day.getMonth(),
       date: day.getDate(),
       year: day.getFullYear(),
+      fullDateString: `${
+        months[day.getMonth()]
+      } ${day.getDate()}, ${day.getFullYear()}`,
     });
   }
 
@@ -469,6 +490,7 @@ function MainPage() {
         sunrise={sunrise}
         sunset={sunset}
         displayTemp={displayTemp}
+        date={date}
       />
       <Footer />
     </div>

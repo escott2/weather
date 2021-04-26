@@ -1,0 +1,52 @@
+@import "../styles/abstracts/index";
+
+.weather {
+  width: 100%;
+  height: 600px;
+  background-color: $light-blue;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+
+  @media (min-width: 576px) {
+    height: 250px;
+    // flex-direction: row;
+  }
+
+  @media (min-width: 796px) {
+    width: 30%;
+    height: 600px;
+    // flex-direction: column;
+  }
+
+  .sun-forecast-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    text-align: center;
+    color: $color-primary;
+
+    // @media (min-width: 576px) {
+    //   justify-content: center;
+    // }
+
+    @media (min-width: 796px) {
+      justify-content: flex-start;
+    }
+
+    .date-block {
+      display: inline-block;
+    }
+
+    .sun-forecast-info__heading {
+      padding: 0.8rem;
+      margin: 0;
+    }
+  }
+}
