@@ -35,6 +35,9 @@ function MainPage() {
       months[today.getMonth()]
     } ${today.getDate()}, ${today.getFullYear()}`,
   });
+  const [isOpenWeatherAPILoading, setIsOpenWeatherAPILoading] = useState(false);
+  const [isSunAPILoading, setSunAPILoading] = useState(false);
+  // const [displayLoader, setDisplayLoader] = useState(false);
   const [location, setLocation] = useState({
     city: "",
     region: "",
@@ -68,8 +71,9 @@ function MainPage() {
     key: "922176d7fe6aa80866789eaaf2e9d26d",
     base: "https://api.openweathermap.org/data/2.5/",
   };
+  const displayLoader =
+    isOpenWeatherAPILoading || isSunAPILoading ? true : false;
   const fullDate = `${date.year}-${date.month + 1}-${date.date}`;
-
   const HOURS_PER_DAY = 24;
   const MINUTES_PER_HOUR = 60;
   const MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
@@ -83,6 +87,7 @@ function MainPage() {
     Math.round(nightLengthPercentRounded * HOURS_PER_DAY * 10) / 10;
   const dayLengthInHours =
     Math.round(dayLengthPercentRounded * HOURS_PER_DAY * 10) / 10;
+  const forecastType = displayTemp ? "Weather and Sun" : "Sun";
 
   //END VARIABLE DECLARATION
 
@@ -223,6 +228,7 @@ function MainPage() {
     */
   useEffect(() => {
     if (location.lat) {
+      setIsOpenWeatherAPILoading(true);
       const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,minutely&units=imperial&appid=${weatherAPI.key}`;
       axios
         .get(weatherURL)
@@ -259,6 +265,7 @@ function MainPage() {
             const newTimezone = response.data.timezone;
             return newTimezone;
           });
+          setIsOpenWeatherAPILoading(false);
         })
         .catch(function (error) {
           console.log(error);
@@ -277,6 +284,7 @@ function MainPage() {
     */
   useEffect(() => {
     if (location.lat) {
+      setSunAPILoading(true);
       const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${fullDate}`;
       axios
         .get(sunURL)
@@ -321,6 +329,7 @@ function MainPage() {
             );
             return dayLengthInMinutes;
           });
+          setSunAPILoading(false);
         })
         .catch(function (error) {
           console.log(error);
@@ -481,6 +490,7 @@ function MainPage() {
         changeDate={handleDateChange}
         saveLocation={handleSaveLocation}
         savedLocations={savedLocations}
+        // forecastType={forecastType}
       />
       <Main
         currentWeather={currentWeather}
@@ -491,6 +501,7 @@ function MainPage() {
         sunset={sunset}
         displayTemp={displayTemp}
         date={date}
+        displayLoader={displayLoader}
       />
       <Footer />
     </div>
