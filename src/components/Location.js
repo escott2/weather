@@ -84,7 +84,13 @@ function Location({
       )}
       {location.city ? (
         <div>
-          <div className="location__title-wrapper">
+          <div
+            className={
+              locationNotSaved
+                ? "location__title-wrapper location__title-wrapper--transform"
+                : "location__title-wrapper"
+            }
+          >
             {locationName}
             {locationNotSaved && (
               <button

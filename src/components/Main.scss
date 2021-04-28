@@ -61,22 +61,22 @@
 
   &__header {
     flex-basis: 100%;
-    background-color: $lightest-blue;
-    border: 0.75rem solid $light-blue;
-    // margin-bottom: 1rem;
+    background-color: white;
     text-align: center;
+    border-top: 0.75rem solid $light-blue;
+
+    // background: transparent;
   }
 
   &__heading {
-    // color: $color-accent;
-    // background-color: white;
     display: inline-block;
     margin: 0;
     padding: 1rem;
     text-align: center;
-    // font-size: 1.125rem;
+    font-family: "IBM Plex Serif", serif;
     letter-spacing: 2px;
     font-weight: 700;
+    // color: white;
   }
 }
 
@@ -106,4 +106,10 @@
   .sunrise-img {
     transform: rotate(180deg);
   }
+}
+
+.wave-svg--bottom {
+  transform: scaleY(-1);
+  // background-color: $lightest-blue;
+  background-color: white;
 }

@@ -1,15 +1,12 @@
 @import "../styles/abstracts/index";
 
 header {
-  // margin-top: 5rem;
-  // margin-top: 1rem;
   width: 100%;
   max-width: 1500px;
   font-size: 2rem;
 
-  @media (min-width: 796px) {
+  @media (min-width: $breakpoint-medium) {
     width: 90%;
-    // margin-top: 2.5rem;
   }
 
   .header__card {
@@ -18,11 +15,21 @@ header {
     padding: 0.5rem 0.5rem;
     width: 90%;
     text-align: center;
-    // border: none;
-    // background-color: inherit;
 
-    @media (min-width: $breakpoint-medium) {
-      width: 45%;
+    @media (min-width: $breakpoint-large) {
+      width: auto;
+    }
+  }
+
+  .header__card--location {
+    @media (min-width: $breakpoint-large) {
+      flex-grow: 2;
+    }
+  }
+
+  .header__card--date {
+    @media (min-width: $breakpoint-large) {
+      flex-grow: 1;
     }
   }
 
@@ -47,14 +54,20 @@ header {
     background-color: $lightest-blue;
   }
 
+  .wave-svg--bottom {
+    transform: scaleY(-1);
+    background-color: $lightest-blue;
+  }
+
   .header__select-wrapper {
     display: flex;
     flex-direction: column;
     padding-top: 4.5rem;
 
-    @media (min-width: $breakpoint-medium) {
+    @media (min-width: $breakpoint-large) {
       padding-top: 2rem;
       flex-direction: row;
+      column-gap: 30px;
     }
   }
 }
