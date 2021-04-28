@@ -35,6 +35,7 @@ header {
 
   .title {
     font-family: "IBM Plex Serif", serif;
+    font-weight: 700;
     text-align: center;
     margin: 0.1rem 0;
     background-color: $lightest-blue;
@@ -46,6 +47,7 @@ header {
     &__span {
       font-size: 1.5rem;
       margin: 1rem 0;
+      font-weight: 500;
     }
   }
 
@@ -63,6 +65,7 @@ header {
     display: flex;
     flex-direction: column;
     padding-top: 4.5rem;
+    margin: 2rem 0 0;
 
     @media (min-width: $breakpoint-large) {
       padding-top: 2rem;

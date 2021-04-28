@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
 import "./Main.scss";
-import Header from "./Header";
 import LightMeter from "./LightMeter";
 import Sun from "./Sun";
 import WeatherIcon from "./WeatherIcon";
@@ -31,10 +30,6 @@ function Main({
   displayLoader,
   date,
 }) {
-  //Ready to Forecast
-  //Current Weather and Sun Forecast
-  //Hourly Weather and Sun Forecast
-  //Sun Forecast
   const forecastType = displayTemp ? "Weather and Sun" : "Sun";
 
   return (
@@ -43,10 +38,9 @@ function Main({
         <h2 className="main__heading">{forecastType} Forecast</h2>
       </div>
       <svg
-        // className="svg-rotate-180"
         className="wave-svg--bottom"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 200"
+        viewBox="0 0 1440 160"
       >
         <path
           fill="#D9F0FC"

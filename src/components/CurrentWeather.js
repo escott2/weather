@@ -25,7 +25,7 @@ function CurrentWeather({ displayTemp, currentWeather }) {
   };
 
   return (
-    <div className="current-weather">
+    <div className={hasTemperature ? "current-weather" : ""}>
       {hasTemperature && displayTemp && (
         <React.Fragment>
           <div className="temperature">

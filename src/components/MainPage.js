@@ -87,7 +87,6 @@ function MainPage() {
     Math.round(nightLengthPercentRounded * HOURS_PER_DAY * 10) / 10;
   const dayLengthInHours =
     Math.round(dayLengthPercentRounded * HOURS_PER_DAY * 10) / 10;
-  const forecastType = displayTemp ? "Weather and Sun" : "Sun";
 
   //END VARIABLE DECLARATION
 

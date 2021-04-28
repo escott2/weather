@@ -22,7 +22,7 @@ function Location({
   saveLocation,
   savedLocations,
 }) {
-  const [isDisplayModal, setIsDisplayModal] = useState(true);
+  const [isDisplayModal, setIsDisplayModal] = useState(false);
 
   const locationName =
     location.country === "United States" ? (
