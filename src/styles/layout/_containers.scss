@@ -5,7 +5,7 @@
   align-items: center;
   //add media query
 
-  @media (min-width: 796px) {
+  @media (min-width: $breakpoint-medium) {
     flex-direction: row;
   }
 }

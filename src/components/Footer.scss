@@ -1,9 +1,7 @@
-@import '../styles/abstracts/index';
-
+@import "../styles/abstracts/index";
 
 footer {
-    width: 100%;
-    margin-top: 2em;
-    background-color: $light-blue;
-    color: $color-primary;
+  width: 100%;
+  background-color: $light-blue;
+  color: $color-primary;
 }

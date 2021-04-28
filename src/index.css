@@ -1,15 +1,18 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Hind', sans-serif;
+  font-family: "Hind", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
+/* @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;500;600;700&display=swap"); */
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Lexend:wght@300&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Domine:wght@400;500&family=IBM+Plex+Serif:wght@300;400&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400;500;600;700&display=swap");

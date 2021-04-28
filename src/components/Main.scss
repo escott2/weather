@@ -3,15 +3,44 @@
 .main {
   width: 100%;
   max-width: 1500px;
-  background-color: #d9f0fc;
+  background-color: inherit;
   box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  margin: 3rem 0 3rem;
 
-  @media (min-width: 796px) {
+  @media (min-width: $breakpoint-medium) {
     flex-direction: row;
     width: 90%;
+    margin: 2rem 0 1.5rem;
+  }
+
+  .loader {
+    position: absolute;
+    z-index: 200;
+    background-color: white;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    background-color: $color-accent;
+
+    &::after {
+      content: "Loading...";
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: white;
+      display: inline-block;
+      letter-spacing: 2px;
+    }
   }
 
   .weather-scene {
@@ -25,10 +54,32 @@
     align-items: center;
     justify-content: flex-end;
     overflow: hidden;
+    background-color: #d9f0fc;
 
-    @media (min-width: 796px) {
+    @media (min-width: $breakpoint-medium) {
       width: 70%;
     }
+  }
+
+  &__header {
+    flex-basis: 100%;
+    background-color: white;
+    background-color: $lightest-blue;
+    text-align: center;
+    border-top: 0.75rem solid $light-blue;
+    border-left: 0.75rem solid $light-blue;
+    border-right: 0.75rem solid $light-blue;
+    transform: translateY(2px);
+  }
+
+  &__heading {
+    display: inline-block;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-size: 1.7rem;
   }
 }
 
@@ -48,6 +99,7 @@
   p {
     margin: 0.4em 0;
     font-size: 1rem;
+    color: black;
   }
 
   .half-sun-img {
@@ -57,8 +109,11 @@
   .sunrise-img {
     transform: rotate(180deg);
   }
+}
 
-  .sunset-img {
-    order: 2;
-  }
+.wave-svg--bottom {
+  transform: scaleY(-1) translateY(-2px);
+  background-color: $lightest-blue;
+  border-left: 0.75rem solid $light-blue;
+  border-right: 0.75rem solid $light-blue;
 }

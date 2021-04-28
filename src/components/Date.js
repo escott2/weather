@@ -13,20 +13,20 @@ Date.propTypes = {
 function Date({ date, changeDate }) {
   const [isDisplayModal, setIsDisplayModal] = useState(false);
 
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  // const months = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April",
+  //   "May",
+  //   "June",
+  //   "July",
+  //   "August",
+  //   "September",
+  //   "October",
+  //   "November",
+  //   "December",
+  // ];
 
   function handleShowModal() {
     setIsDisplayModal(true);
@@ -44,7 +44,8 @@ function Date({ date, changeDate }) {
         </Modal>
       )}
       <h2>
-        {months[date.month]} {date.date}, {date.year}
+        {/* {months[date.month]} {date.date}, {date.year} */}
+        {date.fullDateString}
       </h2>
       <button
         className="date__button icon icon-btn icon--calendar"

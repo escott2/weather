@@ -22,7 +22,7 @@ function Location({
   saveLocation,
   savedLocations,
 }) {
-  const [isDisplayModal, setIsDisplayModal] = useState(true);
+  const [isDisplayModal, setIsDisplayModal] = useState(false);
 
   const locationName =
     location.country === "United States" ? (
@@ -83,16 +83,24 @@ function Location({
         </Modal>
       )}
       {location.city ? (
-        <div className="flex--responsive">
-          {locationName}
-          {locationNotSaved && (
-            <button
-              className="icon icon-btn icon--plus-sign"
-              onClick={handleSaveClick}
-            >
-              <AiFillPlusCircle aria-label="save-location" />
-            </button>
-          )}
+        <div>
+          <div
+            className={
+              locationNotSaved
+                ? "location__title-wrapper location__title-wrapper--transform"
+                : "location__title-wrapper"
+            }
+          >
+            {locationName}
+            {locationNotSaved && (
+              <button
+                className="icon icon-btn icon--plus-sign"
+                onClick={handleSaveClick}
+              >
+                <AiFillPlusCircle aria-label="save-location" />
+              </button>
+            )}
+          </div>
         </div>
       ) : (
         <h2>Choose a location to get started!</h2>

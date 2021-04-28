@@ -1,14 +1,12 @@
 @import "../styles/abstracts/index";
 
 header {
-  margin-top: 5rem;
   width: 100%;
   max-width: 1500px;
   font-size: 2rem;
 
-  @media (min-width: 796px) {
+  @media (min-width: $breakpoint-medium) {
     width: 90%;
-    margin-top: 2.5rem;
   }
 
   .header__card {
@@ -18,8 +16,61 @@ header {
     width: 90%;
     text-align: center;
 
-    @media (min-width: $breakpoint-medium) {
-      width: 75%;
+    @media (min-width: $breakpoint-large) {
+      width: auto;
+    }
+  }
+
+  .header__card--location {
+    @media (min-width: $breakpoint-large) {
+      flex-grow: 2;
+    }
+  }
+
+  .header__card--date {
+    @media (min-width: $breakpoint-large) {
+      flex-grow: 1;
+    }
+  }
+
+  .title {
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 700;
+    text-align: center;
+    margin: 0.1rem 0;
+    background-color: $lightest-blue;
+
+    @media (min-width: $breakpoint-small) {
+      margin: 1rem 0;
+    }
+
+    &__span {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      font-weight: 500;
+    }
+  }
+
+  .wave-svg--top {
+    transform: scaleX(-1);
+    background-color: $lightest-blue;
+  }
+
+  .wave-svg--bottom {
+    transform: scaleY(-1);
+    background-color: $lightest-blue;
+  }
+
+  .header__select-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4.5rem;
+    margin: 2rem 0 0;
+
+    @media (min-width: $breakpoint-large) {
+      padding-top: 2rem;
+      flex-direction: row;
+      column-gap: 30px;
     }
   }
 }
