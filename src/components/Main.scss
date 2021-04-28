@@ -32,10 +32,6 @@
     transform: translate(-50%, -10%);
     background-color: $color-accent;
 
-    // @media (min-width: $breakpoint-small) {
-    //   width: 80%;
-    // }
-
     &::after {
       content: "Loading...";
       font-size: 1.5rem;
@@ -70,6 +66,7 @@
     // margin-bottom: 1rem;
     text-align: center;
   }
+
   &__heading {
     // color: $color-accent;
     // background-color: white;

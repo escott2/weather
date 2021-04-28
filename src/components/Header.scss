@@ -1,7 +1,7 @@
 @import "../styles/abstracts/index";
 
 header {
-  margin-top: 5rem;
+  // margin-top: 5rem;
   // margin-top: 1rem;
   width: 100%;
   max-width: 1500px;
@@ -9,7 +9,7 @@ header {
 
   @media (min-width: 796px) {
     width: 90%;
-    margin-top: 2.5rem;
+    // margin-top: 2.5rem;
   }
 
   .header__card {
@@ -18,23 +18,43 @@ header {
     padding: 0.5rem 0.5rem;
     width: 90%;
     text-align: center;
+    // border: none;
+    // background-color: inherit;
 
     @media (min-width: $breakpoint-medium) {
-      width: 75%;
+      width: 45%;
     }
   }
 
   .title {
     font-family: "IBM Plex Serif", serif;
     text-align: center;
-    margin: 1rem 0;
+    margin: 0.1rem 0;
+    background-color: $lightest-blue;
+
+    @media (min-width: $breakpoint-small) {
+      margin: 1rem 0;
+    }
 
     &__span {
       font-size: 1.5rem;
+      margin: 1rem 0;
     }
   }
 
-  .svg-rotate-180 {
-    transform: rotate(180deg);
+  .wave-svg--top {
+    transform: scaleX(-1);
+    background-color: $lightest-blue;
+  }
+
+  .header__select-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4.5rem;
+
+    @media (min-width: $breakpoint-medium) {
+      padding-top: 2rem;
+      flex-direction: row;
+    }
   }
 }

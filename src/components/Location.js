@@ -83,16 +83,18 @@ function Location({
         </Modal>
       )}
       {location.city ? (
-        <div className="flex--responsive">
-          {locationName}
-          {locationNotSaved && (
-            <button
-              className="icon icon-btn icon--plus-sign"
-              onClick={handleSaveClick}
-            >
-              <AiFillPlusCircle aria-label="save-location" />
-            </button>
-          )}
+        <div>
+          <div className="location__title-wrapper">
+            {locationName}
+            {locationNotSaved && (
+              <button
+                className="icon icon-btn icon--plus-sign"
+                onClick={handleSaveClick}
+              >
+                <AiFillPlusCircle aria-label="save-location" />
+              </button>
+            )}
+          </div>
         </div>
       ) : (
         <h2>Choose a location to get started!</h2>

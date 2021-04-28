@@ -48,7 +48,6 @@ function Main({
         // timeout={3000} //3 secs
         className="loader"
       />
-      {/* <Header /> */}
       {/* <div className="main__header">
         <h2 className="main__heading">{forecastType} Forecast</h2>
       </div> */}
