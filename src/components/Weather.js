@@ -1,17 +1,17 @@
 import React from "react";
 import "./Weather.scss";
 import CurrentWeather from "./CurrentWeather";
+import HourlyWeather from "./HourlyWeather";
 
-function Weather({ currentWeather, dayHours, nightHours, displayTemp, date }) {
+function Weather({ currentWeather, hourlyWeatherData, displayTemp, date }) {
   return (
     <div className="weather">
       {displayTemp ? (
-        <CurrentWeather
+        /* <CurrentWeather
           currentWeather={currentWeather}
-          dayHours={dayHours}
-          nightHours={nightHours}
           displayTemp={displayTemp}
-        />
+        /> */
+        <HourlyWeather hourlyWeatherData={hourlyWeatherData} />
       ) : (
         <div className="sun-forecast-info-wrapper">
           <div className="sun-forecast-info">
@@ -24,9 +24,6 @@ function Weather({ currentWeather, dayHours, nightHours, displayTemp, date }) {
           </div>
         </div>
       )}
-      {/* <div>
-        <h2>Hourly Weather</h2>
-      </div> */}
     </div>
   );
 }

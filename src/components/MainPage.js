@@ -54,6 +54,7 @@ function MainPage() {
 
   //Change temp to include more weather data, ex: setDisplayCurrentWeather
   const [currentWeather, setCurrentWeather] = useState({ temp: -500 });
+  const [hourlyWeatherData, setHourlyWeatherData] = useState({ temp: -500 });
   const [displayTemp, setDisplayTemp] = useState(true);
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");
@@ -228,7 +229,7 @@ function MainPage() {
   useEffect(() => {
     if (location.lat) {
       setIsOpenWeatherAPILoading(true);
-      const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=hourly,minutely&units=imperial&appid=${weatherAPI.key}`;
+      const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=minutely&units=imperial&appid=${weatherAPI.key}`;
       axios
         .get(weatherURL)
         .then((response) => {
@@ -263,6 +264,10 @@ function MainPage() {
           setTimezone(() => {
             const newTimezone = response.data.timezone;
             return newTimezone;
+          });
+          setHourlyWeatherData(() => {
+            const hourlyWeatherArray = response.data.hourly;
+            return hourlyWeatherArray;
           });
           setIsOpenWeatherAPILoading(false);
         })
@@ -489,10 +494,10 @@ function MainPage() {
         changeDate={handleDateChange}
         saveLocation={handleSaveLocation}
         savedLocations={savedLocations}
-        // forecastType={forecastType}
       />
       <Main
         currentWeather={currentWeather}
+        hourlyWeatherData={hourlyWeatherData}
         dayHours={dayLengthInHours}
         nightHours={nightLengthInHours}
         dayLength={dayLengthPercentRounded}

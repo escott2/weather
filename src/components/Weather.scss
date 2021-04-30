@@ -5,6 +5,7 @@
   background-color: $light-blue;
   font-size: 1.25rem;
   letter-spacing: 2px;
+  overflow-y: auto;
 
   @media (min-width: $breakpoint-small) {
     height: 250px;

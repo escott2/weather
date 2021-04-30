@@ -21,6 +21,7 @@ Main.propTypes = {
 
 function Main({
   currentWeather,
+  hourlyWeatherData,
   dayLength,
   dayHours,
   nightHours,
@@ -59,6 +60,7 @@ function Main({
       />
       <Weather
         currentWeather={currentWeather}
+        hourlyWeatherData={hourlyWeatherData}
         dayHours={dayHours}
         nightHours={nightHours}
         displayTemp={displayTemp}
