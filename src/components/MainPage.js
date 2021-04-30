@@ -506,6 +506,8 @@ function MainPage() {
         displayTemp={displayTemp}
         date={date}
         displayLoader={displayLoader}
+        timezone={timezone}
+        toLocalTime={toLocalTime}
       />
       <Footer />
     </div>

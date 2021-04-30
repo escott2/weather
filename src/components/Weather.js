@@ -3,7 +3,14 @@ import "./Weather.scss";
 import CurrentWeather from "./CurrentWeather";
 import HourlyWeather from "./HourlyWeather";
 
-function Weather({ currentWeather, hourlyWeatherData, displayTemp, date }) {
+function Weather({
+  currentWeather,
+  hourlyWeatherData,
+  displayTemp,
+  date,
+  timezone,
+  toLocalTime,
+}) {
   return (
     <div className="weather">
       {displayTemp ? (
@@ -11,7 +18,12 @@ function Weather({ currentWeather, hourlyWeatherData, displayTemp, date }) {
           currentWeather={currentWeather}
           displayTemp={displayTemp}
         /> */
-        <HourlyWeather hourlyWeatherData={hourlyWeatherData} />
+        <HourlyWeather
+          hourlyWeatherData={hourlyWeatherData}
+          timezone={timezone}
+          date={date}
+          toLocalTime={toLocalTime}
+        />
       ) : (
         <div className="sun-forecast-info-wrapper">
           <div className="sun-forecast-info">

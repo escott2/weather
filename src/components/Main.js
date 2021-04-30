@@ -30,6 +30,8 @@ function Main({
   displayTemp,
   displayLoader,
   date,
+  timezone,
+  toLocalTime,
 }) {
   const forecastType = displayTemp ? "Weather and Sun" : "Sun";
 
@@ -65,6 +67,8 @@ function Main({
         nightHours={nightHours}
         displayTemp={displayTemp}
         date={date}
+        timezone={timezone}
+        toLocalTime={toLocalTime}
       />
       <div className="weather-scene">
         <Sun />
