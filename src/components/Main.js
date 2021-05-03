@@ -60,6 +60,12 @@ function Main({
         // timeout={3000} //3 secs
         className="loader"
       />
+      <nav className="main__nav">
+        <ul className="main__nav__list">
+          <li className="main__nav__list__item">Current</li>
+          <li className="main__nav__list__item">Hourly</li>
+        </ul>
+      </nav>
       <Weather
         currentWeather={currentWeather}
         hourlyWeatherData={hourlyWeatherData}

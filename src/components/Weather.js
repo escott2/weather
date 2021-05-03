@@ -14,16 +14,18 @@ function Weather({
   return (
     <div className="weather">
       {displayTemp ? (
-        /* <CurrentWeather
-          currentWeather={currentWeather}
-          displayTemp={displayTemp}
-        /> */
-        <HourlyWeather
-          hourlyWeatherData={hourlyWeatherData}
-          timezone={timezone}
-          date={date}
-          toLocalTime={toLocalTime}
-        />
+        <React.Fragment>
+          <CurrentWeather
+            currentWeather={currentWeather}
+            displayTemp={displayTemp}
+          />
+          <HourlyWeather
+            hourlyWeatherData={hourlyWeatherData}
+            timezone={timezone}
+            date={date}
+            toLocalTime={toLocalTime}
+          />
+        </React.Fragment>
       ) : (
         <div className="sun-forecast-info-wrapper">
           <div className="sun-forecast-info">

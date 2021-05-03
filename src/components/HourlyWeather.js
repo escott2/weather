@@ -1,5 +1,6 @@
 import React from "react";
 import spacetime from "spacetime";
+import "./HourlyWeather.scss";
 import Card from "./UI/Card";
 
 function HourlyWeather({ hourlyWeatherData, date, timezone, toLocalTime }) {
@@ -21,17 +22,16 @@ function HourlyWeather({ hourlyWeatherData, date, timezone, toLocalTime }) {
     <div>
       {hasData && (
         <div>
-          <p>{timezone}</p>
           {hourlyWeatherData.map((hour) => {
             const time = hourToLocalTime(hour.dt);
             return (
-              <Card>
-                <p>{time}</p>
-                <p>{hour.temp}</p>
-                <p>{hour.wind_speed}</p>
-                <p>{hour.wind_deg}</p>
-                <p>{hour.weather[0].description}</p>
-                <p>{hour.weather[0].icon}</p>
+              <Card className="hourly-weather">
+                <h5 className="hourly-weather__heading">{time}</h5>
+                <p>{Math.round(hour.temp)}°F</p>
+                <p>Wind speed:{hour.wind_speed}</p>
+                <p>Wind direction:{hour.wind_deg}</p>
+                <p>Condition: {hour.weather[0].description}</p>
+                <p>icon: {hour.weather[0].icon}</p>
               </Card>
             );
           })}
