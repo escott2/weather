@@ -1,23 +1,12 @@
 import "./App.scss";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Layout from "./layout/Layout";
 import MainPage from "./MainPage";
-import About from "./About";
+import About from "../pages/About.js";
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+    <Layout>
       <Switch>
         <Route exact path="/">
           <Redirect to="/home" />
@@ -29,7 +18,7 @@ function App() {
           <About />
         </Route>
       </Switch>
-    </div>
+    </Layout>
   );
 }
 

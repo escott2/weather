@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
 import "./Main.scss";
@@ -38,7 +38,7 @@ function Main({
   const hasTemperature = currentWeather.temp !== -500;
 
   return (
-    <main className="main">
+    <div className="main">
       <div className="main__header">
         <h2 className="main__heading">{forecastType} Forecast</h2>
       </div>
@@ -66,10 +66,20 @@ function Main({
         <nav className="main__nav">
           <ul className="main__nav__list">
             <li className="main__nav__list__item">
-              <Link to="/home/current">Current</Link>
+              <NavLink
+                to="/home/current"
+                activeClassName="main__nav__list__item__link--active"
+              >
+                Current
+              </NavLink>
             </li>
             <li className="main__nav__list__item">
-              <Link to="/home/hourly">Hourly</Link>
+              <NavLink
+                to="/home/hourly"
+                activeClassName="main__nav__list__item__link--active"
+              >
+                Hourly
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -105,7 +115,7 @@ function Main({
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

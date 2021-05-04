@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 select {
   -webkit-appearance: none;
   outline: none;
@@ -41,5 +45,35 @@ select {
 
   @media (min-width: 576px) {
     font-size: 1rem;
+  }
+}
+
+.nav__list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+}
+
+.nav__list__item {
+  background-color: $dark-blue;
+  color: white;
+  margin: 0.5rem;
+
+  &__link--active {
+    background-color: $color-accent;
+  }
+
+  & a {
+    display: block;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & a:visited {
+    color: white;
   }
 }

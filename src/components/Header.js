@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./Header.scss";
 import Location from "./Location";
@@ -41,6 +42,16 @@ function Header({
       <h1 className="title">
         <span className="title__span">The Great </span>Outdoorcast
       </h1>
+      <nav className="header__nav">
+        <ul className="nav__list header__nav__list">
+          {/* <li>
+              <Link to="/home">Home</Link>
+            </li> */}
+          <li className="nav__list__item header__nav__list__item">
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
       <div className="header__select-wrapper">
         <Card className="header__card header__card--location">
           <Location

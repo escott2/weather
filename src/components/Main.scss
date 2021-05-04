@@ -53,6 +53,7 @@
       flex-direction: row;
       font-size: 1.2rem;
     }
+
     .main__nav__list__item {
       background-color: $dark-blue;
       color: white;
@@ -69,6 +70,10 @@
 
       & a:visited {
         color: white;
+      }
+
+      &__link--active {
+        background-color: $color-accent;
       }
     }
   }
