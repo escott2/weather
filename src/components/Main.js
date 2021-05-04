@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
 import "./Main.scss";
@@ -34,6 +35,7 @@ function Main({
   toLocalTime,
 }) {
   const forecastType = displayTemp ? "Weather and Sun" : "Sun";
+  const hasTemperature = currentWeather.temp !== -500;
 
   return (
     <main className="main">
@@ -60,12 +62,18 @@ function Main({
         // timeout={3000} //3 secs
         className="loader"
       />
-      <nav className="main__nav">
-        <ul className="main__nav__list">
-          <li className="main__nav__list__item">Current</li>
-          <li className="main__nav__list__item">Hourly</li>
-        </ul>
-      </nav>
+      {displayTemp && hasTemperature && (
+        <nav className="main__nav">
+          <ul className="main__nav__list">
+            <li className="main__nav__list__item">
+              <Link to="/home/current">Current</Link>
+            </li>
+            <li className="main__nav__list__item">
+              <Link to="/home/hourly">Hourly</Link>
+            </li>
+          </ul>
+        </nav>
+      )}
       <Weather
         currentWeather={currentWeather}
         hourlyWeatherData={hourlyWeatherData}

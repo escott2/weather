@@ -1,5 +1,7 @@
 import React from "react";
 import "./Weather.scss";
+import { Route, Switch } from "react-router-dom";
+
 import CurrentWeather from "./CurrentWeather";
 import HourlyWeather from "./HourlyWeather";
 
@@ -15,16 +17,20 @@ function Weather({
     <div className="weather">
       {displayTemp ? (
         <React.Fragment>
-          <CurrentWeather
-            currentWeather={currentWeather}
-            displayTemp={displayTemp}
-          />
-          <HourlyWeather
-            hourlyWeatherData={hourlyWeatherData}
-            timezone={timezone}
-            date={date}
-            toLocalTime={toLocalTime}
-          />
+          <Route path="/home/current">
+            <CurrentWeather
+              currentWeather={currentWeather}
+              displayTemp={displayTemp}
+            />
+          </Route>
+          <Route path="/home/hourly">
+            <HourlyWeather
+              hourlyWeatherData={hourlyWeatherData}
+              timezone={timezone}
+              date={date}
+              toLocalTime={toLocalTime}
+            />
+          </Route>
         </React.Fragment>
       ) : (
         <div className="sun-forecast-info-wrapper">
