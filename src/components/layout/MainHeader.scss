@@ -1,0 +1,66 @@
+@import "../../styles/abstracts/index";
+
+header {
+  width: 100%;
+  max-width: 1500px;
+  font-size: 2rem;
+  background-color: $lightest-blue;
+  margin: 0 auto;
+
+  @media (min-width: $breakpoint-medium) {
+    width: 90%;
+  }
+
+  // START SVG STYLES, svg
+  .wave-svg--top {
+    transform: scaleX(-1);
+    background-color: $lightest-blue;
+  }
+
+  .wave-svg--bottom {
+    transform: scaleY(-1);
+    background-color: $lightest-blue;
+  }
+  // END SVG STYLES, svg
+
+  // START PAGE TITLE STYLES, h1
+  .title {
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 700;
+    text-align: center;
+    margin: 0.1rem 0.2rem;
+    background-color: $lightest-blue;
+
+    @media (min-width: $breakpoint-small) {
+      margin: 1rem 0;
+    }
+
+    &__span {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      font-weight: 500;
+    }
+  }
+  // END PAGE TITLE STYLES, h1
+
+  // START NAVIGATION STYLES, nav
+
+  .header__nav__list {
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex: row;
+    justify-content: space-between;
+
+    &__item {
+      background-color: $white;
+      color: black;
+
+      a:visited {
+        color: black;
+      }
+    }
+  }
+  // END NAVIGATION STYLES, nav
+}

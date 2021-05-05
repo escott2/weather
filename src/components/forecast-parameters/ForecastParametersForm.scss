@@ -1,0 +1,44 @@
+@import "../../styles/abstracts/index";
+
+.forecast-parameters-form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 4.5rem;
+  margin: 2rem 0 0;
+  width: 100%;
+  max-width: 1500px;
+
+  @media (min-width: $breakpoint-medium) {
+    width: 90%;
+  }
+
+  @media (min-width: $breakpoint-large) {
+    padding-top: 2rem;
+    flex-direction: row;
+    column-gap: 30px;
+  }
+
+  &__card {
+    margin: 0 auto;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem 0.5rem;
+    width: 90%;
+    text-align: center;
+
+    @media (min-width: $breakpoint-large) {
+      width: auto;
+    }
+  }
+
+  &__card--location {
+    @media (min-width: $breakpoint-large) {
+      flex-grow: 2;
+    }
+  }
+
+  &__card--date {
+    @media (min-width: $breakpoint-large) {
+      flex-grow: 1;
+    }
+  }
+}

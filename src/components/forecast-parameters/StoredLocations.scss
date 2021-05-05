@@ -1,0 +1,43 @@
+@import "../../styles/abstracts/index";
+
+.stored-locations {
+  padding: 0.5rem;
+  position: absolute;
+  top: -96px;
+  width: 100%;
+
+  @media (min-width: $breakpoint-medium) {
+    top: -45px;
+  }
+
+  &__select {
+    font-size: 1rem;
+    border: none;
+    padding: 0.3rem;
+    padding-right: 25px;
+    z-index: 10;
+    background-color: transparent;
+  }
+
+  .select-wrapper {
+    background-color: white;
+  }
+
+  .save-form {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+
+    .icon--arrow {
+      color: $dark-blue;
+      transform: translateY(5px);
+    }
+
+    @media (min-width: $breakpoint-medium) {
+      flex-direction: row;
+    }
+  }
+}

@@ -2,8 +2,13 @@ p {
   font-size: 1rem;
 }
 
+a,
+a:visited {
+  color: white;
+}
+
 h1 {
-  font-size: 3.2rem;
+  font-size: 3rem;
 
   @media (min-width: $breakpoint-small) {
     font-size: 4rem;

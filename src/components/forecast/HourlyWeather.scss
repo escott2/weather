@@ -1,0 +1,11 @@
+@import "../../styles/abstracts/index";
+
+.hourly-weather {
+  text-align: center;
+
+  .hourly-weather__heading {
+    background-color: $color-accent;
+    margin: 1rem 0;
+    padding: 0.5rem 0;
+  }
+}

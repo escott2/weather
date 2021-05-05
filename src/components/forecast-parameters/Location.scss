@@ -1,0 +1,42 @@
+@import "../../styles/abstracts/index";
+
+.Location {
+  position: relative;
+
+  .icon--location {
+    color: $color-accent;
+  }
+}
+
+.location__title {
+  display: inline-block;
+}
+
+.location__title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.location__title-wrapper--transform {
+  @media (min-width: $breakpoint-small) {
+    transform: translateX(-25px);
+  }
+}
+
+.icon--plus-sign {
+  position: absolute;
+  color: $color-primary;
+  top: -26.6px;
+  right: -19px;
+
+  @media (min-width: $breakpoint-small) {
+    top: 12px;
+    right: -45px;
+  }
+}
+
+.Location p {
+  font-size: 1.25rem;
+  display: inline-block;
+  margin-right: 1em;
+}
