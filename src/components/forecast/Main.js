@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import waveSVG from "../../img/wave-container.svg";
 import Loader from "react-loader-spinner";
 import "./Main.scss";
 import LightMeter from "./LightMeter";
