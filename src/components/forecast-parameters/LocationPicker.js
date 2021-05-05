@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { GrEdit } from "react-icons/gr";
 import "./LocationPicker.scss";
+import SelectWrapper from "../UI/SelectWrapper";
 
 LocationPicker.propTypes = {
   changeFormLocation: PropTypes.func,
@@ -170,12 +171,14 @@ function LocationPicker({
           {inputText.country === "" ? (
             <React.Fragment>
               <h3>Country</h3>
-              <CountryDropdown
-                classes="input location-picker__input"
-                name="country"
-                value={inputText.country}
-                onChange={handleCountryChange}
-              />
+              <SelectWrapper className="input location-picker__input--size">
+                <CountryDropdown
+                  classes="location-picker__input"
+                  name="country"
+                  value={inputText.country}
+                  onChange={handleCountryChange}
+                />
+              </SelectWrapper>
             </React.Fragment>
           ) : (
             <React.Fragment>
@@ -192,19 +195,21 @@ function LocationPicker({
           {inputText.country === "United States" ? (
             <React.Fragment>
               <h3>State</h3>
-              <RegionDropdown
-                classes="input location-picker__input"
-                name="region"
-                country={inputText.country}
-                value={inputText.region}
-                onChange={handleRegionChange}
-              />
+              <SelectWrapper className="input location-picker__input--location">
+                <RegionDropdown
+                  classes="location-picker__input"
+                  name="region"
+                  country={inputText.country}
+                  value={inputText.region}
+                  onChange={handleRegionChange}
+                />
+              </SelectWrapper>
 
               {inputText.region !== "" && (
                 <React.Fragment>
                   <h3>City</h3>
                   <input
-                    className="input location-picker__input"
+                    className="input location-picker__input--location"
                     type="text"
                     name="city"
                     value={inputText.city}
@@ -228,7 +233,7 @@ function LocationPicker({
             <React.Fragment>
               <h3>City</h3>
               <input
-                className="input location-picker__input"
+                className="input location-picker__input--location"
                 type="text"
                 name="city"
                 value={inputText.city}
@@ -249,15 +254,17 @@ function LocationPicker({
           <p className={`${message.className} message`}>{message.message}</p>
           {displayChoice && (
             <React.Fragment>
-              <select
-                className="input location-picker__input"
-                value={userResponse}
-                onChange={handleSelectChange}
-              >
-                <option value="">-</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <SelectWrapper className="input location-picker__input--user-response">
+                <select
+                  className="location-picker__input"
+                  value={userResponse}
+                  onChange={handleSelectChange}
+                >
+                  <option value="">-</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </SelectWrapper>
 
               {userResponse && (
                 <button

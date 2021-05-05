@@ -9,7 +9,7 @@ function MainHeader() {
       <nav className="header__nav">
         <ul className="nav__list header__nav__list">
           <li className="nav__list__item header__nav__list__item">
-            <NavLink to="/home">Home</NavLink>
+            <NavLink to="/home/current">Home</NavLink>
           </li>
           <li className="nav__list__item header__nav__list__item">
             <NavLink to="/about">About</NavLink>

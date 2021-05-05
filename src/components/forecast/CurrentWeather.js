@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FiTarget } from "react-icons/fi";
-import { WiWindDeg } from "react-icons/wi";
 import "./CurrentWeather.scss";
+import Wind from "./Wind";
 
 CurrentWeather.propTypes = {
   temp: PropTypes.number,
@@ -18,10 +18,6 @@ function CurrentWeather({ displayTemp, currentWeather }) {
 
   const tempIconPositionStyle = {
     top: `${tempScalePosition}px`,
-  };
-
-  const windDirectionStyle = {
-    transform: `scaleY(-1) scaleX(-1) rotate(${currentWeather.windDirection}deg)`,
   };
 
   return (
@@ -41,14 +37,10 @@ function CurrentWeather({ displayTemp, currentWeather }) {
             <p className="text--min-max">L: {currentWeather.lowTemp}°</p>
           </div>
 
-          <div className="wind">
-            <h4 className="wind__heading">Wind</h4>
-            <p>{currentWeather.windSpeed} MPH</p>
-            <WiWindDeg
-              style={windDirectionStyle}
-              className="wind-icon--direction"
-            />
-          </div>
+          <Wind
+            speed={currentWeather.windSpeed}
+            direction={currentWeather.windDirection}
+          />
 
           <div className="conditions">
             <div className="condition">
