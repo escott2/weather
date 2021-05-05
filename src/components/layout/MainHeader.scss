@@ -44,13 +44,17 @@ header {
   // END PAGE TITLE STYLES, h1
 
   // START NAVIGATION STYLES, nav
+
   .header__nav__list {
-    background-color: $light-blue;
+    background-color: white;
     padding: 0;
+    margin: 0;
+    display: flex;
+    flex: row;
+    justify-content: space-between;
 
     &__item {
-      margin-left: auto;
-      background-color: $light-blue;
+      background-color: $white;
       color: black;
 
       a:visited {

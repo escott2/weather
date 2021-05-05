@@ -15,30 +15,29 @@
     border: none;
     padding: 0.3rem;
     padding-right: 25px;
-    // width: 100%;
     z-index: 10;
     background-color: transparent;
   }
-}
 
-.save-form {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-
-  // select {
-  //   background-color: $lightest-blue;
-  // }
-
-  .icon--arrow {
-    color: $dark-blue;
-    transform: translateY(5px);
+  .select-wrapper {
+    background-color: white;
   }
 
-  @media (min-width: $breakpoint-medium) {
-    flex-direction: row;
+  .save-form {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+
+    .icon--arrow {
+      color: $dark-blue;
+      transform: translateY(5px);
+    }
+
+    @media (min-width: $breakpoint-medium) {
+      flex-direction: row;
+    }
   }
 }

@@ -6,6 +6,16 @@ import "./MainHeader.scss";
 function MainHeader() {
   return (
     <header>
+      <nav className="header__nav">
+        <ul className="nav__list header__nav__list">
+          <li className="nav__list__item header__nav__list__item">
+            <NavLink to="/home">Home</NavLink>
+          </li>
+          <li className="nav__list__item header__nav__list__item">
+            <NavLink to="/about">About</NavLink>
+          </li>
+        </ul>
+      </nav>
       <svg
         className="wave-svg--top"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,16 +30,6 @@ function MainHeader() {
       <h1 className="title">
         <span className="title__span">The Great </span>Outdoorcast
       </h1>
-      <nav className="header__nav">
-        <ul className="nav__list header__nav__list">
-          <li className="nav__list__item">
-            <NavLink to="/home">Home</NavLink>
-          </li>
-          <li className="nav__list__item header__nav__list__item">
-            <NavLink to="/about">About</NavLink>
-          </li>
-        </ul>
-      </nav>
     </header>
   );
 }

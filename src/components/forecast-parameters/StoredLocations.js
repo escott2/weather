@@ -37,7 +37,7 @@ function StoredLocations({ savedLocations, changeLocation }) {
   return (
     <div className="stored-locations">
       <form className="save-form">
-        <SelectWrapper className="input">
+        <SelectWrapper className="input select-wrapper">
           <select
             className="stored-locations__select"
             value={chosenLocation}
