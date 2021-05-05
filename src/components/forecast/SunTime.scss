@@ -1,0 +1,12 @@
+@import "../../styles/abstracts/index";
+
+.SunTime {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // background-color: white;
+  width: 90px;
+  height: 90px;
+}

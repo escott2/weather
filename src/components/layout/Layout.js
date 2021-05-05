@@ -1,12 +1,14 @@
-import { Fragment } from "react";
 import MainHeader from "./MainHeader";
+import MainFooter from "./MainFooter";
+import "./Layout.scss";
 
 function Layout({ children }) {
   return (
-    <Fragment>
+    <div className="layout">
       <MainHeader />
       <main>{children}</main>
-    </Fragment>
+      <MainFooter />
+    </div>
   );
 }
 

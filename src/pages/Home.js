@@ -1,8 +1,8 @@
 import React from "react";
-import MainPage from "../components/MainPage";
+import ForecastApp from "../components/ForecastApp";
 
 function Home() {
-  return <MainPage />;
+  return <ForecastApp />;
 }
 
 export default Home;
