@@ -17,6 +17,7 @@
     "react-loader-spinner": "^4.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-uuid": "^1.0.2",
     "spacetime": "^6.13.1",
     "web-vitals": "^1.0.1"
   },

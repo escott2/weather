@@ -70,7 +70,7 @@
     margin: 0.5em;
   }
 
-  .wind,
+  // .wind,
   .conditions {
     // width: 150px;
     // height: 150px;
@@ -80,23 +80,22 @@
     justify-content: space-evenly;
   }
 
-  .wind {
-    width: 150px;
-    height: 150px;
+  // .wind {
+  //   width: 150px;
+  //   height: 150px;
 
-    .wind__heading {
-      margin: 0.4em;
-      padding: 0.2em 0;
-      border-bottom: solid 0.2em black;
-      width: 122px;
-      text-align: center;
-    }
+  //   .wind__heading {
+  //     margin: 0.4em;
+  //     padding: 0.2em 0;
+  //     border-bottom: solid 0.2em black;
+  //     width: 122px;
+  //     text-align: center;
+  //   }
 
-    .wind-icon--direction {
-      font-size: 60px;
-      color: $color-accent;
-    }
-  }
+  //   .wind-icon--direction {
+  //     font-size: 60px;
+  //     color: $color-accent;
+  //   }
 
   .conditions {
     min-width: 175px;

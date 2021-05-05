@@ -4,7 +4,6 @@ import spacetime from "spacetime";
 import "./ForecastApp.scss";
 import ForecastParametersForm from "./forecast-parameters/ForecastParametersForm";
 import Main from "./forecast/Main";
-import SelectWrapper from "./UI/SelectWrapper";
 
 function ForecastApp() {
   const today = new Date();

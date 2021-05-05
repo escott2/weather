@@ -12,19 +12,26 @@
   &__input {
     font-size: 1rem;
     text-align: center;
-    margin: 0.3rem 0;
-    // padding: 0.2rem;
-    width: 85%;
+    border: none;
+    width: 100%;
+    padding-left: 0.2rem;
+    // padding-right: 25px;
+    z-index: 10;
+    background-color: transparent;
+  }
+
+  .location-picker__input--location {
+    width: 90%;
 
     @media (min-width: $breakpoint-small) {
-      // font-size: 1rem;
       width: 75%;
     }
   }
 
-  // &__country-select
-
-  // &__state-select
+  .location-picker__input--user-response {
+    width: 50%;
+    border-color: $color-accent;
+  }
 
   h3 {
     width: 100%;
@@ -45,11 +52,6 @@
     align-items: center;
   }
 
-  // .input {
-  //   text-align: center;
-  //   margin: 0.5em;
-  // }
-
   .btn {
     margin: 0.5em;
   }
@@ -62,6 +64,7 @@
   .message {
     display: block;
     width: 100%;
+    margin: 1rem 0;
   }
 
   &__message--info {
@@ -72,7 +75,7 @@
   }
 
   &__message--alert {
-    color: red;
+    background-color: $color-accent;
     padding: 0.5em;
   }
 }

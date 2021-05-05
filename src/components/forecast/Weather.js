@@ -17,20 +17,22 @@ function Weather({
     <div className="weather">
       {displayTemp ? (
         <React.Fragment>
-          <Route path="/home/current">
-            <CurrentWeather
-              currentWeather={currentWeather}
-              displayTemp={displayTemp}
-            />
-          </Route>
-          <Route path="/home/hourly">
-            <HourlyWeather
-              hourlyWeatherData={hourlyWeatherData}
-              timezone={timezone}
-              date={date}
-              toLocalTime={toLocalTime}
-            />
-          </Route>
+          <Switch>
+            <Route path="/home/current">
+              <CurrentWeather
+                currentWeather={currentWeather}
+                displayTemp={displayTemp}
+              />
+            </Route>
+            <Route path="/home/hourly">
+              <HourlyWeather
+                hourlyWeatherData={hourlyWeatherData}
+                timezone={timezone}
+                date={date}
+                toLocalTime={toLocalTime}
+              />
+            </Route>
+          </Switch>
         </React.Fragment>
       ) : (
         <div className="sun-forecast-info-wrapper">

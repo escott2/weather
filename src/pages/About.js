@@ -5,9 +5,27 @@ function About() {
   return (
     <div className="about">
       <p>Weather app created by Emily Scott.</p>
-      <p>
-        <a href="https://github.com/escott2/weather.git">Github repository</a>
-      </p>
+      <ul>
+        <li>
+          <a
+            href="https://github.com/escott2/weather.git"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github repository
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/emily-e-scott"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+        </li>
+      </ul>
+
       <p>More information coming soon.</p>
     </div>
   );

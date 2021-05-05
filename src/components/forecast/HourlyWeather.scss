@@ -1,11 +1,53 @@
 @import "../../styles/abstracts/index";
 
 .hourly-weather {
-  text-align: center;
+  // text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0 1rem;
 
   .hourly-weather__heading {
     background-color: $color-accent;
     margin: 1rem 0;
     padding: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .current-temp--degree {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hourly__wind {
+    background-color: $lightest-blue;
+    border: solid 0.4rem $light-blue;
+    border-radius: 500px;
+    padding: 1rem;
+    width: 200px;
+    height: 200px;
+  }
+
+  .hourly__icon {
+    background-color: $light-blue;
+    border-radius: 50%;
+  }
+
+  .hourly__other-weather {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .text--margin-left {
+    margin-left: 10px;
+  }
+
+  h4 {
+    font-size: 1.125rem;
   }
 }
