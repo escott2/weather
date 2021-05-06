@@ -26,7 +26,7 @@ function HourlyWeather({ hourlyWeatherData, date, timezone, toLocalTime }) {
         <div>
           {hourlyWeatherData.map((hour) => {
             const time = hourToLocalTime(hour.dt);
-            const iconURL = `http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`;
+            const iconURL = `https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`;
             return (
               <Card className="hourly-weather" key={uuid()}>
                 <h5 className="hourly-weather__heading">{time}</h5>
