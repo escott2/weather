@@ -114,21 +114,14 @@ function ForecastApp() {
     */
   useEffect(() => {
     if (locationData.enteredCity) {
-      let geoCodeURL = "";
-      if (locationData.enteredCountry === "United States") {
-        geoCodeURL = `${geoCodeAPI.base}address?key=${
+      let geoCodeURL = `${geoCodeAPI.base}address?key=${
           geoCodeAPI.key
-        }&city=${locationData.enteredCity.replace(/\s/g, "+")}&state=${
-          locationData.enteredRegion
-        }&country=${locationData.enteredCountry.replace(/\s/g, "+")}`;
-      } else {
-        geoCodeURL = `${geoCodeAPI.base}address?key=${
-          geoCodeAPI.key
-        }&city=${locationData.enteredCity.replace(
+        }&location=${locationData.enteredCity.replace(
           /\s/g,
           "+"
-        )}&country=${locationData.enteredCountry.replace(/\s/g, "+")}`;
-      }
+        )},state=${
+          locationData.enteredRegion
+        }`;
       axios
         .get(geoCodeURL)
         .then((response) => {
@@ -178,21 +171,14 @@ function ForecastApp() {
     */
   useEffect(() => {
     if (location.city) {
-      let geoCodeURL = "";
-      if (location.country === "United States") {
-        geoCodeURL = `${geoCodeAPI.base}address?key=${
-          geoCodeAPI.key
-        }&city=${location.city.replace(/\s/g, "+")}&state=${
-          location.region
-        }&country=${location.country.replace(/\s/g, "+")}`;
-      } else {
-        geoCodeURL = `${geoCodeAPI.base}address?key=${
-          geoCodeAPI.key
-        }&city=${location.city.replace(
-          /\s/g,
-          "+"
-        )}&country=${location.country.replace(/\s/g, "+")}`;
-      }
+      let geoCodeURL = `${geoCodeAPI.base}address?key=${
+        geoCodeAPI.key
+      }&location=${locationData.enteredCity.replace(
+        /\s/g,
+        "+"
+      )},state=${
+        locationData.enteredRegion
+      }`;
       axios
         .get(geoCodeURL)
         .then((response) => {
@@ -431,7 +417,7 @@ function ForecastApp() {
         ...prevState,
         enteredCity: formattedCity,
         enteredRegion: enteredLocation.region,
-        enteredCountry: enteredLocation.country,
+        enteredCountry: "United States",
       };
     });
   }
@@ -447,12 +433,9 @@ function ForecastApp() {
   function handleLocationChange(newLocation) {
     setLocation((prevState) => {
       let locationName;
-      if (newLocation.country === "United States") {
-        locationName = `${newLocation.city}, ${newLocation.region}, ${newLocation.country}`;
-      } else {
-        locationName = `${newLocation.city}, ${newLocation.country}`;
+      if (newLocation.city && newLocation.region) {
+        locationName = `${newLocation.city}, ${newLocation.region}`;
       }
-
       const formattedCity = formatCityName(
         newLocation.city.replace(/\s+/g, " ").trim()
       );
@@ -461,7 +444,7 @@ function ForecastApp() {
         ...prevState,
         city: formattedCity,
         region: newLocation.region,
-        country: newLocation.country,
+        country: "United States",
         name: locationName,
         id: locationName.toLowerCase().replace(/\s+/g, "-"),
       };

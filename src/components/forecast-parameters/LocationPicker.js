@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { RegionDropdown } from "react-country-region-selector";
 import { GrEdit } from "react-icons/gr";
 import "./LocationPicker.scss";
 import SelectWrapper from "../UI/SelectWrapper";
@@ -17,13 +17,11 @@ function LocationPicker({
   changeFormLocation,
   changeLocation,
   locationData,
-  hideModal,
-  location,
+  hideModal
 }) {
   const [inputText, setInputText] = useState({
     city: "",
-    region: "",
-    country: location.country,
+    region: ""
   });
   const [displayMessage, setDisplayMessage] = useState(false);
   const [message, setMessage] = useState("");
@@ -63,9 +61,6 @@ function LocationPicker({
         setDisplaySubmit(true);
       }
     }
-    // return () => {
-
-    // }
   }, [locationData.isCityFound, locationData.city, locationData.isCityMatch]);
 
   function handleCityChange(e) {
@@ -79,16 +74,6 @@ function LocationPicker({
     setDisplayMessage(false);
   }
 
-  function handleCountryChange(val) {
-    setInputText((prevState) => {
-      return {
-        ...prevState,
-        country: val,
-      };
-    });
-    setDisplayMessage(false);
-  }
-
   function handleRegionChange(val) {
     setInputText((prevState) => {
       return {
@@ -97,14 +82,6 @@ function LocationPicker({
       };
     });
     setDisplayMessage(false);
-  }
-
-  function handleEditCountry() {
-    setInputText({
-      city: "",
-      region: "",
-      country: "",
-    });
   }
 
   function handleSelectChange(e) {
@@ -159,79 +136,12 @@ function LocationPicker({
     hideModal();
   }
 
-  //     const enteredLocationName = locationData.enteredCountry === "United States" ?
-  //     <p>{locationData.enteredCity}, {locationData.enteredRegion}, {locationData.enteredCountry}</p>
-  // :
-  //     <p>{locationData.enteredCity}, {locationData.enteredCountry}</p>
-
   return (
     <div className="location-picker">
       {!displaySubmit && (
         <React.Fragment>
-          {inputText.country === "" ? (
-            <React.Fragment>
-              <h3>Country</h3>
-              <SelectWrapper className="input location-picker__input--size">
-                <CountryDropdown
-                  classes="location-picker__input"
-                  name="country"
-                  value={inputText.country}
-                  onChange={handleCountryChange}
-                />
-              </SelectWrapper>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <h3>Country</h3>
-              <div className="country-name">
-                <p>{inputText.country}</p>
-                <button className="btn edit-btn" onClick={handleEditCountry}>
-                  <GrEdit aria-label="edit" />
-                </button>
-              </div>
-            </React.Fragment>
-          )}
-
-          {inputText.country === "United States" ? (
-            <React.Fragment>
-              <h3>State</h3>
-              <SelectWrapper className="input location-picker__input--location">
-                <RegionDropdown
-                  classes="location-picker__input"
-                  name="region"
-                  country={inputText.country}
-                  value={inputText.region}
-                  onChange={handleRegionChange}
-                />
-              </SelectWrapper>
-
-              {inputText.region !== "" && (
-                <React.Fragment>
-                  <h3>City</h3>
-                  <input
-                    className="input location-picker__input--location"
-                    type="text"
-                    name="city"
-                    value={inputText.city}
-                    onChange={handleCityChange}
-                  ></input>
-                  {inputText.country &&
-                    inputText.region &&
-                    inputText.city &&
-                    displayLocateBtn && (
-                      <button
-                        className="btn locate-btn"
-                        onClick={handleLocateClick}
-                      >
-                        Locate
-                      </button>
-                    )}
-                </React.Fragment>
-              )}
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <h3>City</h3>
+          <React.Fragment>
+            <h3>City</h3>
               <input
                 className="input location-picker__input--location"
                 type="text"
@@ -239,13 +149,32 @@ function LocationPicker({
                 value={inputText.city}
                 onChange={handleCityChange}
               ></input>
-              {inputText.country && inputText.city && displayLocateBtn && (
-                <button className="btn" onClick={handleLocateClick}>
-                  Locate
-                </button>
-              )}
+            <h3>State</h3>
+            <SelectWrapper className="input location-picker__input--location">
+              <RegionDropdown
+                classes="location-picker__input"
+                name="region"
+                country="United States"
+                value={inputText.region}
+                onChange={handleRegionChange}
+              />
+            </SelectWrapper>
+
+            <React.Fragment>
+
+              { inputText.region &&
+                inputText.city &&
+                displayLocateBtn && (
+                  <button
+                    className="btn locate-btn"
+                    onClick={handleLocateClick}
+                  >
+                    Locate
+                  </button>
+                )}
             </React.Fragment>
-          )}
+
+          </React.Fragment>
         </React.Fragment>
       )}
 
