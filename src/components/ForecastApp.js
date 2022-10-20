@@ -433,12 +433,9 @@ function ForecastApp() {
   function handleLocationChange(newLocation) {
     setLocation((prevState) => {
       let locationName;
-      if (newLocation.country === "United States") {
-        locationName = `${newLocation.city}, ${newLocation.region}, ${newLocation.country}`;
-      } else {
-        locationName = `${newLocation.city}, ${newLocation.country}`;
+      if (newLocation.city && newLocation.region) {
+        locationName = `${newLocation.city}, ${newLocation.region}`;
       }
-
       const formattedCity = formatCityName(
         newLocation.city.replace(/\s+/g, " ").trim()
       );
