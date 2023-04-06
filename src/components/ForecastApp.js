@@ -50,7 +50,7 @@ function ForecastApp() {
     enteredRegion: "",
     enteredCountry: "",
   });
-
+  
   //Change temp to include more weather data, ex: setDisplayCurrentWeather
   const [currentWeather, setCurrentWeather] = useState({ temp: -500 });
   const [hourlyWeatherData, setHourlyWeatherData] = useState({ temp: -500 });
@@ -173,11 +173,11 @@ function ForecastApp() {
     if (location.city) {
       let geoCodeURL = `${geoCodeAPI.base}address?key=${
         geoCodeAPI.key
-      }&location=${locationData.enteredCity.replace(
+      }&location=${location.city.replace(
         /\s/g,
         "+"
       )},state=${
-        locationData.enteredRegion
+        location.region
       }`;
       axios
         .get(geoCodeURL)
@@ -197,7 +197,6 @@ function ForecastApp() {
   }, [
     location.city,
     location.region,
-    location.country,
     geoCodeAPI.base,
     geoCodeAPI.key,
   ]);
