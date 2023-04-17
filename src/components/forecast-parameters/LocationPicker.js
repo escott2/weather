@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { RegionDropdown } from "react-country-region-selector";
-import { GrEdit } from "react-icons/gr";
 import "./LocationPicker.scss";
 import SelectWrapper from "../UI/SelectWrapper";
 
