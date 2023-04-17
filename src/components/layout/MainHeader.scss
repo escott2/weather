@@ -2,26 +2,18 @@
 
 header {
   width: 100%;
-  max-width: 1500px;
   font-size: 2rem;
-  background-color: $light-blue;
   margin: 0 auto;
+  background-color: $dark-blue;
 
-  @media (min-width: $breakpoint-medium) {
-    width: 90%;
-  }
+  // @media (min-width: $breakpoint-medium) {
+  //   width: 90%;
+  // }
 
-  // START SVG STYLES, svg
-  .wave-svg--top {
-    transform: scaleX(-1);
-    background-color: $lightest-blue;
+  .header__inner-wrapper {
+    max-width: 1500px;
+    margin: 0 auto;
   }
-
-  .wave-svg--bottom {
-    transform: scaleY(-1);
-    background-color: $lightest-blue;
-  }
-  // END SVG STYLES, svg
 
   // START PAGE TITLE STYLES, h1
   .title {
@@ -29,6 +21,7 @@ header {
     font-weight: 700;
     text-align: center;
     background-color: $lightest-blue;
+    margin: 0;
 
     &__span {
       font-size: 1.5rem;
@@ -48,12 +41,17 @@ header {
     justify-content: space-between;
 
     &__item {
-      background-color: $light-blue;
+      background-color: $dark-blue;
       color: black;
 
       a,
       a:visited {
-        color: black;
+        color: white;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
       }
     }
 

@@ -1,7 +1,7 @@
 @import "../../styles/abstracts/index";
 
 .Modal {
-  background-color: rgba($color-primary, 0.9);
+  background-color: rgba($white, 0.9);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -15,14 +15,15 @@
 }
 
 .Modal__wrapper {
-  background-color: white;
-  color: black;
-  border: 0.5rem solid $color-primary;
+  background-color: $lightest-blue;
+  color: $dark-blue;
+  border: 0.5rem solid $light-blue;
   border-radius: 15px;
   opacity: 1;
   height: 500px;
   overflow-y: auto;
   width: 100%;
+  margin: 10px;
 
   @media (min-width: 576px) {
     // padding: 0 0.4em;
@@ -37,9 +38,4 @@
 .Modal__exit-btn {
   display: block;
   margin-left: auto;
-  //   transform: translateX(18px) translateY(1px);
-
-  //   @media (min-width: 576px) {
-  //     transform: translateX(32px) translateY(5px);
-  //   }
 }
