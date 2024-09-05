@@ -31,7 +31,6 @@ function LocationPicker({
 
   //If user searches for a city, clicks locate, and exits with the x, this will not rerender if they search for the same location again. Fix.
   useEffect(() => {
-    console.log("locationData:", locationData);
     if (locationData.city) {
       setDisplayMessage(true);
       if (!locationData.isCityFound) {

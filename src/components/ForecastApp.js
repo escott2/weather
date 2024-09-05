@@ -115,8 +115,11 @@ function ForecastApp() {
       locationData.enteredCity, locationData.enteredRegion, locationData.enteredCountry, geoCodeAPI.base, geoCodeAPI.key
     */
   useEffect(() => {
-    const { enteredCity, enteredRegion, enteredCountry } = locationData;
-    if (enteredCity && enteredRegion && enteredCountry) {
+    if (
+      locationData.enteredCity &&
+      locationData.enteredRegion &&
+      locationData.enteredCountry
+    ) {
       let geoCodeURL = `${geoCodeAPI.baseURL}?q=Minneapolis,MN,USA&limit=1&appid=${geoCodeAPI.key}`;
 
       axios
@@ -181,10 +184,9 @@ function ForecastApp() {
       location.lat, location.long, weatherAPI.base, weatherAPI.key
     */
   useEffect(() => {
-    const { lat, lon } = locationData;
-    if (lat && lon) {
+    if (locationData.lat && locationData.lon) {
       setIsOpenWeatherAPILoading(true);
-      const weatherURL = `${weatherAPI.base}onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=imperial&appid=${weatherAPI.key}`;
+      const weatherURL = `${weatherAPI.base}onecall?lat=${locationData.lat}&lon=${locationData.lon}&exclude=minutely&units=imperial&appid=${weatherAPI.key}`;
       axios
         .get(weatherURL)
         .then((response) => {
@@ -241,11 +243,11 @@ function ForecastApp() {
       --- DEPENDENCIES ---
       date, location.lat, location.long, timezone, fullDate
     */
+
   useEffect(() => {
-    const { lat, lon } = locationData;
-    if (lat && lon) {
+    if (locationData.lat && locationData.lon) {
       setSunAPILoading(true);
-      const sunURL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${fullDate}`;
+      const sunURL = `https://api.sunrise-sunset.org/json?lat=${locationData.lat}&lng=${locationData.lon}&date=${fullDate}`;
       axios
         .get(sunURL)
         .then((response) => {
