@@ -16,11 +16,11 @@ function LocationPicker({
   changeFormLocation,
   changeLocation,
   locationData,
-  hideModal
+  hideModal,
 }) {
   const [inputText, setInputText] = useState({
     city: "",
-    region: ""
+    region: "",
   });
   const [displayMessage, setDisplayMessage] = useState(false);
   const [message, setMessage] = useState("");
@@ -31,6 +31,7 @@ function LocationPicker({
 
   //If user searches for a city, clicks locate, and exits with the x, this will not rerender if they search for the same location again. Fix.
   useEffect(() => {
+    console.log("locationData:", locationData);
     if (locationData.city) {
       setDisplayMessage(true);
       if (!locationData.isCityFound) {
@@ -141,13 +142,13 @@ function LocationPicker({
         <React.Fragment>
           <React.Fragment>
             <h3>City</h3>
-              <input
-                className="input location-picker__input--location"
-                type="text"
-                name="city"
-                value={inputText.city}
-                onChange={handleCityChange}
-              ></input>
+            <input
+              className="input location-picker__input--location"
+              type="text"
+              name="city"
+              value={inputText.city}
+              onChange={handleCityChange}
+            ></input>
             <h3>State</h3>
             <SelectWrapper className="input location-picker__input--location">
               <RegionDropdown
@@ -160,19 +161,12 @@ function LocationPicker({
             </SelectWrapper>
 
             <React.Fragment>
-
-              { inputText.region &&
-                inputText.city &&
-                displayLocateBtn && (
-                  <button
-                    className="btn locate-btn"
-                    onClick={handleLocateClick}
-                  >
-                    Locate
-                  </button>
-                )}
+              {inputText.region && inputText.city && displayLocateBtn && (
+                <button className="btn locate-btn" onClick={handleLocateClick}>
+                  Locate
+                </button>
+              )}
             </React.Fragment>
-
           </React.Fragment>
         </React.Fragment>
       )}

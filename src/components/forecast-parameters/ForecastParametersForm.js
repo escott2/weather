@@ -28,7 +28,9 @@ function ForecastParametersForm({
   return (
     <div className="forecast-parameters-form">
       <div className="forecast-parameters-form__update-wrapper">
-        <h2 className="forecast-parameters-form__update-message">Update in progress...</h2>
+        <h2 className="forecast-parameters-form__update-message">
+          Update in progress...
+        </h2>
       </div>
       <Card className="forecast-parameters-form__card forecast-parameters-form__card--location">
         <Location

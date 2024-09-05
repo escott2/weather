@@ -50,7 +50,7 @@ function ForecastApp() {
     enteredRegion: "",
     enteredCountry: "",
   });
-  
+
   //Change temp to include more weather data, ex: setDisplayCurrentWeather
   const [currentWeather, setCurrentWeather] = useState({ temp: -500 });
   const [hourlyWeatherData, setHourlyWeatherData] = useState({ temp: -500 });
@@ -64,12 +64,13 @@ function ForecastApp() {
   //START VARIABLE DECLARATION
   // --- APIs
   const geoCodeAPI = {
-    key: "cADuj9DK0OJq9A1eVBEeXI5566aRCAzG",
-    base: "https://www.mapquestapi.com/geocoding/v1/",
+    key: "922176d7fe6aa80866789eaaf2e9d26d",
+    baseURL: "https://api.openweathermap.org/geo/1.0/direct",
   };
+
   const weatherAPI = {
     key: "922176d7fe6aa80866789eaaf2e9d26d",
-    base: "https://api.openweathermap.org/data/2.5/",
+    base: "https://api.openweathermap.org/data/3.0/",
   };
   const displayLoader =
     isOpenWeatherAPILoading || isSunAPILoading ? true : false;
@@ -105,6 +106,7 @@ function ForecastApp() {
 
   /*
       Mapquest Geolocation API Data
+      edit -- fixing bug. This is going to use openweathermap api.
 
       --- SETS STATE ---
       locationData
@@ -113,26 +115,23 @@ function ForecastApp() {
       locationData.enteredCity, locationData.enteredRegion, locationData.enteredCountry, geoCodeAPI.base, geoCodeAPI.key
     */
   useEffect(() => {
-    if (locationData.enteredCity) {
-      let geoCodeURL = `${geoCodeAPI.base}address?key=${
-          geoCodeAPI.key
-        }&location=${locationData.enteredCity.replace(
-          /\s/g,
-          "+"
-        )},state=${
-          locationData.enteredRegion
-        }`;
+    const { enteredCity, enteredRegion, enteredCountry } = locationData;
+    if (enteredCity && enteredRegion && enteredCountry) {
+      let geoCodeURL = `${geoCodeAPI.baseURL}?q=Minneapolis,MN,USA&limit=1&appid=${geoCodeAPI.key}`;
+
       axios
         .get(geoCodeURL)
         .then((response) => {
           setLocationData((prevState) => {
-            let city = response.data.results[0].locations[0].adminArea5;
+            let city = response.data[0].name;
+            const lat = response.data[0].lat;
+            const lon = response.data[0].lon;
+
             let isCityMatch = false;
             let isCityFound = true;
 
             if (!city) {
               city = "City not found";
-              isCityMatch = false;
               isCityFound = false;
             }
 
@@ -142,9 +141,11 @@ function ForecastApp() {
 
             return {
               ...prevState,
-              city: city,
-              isCityMatch: isCityMatch,
-              isCityFound: isCityFound,
+              lat,
+              lon,
+              city,
+              isCityMatch,
+              isCityFound,
             };
           });
         })
@@ -156,7 +157,7 @@ function ForecastApp() {
     locationData.enteredCity,
     locationData.enteredRegion,
     locationData.enteredCountry,
-    geoCodeAPI.base,
+    geoCodeAPI.baseURL,
     geoCodeAPI.key,
   ]);
 
@@ -169,37 +170,6 @@ function ForecastApp() {
       --- DEPENDENCIES ---
       location.city, location.region, location.country, geoCodeAPI.base, geoCodeAPI.key
     */
-  useEffect(() => {
-    if (location.city) {
-      let geoCodeURL = `${geoCodeAPI.base}address?key=${
-        geoCodeAPI.key
-      }&location=${location.city.replace(
-        /\s/g,
-        "+"
-      )},state=${
-        location.region
-      }`;
-      axios
-        .get(geoCodeURL)
-        .then((response) => {
-          setLocation((prevState) => {
-            return {
-              ...prevState,
-              lat: response.data.results[0].locations[0].latLng.lat,
-              long: response.data.results[0].locations[0].latLng.lng,
-            };
-          });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  }, [
-    location.city,
-    location.region,
-    geoCodeAPI.base,
-    geoCodeAPI.key,
-  ]);
 
   /*
       OpenWeather API Data
@@ -211,9 +181,10 @@ function ForecastApp() {
       location.lat, location.long, weatherAPI.base, weatherAPI.key
     */
   useEffect(() => {
-    if (location.lat) {
+    const { lat, lon } = locationData;
+    if (lat && lon) {
       setIsOpenWeatherAPILoading(true);
-      const weatherURL = `${weatherAPI.base}onecall?lat=${location.lat}&lon=${location.long}&exclude=minutely&units=imperial&appid=${weatherAPI.key}`;
+      const weatherURL = `${weatherAPI.base}onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=imperial&appid=${weatherAPI.key}`;
       axios
         .get(weatherURL)
         .then((response) => {
@@ -259,7 +230,7 @@ function ForecastApp() {
           console.log(error);
         });
     }
-  }, [location.lat, location.long, weatherAPI.base, weatherAPI.key]);
+  }, [locationData.lat, locationData.lon, weatherAPI.base, weatherAPI.key]);
 
   /*
       Sunrise-Sunset API Data
@@ -271,9 +242,10 @@ function ForecastApp() {
       date, location.lat, location.long, timezone, fullDate
     */
   useEffect(() => {
-    if (location.lat) {
+    const { lat, lon } = locationData;
+    if (lat && lon) {
       setSunAPILoading(true);
-      const sunURL = `https://api.sunrise-sunset.org/json?lat=${location.lat}&lng=${location.long}&date=${fullDate}`;
+      const sunURL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${fullDate}`;
       axios
         .get(sunURL)
         .then((response) => {
@@ -323,7 +295,7 @@ function ForecastApp() {
           console.log(error);
         });
     }
-  }, [date, location.lat, location.long, timezone, fullDate]);
+  }, [date, locationData.lat, locationData.lon, timezone, fullDate]);
 
   //START FUNCTIONS
 
