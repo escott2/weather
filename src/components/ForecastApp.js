@@ -70,7 +70,7 @@ function ForecastApp() {
 
   const weatherAPI = {
     key: "922176d7fe6aa80866789eaaf2e9d26d",
-    base: "https://api.openweathermap.org/data/3.0/",
+    base: "https://api.openweathermap.org/data/2.5/weather",
   };
   const displayLoader =
     isOpenWeatherAPILoading || isSunAPILoading ? true : false;
@@ -120,7 +120,7 @@ function ForecastApp() {
       locationData.enteredRegion &&
       locationData.enteredCountry
     ) {
-      let geoCodeURL = `${geoCodeAPI.baseURL}?q=Minneapolis,MN,USA&limit=1&appid=${geoCodeAPI.key}`;
+      let geoCodeURL = `${geoCodeAPI.baseURL}?q=${locationData.enteredCity},${locationData.enteredRegion},${locationData.enteredCountry}&limit=1&appid=${geoCodeAPI.key}`;
 
       axios
         .get(geoCodeURL)
@@ -186,23 +186,23 @@ function ForecastApp() {
   useEffect(() => {
     if (locationData.lat && locationData.lon) {
       setIsOpenWeatherAPILoading(true);
-      const weatherURL = `${weatherAPI.base}onecall?lat=${locationData.lat}&lon=${locationData.lon}&exclude=minutely&units=imperial&appid=${weatherAPI.key}`;
+      const weatherURL = `${weatherAPI.base}?lat=${locationData.lat}&lon=${locationData.lon}&units=imperial&appid=${weatherAPI.key}`;
       axios
         .get(weatherURL)
         .then((response) => {
           setCurrentWeather(() => {
-            let currentTemp = response.data.current.temp;
+            let currentTemp = response.data.main.temp;
             currentTemp = Math.round(Number(currentTemp));
-            const date = response.data.daily[0].dt;
-            const highTemp = Math.round(response.data.daily[0].temp.max);
-            const lowTemp = Math.round(response.data.daily[0].temp.min);
-            const feelsLike = Math.round(response.data.current.feels_like);
-            const windSpeed = response.data.current.wind_speed;
-            const windDirection = response.data.current.wind_deg;
-            const humidity = response.data.current.humidity;
-            const icon = response.data.current.weather[0].icon;
-            const condition = response.data.current.weather[0].main;
-            const description = response.data.current.weather[0].description;
+            const date = response.data.dt;
+            const highTemp = Math.round(response.data.main.temp_max);
+            const lowTemp = Math.round(response.data.main.temp_min);
+            const feelsLike = Math.round(response.data.main.feels_like);
+            const windSpeed = response.data.wind.speed;
+            const windDirection = response.data.wind.deg;
+            const humidity = response.data.main.humidity;
+            const icon = response.data.weather[0].icon;
+            const condition = response.data.weather[0].main;
+            const description = response.data.weather[0].description;
 
             return {
               temp: currentTemp,
@@ -219,20 +219,22 @@ function ForecastApp() {
             };
           });
           setTimezone(() => {
-            const newTimezone = response.data.timezone;
-            return newTimezone;
+            let timezoneData = response.data.timezone;
+            const SECONDS_IN_HOUR = 3600;
+            let timezoneInHours = (timezoneData / SECONDS_IN_HOUR).toString();
+            return timezoneInHours;
           });
-          setHourlyWeatherData(() => {
-            const hourlyWeatherArray = response.data.hourly;
-            return hourlyWeatherArray;
-          });
+          // setHourlyWeatherData(() => {
+          //   const hourlyWeatherArray = response.data.hourly;
+          //   return hourlyWeatherArray;
+          // });
           setIsOpenWeatherAPILoading(false);
         })
         .catch(function (error) {
           console.log(error);
         });
     }
-  }, [locationData.lat, locationData.lon, weatherAPI.base, weatherAPI.key]);
+  }, [locationData.lat, locationData.lon]);
 
   /*
       Sunrise-Sunset API Data
@@ -245,7 +247,7 @@ function ForecastApp() {
     */
 
   useEffect(() => {
-    if (locationData.lat && locationData.lon) {
+    if (locationData.lat && locationData.lon && timezone) {
       setSunAPILoading(true);
       const sunURL = `https://api.sunrise-sunset.org/json?lat=${locationData.lat}&lng=${locationData.lon}&date=${fullDate}`;
       axios
@@ -390,7 +392,7 @@ function ForecastApp() {
         ...prevState,
         enteredCity: formattedCity,
         enteredRegion: enteredLocation.region,
-        enteredCountry: "United States",
+        enteredCountry: "USA",
       };
     });
   }
